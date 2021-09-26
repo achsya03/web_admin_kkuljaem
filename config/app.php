@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('https://web-admin-kkuljaem-3mmob.ondigitalocean.app'),
+    'url' => env('APP_URL', 'https://web-admin-kkuljaem-3mmob.ondigitalocean.app'),
 
     'asset_url' => env('ASSET_URL', null),
 
