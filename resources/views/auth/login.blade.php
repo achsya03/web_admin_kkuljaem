@@ -82,7 +82,7 @@
     <div class="toast" role="alert" aria-live="polite" aria-atomic="true" data-delay="10000">
         <div role="alert" aria-live="assertive" aria-atomic="true">...</div>
     </div>
-    <script type="text/javascript" src="{{ url('js/app.js') }}"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
     <script>
         var api = "{{ env('APP_API_URL', 'api/') }}";
         navigator.geolocation.getCurrentPosition(function(position) {
