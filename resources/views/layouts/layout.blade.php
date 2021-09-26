@@ -160,11 +160,13 @@
                                 </div>
                             </div>
                             <div class="page-title-actions">
+                                @isset($_SERVER['PATH_INFO']))
                                 @if(count(explode('/', $_SERVER['PATH_INFO'])) > 2)
                                 <a href="#"  onClick="javascript:history.go(-1)" class="btn btn-focus mm-active">
                                     <i class="fa fa-angle-left"></i> Kembali
                                 </a>
                                 @endif
+                                @endisset
                                 @yield('top-button')
                             </div>
                         </div>
