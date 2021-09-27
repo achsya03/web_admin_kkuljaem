@@ -21,8 +21,8 @@
     * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
     -->
 
-    <link href="{{ url('css/app.css') }}" rel="stylesheet">
-    <link href="{{ url('css/assets/images/logo.svg') }}" rel="shortcut icon" type="image/x-icon">
+    <link href="/css/app.css" rel="stylesheet">
+    <link href="/css/assets/images/logo.svg" rel="shortcut icon" type="image/x-icon">
     <style>
         .table-fix {
             table-layout: fixed;
@@ -236,7 +236,7 @@
         </div>
     </div>
     @yield('modal')
-    <script type="text/javascript" src="{{ url('js/app.js') }}"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
     <script>
         var api = "{{ env('APP_API_URL', 'api/') }}";
