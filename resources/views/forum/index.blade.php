@@ -2,35 +2,7 @@
 @section('title-description', 'Menulis, Menyukai, Memberi Komentar, Menghapus dan Melaporkan')
 @section('title-icon', 'pe-7s-news-paper')
 @section('content')
-<div class="row mb-4">
-    <div class="col-4">
-        <div class="card card-body">
-            <a href="{{ route('forum-topik') }}" class="text-dark">
-                <h4 class="">Topik A (20)</h4>
-            </a>
-            <hr>
-            <a href="#" class="btn btn-info" data-toggle="modal" data-target=".bd-example-modal-sm">Edit</a>
-        </div>
-    </div>
-    <div class="col-4">
-        <div class="card card-body">
-            <a href="{{ route('forum-topik') }}" class="text-dark">
-                <h4 class="">Topik B (20)</h4>
-            </a>
-            <hr>
-            <a href="#" class="btn btn-info" data-toggle="modal" data-target=".bd-example-modal-sm">Edit</a>
-        </div>
-    </div>
-    <div class="col-4">
-        <div class="card card-body">
-            <a href="{{ route('forum-topik') }}" class="text-dark">
-                <h4 class="">Topik C (20)</h4>
-            </a>
-            <hr>
-            <a href="#" class="btn btn-info" data-toggle="modal" data-target=".bd-example-modal-sm">Edit</a>
-        </div>
-    </div>
-</div>
+<div class="row mb-4 topik-list"></div>
 <div class="row">
     <div class="col-12">
         <div class="card card-body">
@@ -66,7 +38,32 @@
 
 @section('js')
 <script>
-    $('.dataTable').DataTable();
+    $('#cover-spin').show();
+    $.ajax({
+        "url": api + "forum",
+        "method": "GET",
+        "headers": {
+            "Accept": "application/json",
+            "Authorization": 'bearer ' + window.localStorage.getItem('token'),
+        },
+    }).done(function(response) {
+        $('#cover-spin').hide();
+        if (response.message == 'Success') {
+            html = '';
+            $.each(response.data.theme, function(index, row) {
+                html += `<div class="col-4">`;
+                html += `<div class="card card-body">`;
+                html += `<a href="{{ route('forum-topik') }}" class="text-dark">`;
+                html += `<h4 class="">` + row.judul + ` (` + row.jml_post + `)</h4>`;
+                html += `</a>`;
+                html += `<hr>`;
+                html += `<a href="#" class="btn btn-info" data-toggle="modal" data-target=".bd-example-modal-sm">Edit</a>`;
+                html += `</div>`;
+                html += `</div>`;
+            });
+            $('.topik-list').html(html);
+        }
+    });
 </script>
 @endsection
 @extends('layouts.layout')

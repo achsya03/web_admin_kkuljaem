@@ -1,5 +1,5 @@
 @section('title', 'Dashboard')
-@section('title-description', 'Saturday, July 17, 2021')
+@section('title-description', '')
 @section('title-icon', 'pe-7s-bookmarks')
 @section('content')
 <div class="main-card mb-3 card">
@@ -200,6 +200,11 @@
             data,
         } = datas;
 
+        // var today = new Date();
+        // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+'-'+today.get();
+
+    $('.page-title-text').html("Dashboard" + '<div class="page-title-subheading">' + moment().format('MMMM Do YYYY') + '</div>');
+
         console.log(data)
         $('.fa-spinner').removeClass('fa-spinner').removeClass('fa-spin');
         document.getElementById('sub').textContent = data['jml-subs'];
@@ -214,7 +219,7 @@
             html += '<tr>';
             html += '<td>' + (index + 1) + '</td>';
             html += '<td>' + row.nama + '</td>';
-            html += '<td>' + row.deskripsi + '</td>';
+            html += '<td>' + row.deskripsi.substring(0, 100) + "..." + '</td>';
             html += '<td>' + '<div role="group" class="btn-group-sm btn-group btn-group-toggle" data-toggle="buttons"><a href="" type="button" class="btn btn-success">Answer</a><a href="" type="button" class="btn btn-info">Details</a></div>' + '</td>';
             html += '</tr>';
         });
@@ -226,7 +231,7 @@
             html1 += '<tr>';
             html1 += '<td>' + (index + 1) + '</td>';
             html1 += '<td>' + row.nama + '</td>';
-            html1 += '<td>' + row.judul + '</td>';
+            html1 += '<td>' + row.judul.substring(0, 100) + "..." + '</td>';
             html1 += '<td>' + '<div role="group" class="btn-group-sm btn-group btn-group-toggle" data-toggle="buttons"><a href="" type="button" class="btn btn-success">Answer</a><a href="" type="button" class="btn btn-info">Details</a></div>' + '</td>';
             html1 += '</tr>';
         });

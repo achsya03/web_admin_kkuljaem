@@ -20,8 +20,8 @@
     =========================================================
     * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
     -->
-    <link href="/css/app.css" rel="stylesheet">
-    <link href="/css/assets/images/logo.svg" rel="shortcut icon" type="image/x-icon">
+    <link href="{{ url('css/app.css') }}" rel="stylesheet">
+    <link href="{{ url('css/assets/images/logo.svg') }}" rel="shortcut icon" type="image/x-icon">
     <style>
         .disablediv {
             pointer-events: none;
@@ -45,7 +45,7 @@
                                 <div class="modal-body">
                                     <div class="h5 modal-title text-center">
                                         <h1 class="mt-1 mb-5">
-                                            <img src="/css/assets/images/logo.svg" alt="App Logo" width="60%">
+                                            <img src="{{ url('css/assets/images/logo.svg') }}" alt="App Logo" width="60%">
                                         </h1>
                                     </div>
                                     <form id="login-form" class="">
@@ -82,7 +82,7 @@
     <div class="toast" role="alert" aria-live="polite" aria-atomic="true" data-delay="10000">
         <div role="alert" aria-live="assertive" aria-atomic="true">...</div>
     </div>
-    <script type="text/javascript" src="/js/app.js"></script>
+    <script type="text/javascript" src="{{ url('js/app.js') }}"></script>
     <script>
         var api = "{{ env('APP_API_URL', 'api/') }}";
         navigator.geolocation.getCurrentPosition(function(position) {

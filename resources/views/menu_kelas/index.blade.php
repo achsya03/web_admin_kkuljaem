@@ -58,20 +58,15 @@
             data,
         } = datas;
 
-//         var groupBy = function(xs, key) {
-//   return xs.reduce(function(rv, x) {
-//     (rv[x[key]] = rv[x[key]] || []).push(x);
-//     return rv;
-//   }, {});
-// };
-// console.log(data);
-
         
-        id = data.reduce(function(result, current) {
-            result[current.nama] = result[current.nama] || [];result[current.nama].push(current);
-            return result;
+        var id = data.slice(0);
+            id.sort(function(a,b) {
+            var x = a.nama.toLowerCase();
+            var y = b.nama.toLowerCase();
+            return x < y ? -1 : x > y ? 1 : 0;
+        });
 
-        }, {});
+ console.log(id)
     
         $('.fa-spinner').removeClass('fa-spinner').removeClass('fa-spin');
 
@@ -80,8 +75,8 @@
             html += '<div class="col-md-4">';
             html += '<div class = "main-card mb-3 card" >';
             html += '<div class = "card-body" >';
-            html += `<a href="{{route('kelas')}}?id=` + row[0].uuid + `"  class="text-dark"><h5><strong><u>` + row[0].nama + '</strong></u>' + '(' + row[0].jml_kelas + ')' + ' </h5></a><p>' + row[0].deskripsi.substring(0, 40) + '...'; + '</p>';
-            html += '<div class="position-relative form-row"><div class="col-md-1"><a data-toggle="modal" data-target=".bd-example-modal-sm" class="btn-icon  btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav" href="#" onclick="getEdit(\'' + row[0].uuid + '\')">Edit</a></div><div style="text-align:right;" class="col-md-11"><a class="btn-icon  btn-icon-only btn btn-danger btn-sm" href="#" onclick="hapus(\'' + row[0].uuid + '\')">Hapus</a></div></div>';
+            html += `<a href="{{route('kelas')}}?id=` + row.uuid + `"  class="text-dark"><h5><strong><u>` + row.nama + '</strong></u>' + '(' + row.jml_kelas + ')' + ' </h5></a><p>' + row.deskripsi.substring(0, 40) + '...'; + '</p>';
+            html += '<div class="position-relative form-row"><div class="col-md-1"><a data-toggle="modal" data-target=".bd-example-modal-sm" class="btn-icon  btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav" href="#" onclick="getEdit(\'' + row.uuid + '\')">Edit</a></div><div style="text-align:right;" class="col-md-11"><a class="btn-icon  btn-icon-only btn btn-danger btn-sm" href="#" onclick="hapus(`' + api + 'admin/classroom-group/delete?token=' + row.uuid + '`)">Hapus</a></div></div>';
             html += '</div>';
             html += '</div>';
             html += '</div>';
@@ -161,23 +156,7 @@
     }
 
     //delete
-    function hapus(id) {
-    $.ajax({
-        type: "delete",
-        url: 'https://floating-harbor-93486.herokuapp.com/api/admin/classroom-group/delete?token=' + id,
-        success: function(response) {
-            if (response.message !== 'Success') {
-                // $.growl.warning({
-                //     message: response.message
-                // });
-            } else if (response.message == 'Success') {
-                notif('success', 'Berhasil Menghapus, Mohon tunggu');
-                window.location = "{{ route('menu_kelas')}}";
-            }
 
-        }
-    });
-    }
 </script>
 @endsection
 @extends('layouts.layout')

@@ -114,6 +114,7 @@
 </div>
 @endsection
 @section('modal')
+<!-- Modal VIdeo -->
 <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -153,6 +154,7 @@
         </div>
     </div>
 </div>
+<!-- EDIT VIDEO -->
 <div class="modal fade bd-example-modal-sm-edit" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -188,11 +190,12 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" onclick="update($('#id').val())" class=" btn btn-primary">Tambah</button>
+                <button type="button" onclick="update($('#id').val())" class=" btn btn-primary">Simpan</button>
             </div>
         </div>
     </div>
 </div>
+<!-- tambahquiz -->
 <div class="modal fade bd-example-modal-sm1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -222,6 +225,42 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" onclick="quiz()" class="btn btn-primary">Tambah</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- edit Quiz -->
+<div class="modal fade bd-example-modal-sm-edit1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Forum Edit Quiz</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="position-relative form-group"><label for="exampleEmail" class="">Letak</label>
+                    <div class="form-row">
+                        <div class="col-md-3">
+                            <input name="id_q" id="id_q" hidden class="form-control">
+
+                            <input name="nomor_q_edit" id="nomor_q_edit" placeholder="" type="number" class="form-control" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="position-relative form-group"><label for="exampleEmail" class="">Judul Quiz</label>
+                    <input name="judul_q_edit" id="judul_q_edit" placeholder="" type="text" class="form-control">
+                </div>
+                <div class="position-relative form-group"><label for="exampleEmail" class="">Keterangan</label>
+                    <textarea name="keterangan_q_edit" id="keterangan_q_edit" placeholder="" type="text" class="form-control"></textarea>
+                    <small class="form-text text-muted">Jumlah Kata 0 (Max 500 Karakter)</small>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" onclick="updatequiz($('#id_q').val())" class="btn btn-primary">Simpan</button>
             </div>
         </div>
     </div>
@@ -284,7 +323,7 @@
             html1 += '<td>' + row1.judul + '</td>';
             html1 += '<td>' + row1.keterangan + '</td>';
             html1 += '<td>' + row1.keterangan + '</td>';
-            html1 += '<td>' + `<a href="{{ route('videosiswa') }}?token=` + row1.uuid + `"style="margin:2px;" class="btn btn-secondary btn-sm">Details</a><br>` + '<a data-toggle="modal" data-target=".bd-example-modal-sm-edit" onclick="getEditVideo(\'' + row1.uuid + '\')" class="btn-icon btn-icon-only btn btn-info btn-sm mobile-toggle-header-nav" href="" style="margin:2px;">Edit</a><br>' + '<a href="" onclick="deleteVideo(\'' + row1.uuid + '\')" style="margin:2px;" class="btn btn-danger btn-sm">Hapus</a>' +
+            html1 += '<td>' + `<a href="{{ route('videosiswa') }}?token=` + row1.uuid + `"style="margin:2px;" class="btn btn-secondary btn-sm">Details</a><br>` + '<a data-toggle="modal" data-target=".bd-example-modal-sm-edit" onclick="getEditVideo(\'' + row1.uuid + '\')" class="btn-icon btn-icon-only btn btn-info btn-sm mobile-toggle-header-nav" href="" style="margin:2px;">Edit</a><br>' + '<button onclick="hapus(`' + api + `admin/classroom/content/video?token=` + row1.uuid + '`)" style="margin:2px;" class="btn btn-danger btn-sm">Hapus</button>' +
                 '</td>';
             html += '</tr>';
         });
@@ -300,7 +339,7 @@
             html2 += '<td>' + row2.judul + '</td>';
             html2 += '<td>' + row2.keterangan + '</td>';
             html2 += '<td>' + row2.jml_pertanyaan + ' Soal</td>';
-            html2 += '<td>' + ` <a href="{{ route('quizsiswa') }}?token=` + row2.uuid + `"style="margin:2px;" class="btn btn-secondary btn-sm"> Details </a><br>` + `<button onclick="editQuiz('` + row2.uuid + `')" style="margin:2px;" class="btn btn-info btn-sm">Edit</button> <br> ` + ` <button onclick="hapus('` + api + `admin/classroom/content/quiz?token=` + row2.uuid + `')" style="margin:2px;" class="btn btn-danger btn-sm"> Hapus </button>` + '</td>';
+            html2 += '<td>' + ` <a href="{{ route('quizsiswa') }}?token=` + row2.uuid + `"style="margin:2px;" class="btn btn-secondary btn-sm"> Details </a><br>` + `<button data-toggle="modal" data-target=".bd-example-modal-sm-edit1" onclick="editQuiz('` + row2.uuid + `')" class="btn-icon btn-icon-only btn btn-info btn-sm mobile-toggle-header-nav" style="margin:2px;" >Edit</button> <br> ` + ` <button onclick="hapus('` + api + `admin/classroom/content/quiz?token=` + row2.uuid + `')" style="margin:2px;" class="btn btn-danger btn-sm"> Hapus </button>` + '</td>';
             html2 += '</tr>';
         });
         document.querySelector('.tbody2').innerHTML = html2;
@@ -472,21 +511,58 @@
         });
     }
 
-    //Edit
-    function editQuiz() {
-        $.ajax({
-            "url": api + "admin/classroom/content/quiz/detail?token=" + urlParams.get('id'),
-            "method": "get",
-            "headers": {
-                "Accept": "application/json",
-                "Authorization": 'bearer ' + window.localStorage.getItem('token'),
+
+
+    //SHOW EDIT VIDEO
+    function editQuiz(id) {
+    $.ajax({
+        method: 'get',
+        url: 'https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content/quiz/detail?token=' + id,
+        dataType: 'json',
+        success: function(response) {
+            console.log(response)
+
+            if (response.message !== 'Success') {
+                // $.growl.warning({
+                //     message: response.message
+                // });
+            } else if (response.message == 'Success') {
+                document.getElementById('id_q').value = response.data['uuid'];
+                document.getElementById('nomor_q_edit').value = response.data['nomor'];
+                document.getElementById('judul_q_edit').value = response.data['judul'];
+                document.getElementById('keterangan_q_edit').value = response.data['keterangan'];
+              
+
             }
-        }).done(function(response) {
-            if (response.message == "Success") {
-                $("#nomor_q").val(response.data.nomor_materi);
+        }
+    });
+    }
+
+
+       // update video
+        function updatequiz(id) {
+        $.ajax({
+            type: "post",
+            url: 'https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content/quiz/update?token=' + id,
+            data: {
+                'nomor': $("#nomor").val(),
+                'judul': $("#judul_q_edit").val(),
+                'tipe': 'quiz',
+                'keterangan': $("#keterangan_q_edit").val(),
+            },
+            success: function(response) {
+                if (response.message !== 'Success') {
+         
+                } else if (response.message == 'Success') {
+                    $(".btn-close").click();
+                    window.location = "{{route('detailkelas')}}?id=" + urlParams.get('id');
+                }
+
             }
         });
     }
+
+
 </script>
 
 @endsection

@@ -21,11 +21,9 @@
     * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
     -->
 
-    <link href="/css/app.css" rel="stylesheet">
-    <link href="/css/assets/images/logo.svg" rel="shortcut icon" type="image/x-icon">
+    <link href="{{ url('css/app.css') }}" rel="stylesheet">
+    <link href="{{ url('css/assets/images/logo.svg') }}" rel="shortcut icon" type="image/x-icon">
     <style>
-
-        
         .table-fix {
             table-layout: fixed;
         }
@@ -35,10 +33,60 @@
             background-color: #6F4C20;
             border-color: #6F4C20;
         }
+
+        #cover-spin {
+            position: fixed;
+            width: 100%;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.7);
+            z-index: 9999;
+            display: none;
+        }
+
+        @-webkit-keyframes spin {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #cover-spin::after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 48%;
+            top: 40%;
+            width: 40px;
+            height: 40px;
+            border-style: solid;
+            border-color: black;
+            border-top-color: transparent;
+            border-width: 4px;
+            border-radius: 50%;
+            -webkit-animation: spin .8s linear infinite;
+            animation: spin .8s linear infinite;
+        }
     </style>
 </head>
 
 <body>
+    <div id="cover-spin"></div>
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow">
             <div class="app-header__logo">
@@ -79,7 +127,7 @@
                                 <div class="widget-content-left">
                                     <div class="btn-group">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                            <img width="42" class="rounded-circle" src="/css/assets/images/avatars/1.jpg" alt="">
+                                            <img width="42" class="rounded-circle" src="{{ url('css/assets/images/avatars/1.jpg') }}" alt="">
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
@@ -160,13 +208,11 @@
                                 </div>
                             </div>
                             <div class="page-title-actions">
-                                @isset($_SERVER['PATH_INFO']))
                                 @if(count(explode('/', $_SERVER['PATH_INFO'])) > 2)
-                                <a href="#"  onClick="javascript:history.go(-1)" class="btn btn-focus mm-active">
+                                <a href="#" onClick="javascript:history.go(-1)" class="btn btn-focus mm-active">
                                     <i class="fa fa-angle-left"></i> Kembali
                                 </a>
                                 @endif
-                                @endisset
                                 @yield('top-button')
                             </div>
                         </div>
@@ -192,7 +238,7 @@
         </div>
     </div>
     @yield('modal')
-    <script type="text/javascript" src="/js/app.js"></script>
+    <script type="text/javascript" src="{{ url('js/app.js') }}"></script>
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
     <script>
         var api = "{{ env('APP_API_URL', 'api/') }}";
@@ -250,7 +296,7 @@
                                 'Data berhasil dihapus!',
                                 'success'
                             )
-                            location.reload(); 
+                            location.reload();
                         },
                         error: function() {
                             Swal.fire(
@@ -258,11 +304,10 @@
                                 'Data tidak berhasil dihapus!',
                                 'error'
                             )
-                            location.reload(); 
                         }
                     });
                 }
-            })
+            });
         }
 
         CKEDITOR.editorConfig = function(config) {
@@ -312,7 +357,7 @@
                 }
             ];
 
-            config.removeButtons = 'Subscript,Superscript,Source,About,SpecialChar,Anchor,Scayt'
+            config.removeButtons = 'Subscript,Superscript,Source,About,SpecialChar,Anchor,Scayt';
         }
 
         function notif(type, message) {
@@ -322,7 +367,7 @@
                 position: 'top-right',
                 icon: type,
                 stack: false
-            })
+            });
         }
     </script>
     @yield('js')

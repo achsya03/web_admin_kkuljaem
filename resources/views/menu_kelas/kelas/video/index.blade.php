@@ -184,7 +184,6 @@
         const {
             data,
         } = datas;
-console.log(data)
         $('.fa-spinner').removeClass('fa-spinner').removeClass('fa-spin');
 
         //show video
