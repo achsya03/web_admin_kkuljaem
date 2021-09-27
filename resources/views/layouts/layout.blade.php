@@ -208,11 +208,9 @@
                                 </div>
                             </div>
                             <div class="page-title-actions">
-                                @if(count(explode('/', $_SERVER['PATH_INFO'])) > 2)
-                                <a href="#" onClick="javascript:history.go(-1)" class="btn btn-focus mm-active">
+                                <a href="#" onClick="javascript:history.go(-1)" class="btn btn-focus btn-kembali mm-active">
                                     <i class="fa fa-angle-left"></i> Kembali
                                 </a>
-                                @endif
                                 @yield('top-button')
                             </div>
                         </div>
@@ -250,12 +248,15 @@
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
         $('.vertical-nav-menu').find('a').each(function() {
-            url = window.location.href;
+            url = window.location.href.replace("https://", "http://");
             if (url.substr(0, $(this).attr('href').length) == $(this).attr('href')) {
                 active_sidebar = $('a[href="' + url.substr(0, $(this).attr('href').length) + '"]').addClass('mm-active');
                 active_sidebar.parent().parent().parent().addClass("mm-active");
             }
         });
+        if (window.location.pathname.split('/').length == 2) {
+            $('.btn-kembali').addClass('d-none');
+        };
 
         function logout() {
             $.ajax({
