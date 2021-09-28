@@ -87,8 +87,10 @@
         var api = "{{ env('APP_API_URL', 'api/') }}";
         navigator.geolocation.getCurrentPosition(function(position) {
             $('input[name="device_id"]').val(navigator.userAgent);
-            $('input[name="lokasi"]').val(position.coords.latitude + ', ' + position.coords.longitude)
+            $('input[name="lokasi"]').val(position.coords.latitude + ', ' + position.coords.longitude);
         }, function() {
+            $('input[name="device_id"]').val('Failed Get Location');
+            $('input[name="lokasi"]').val('Failed Get Location');
             notif('error', 'Gagal Mengambil Lokasi');
         });
 
