@@ -9,7 +9,7 @@
     @foreach([1,2,3,4] as $row)
     <div class="col-4">
         <div class="card mb-4">
-            <img class="card-img-top" src="{{ url('css/assets/images/avatars/' .$row. '.jpg') }}" alt="Card image cap" style="height: 100px;">
+            <img class="card-img-top" src="{{ url('css/assets/images/avatars/' .$row. '.jpg') }}" alt="Card image cap" style="height: 100px; object-fit: cover;">
             <div class="card-body">
                 <h5 class="card-title">Banner {{ $row }}</h5>
                 <a href="{{ route('homepage-setting-marketing-banner-edit') }}" class="btn btn-primary">Edit</a>

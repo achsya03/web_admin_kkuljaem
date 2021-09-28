@@ -1,4 +1,4 @@
-@section('title', 'Tambah Marketing Banner')
+@section('title', 'Sunting Marketing Banner')
 @section('title-description', 'Pengaturan Homepage / Marketing Banner')
 @section('title-icon', 'pe-7s-home')
 
@@ -9,6 +9,7 @@
             <div class="row">
                 @include('homepage-setting.marketing-banner.form')
                 <div class="col-12">
+                    <button class="btn btn-danger">Hapus</button>
                     <button class="btn btn-success pull-right">Simpan</button>
                 </div>
             </div>
