@@ -358,7 +358,7 @@
                 'judul': $("#judul_video").val(),
                 'tipe': 'Video',
                 'keterangan': $("#keterangan").val(),
-                'url_video': $("#url_video").val(),
+                'url_video': 'https://drive.google.com/uc?export=download&id=' + $("#url_video").val().split("/")[5],
             },
 
             success: function(response) {
@@ -387,7 +387,7 @@
                 'judul': $("#judul_video_edit").val(),
                 'tipe': 'Video',
                 'keterangan': $("#keterangan_edit").val(),
-                'url_video': $("#url_video_edit").val(),
+                'url_video': 'https://drive.google.com/uc?export=download&id=' + $("#url_video_edit").val().split("/")[5],
             },
             success: function(response) {
                 if (response.message !== 'Success') {
@@ -462,7 +462,7 @@
                     document.getElementById('nomor_edit').value = response.data['nomor'];
                     document.getElementById('judul_video_edit').value = response.data['judul'];
                     document.getElementById('keterangan_edit').value = response.data['keterangan'];
-                    document.getElementById('url_video_edit').value = response.data['url_video'];
+                    document.getElementById('url_video_edit').value = 'https://drive.google.com/file/d/' + response.data['url_video'].split("/")[4];
 
                 }
             }

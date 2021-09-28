@@ -73,7 +73,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Hangui</th>
-                                    <th>Ari/Keterangan</th>
+                                    <th>Arti/Keterangan</th>
                                     <th>File Audio</th>
                                     <th>Action</th>
                                 </tr>
@@ -102,15 +102,19 @@
                 </button>
             </div>
             <div class="modal-body">
+            <form id="form-create" >
                 <div class="position-relative form-group"><label for="exampleEmail" class="">Letak</label>
                     <div class="form-row">
                         <div class="col-md-3">
-                            <input name="nomor" id="nomor" placeholder="" type="text" class="form-control" disabled>
+                            <input name="nomor" id="nomor1" placeholder="" type="text" class="form-control" disabled>
                         </div>
                     </div>
                 </div>
                 <div class="position-relative form-group">
                     <label  class="">Kata dalam Hanquel</label>
+                    <input name="nomor" id="nomor" placeholder="" type="text" class="form-control" hidden>
+                    <input name="pelafalan" id="pelafalan"  placeholder="" type="text" class="form-control" hidden>
+
                     <input name="hangeul" id="hangeul"  placeholder="" type="text" class="form-control">
                 </div>
                 <div class="position-relative form-group">
@@ -121,6 +125,8 @@
                     <input name="url_pengucapan" id="url_pengucapan"  type="file" class="form-control-file">
                     <small class="form-text text-muted">Format Mp3 Maksimal ukuran file 2MB</small>
                 </div>
+            </form>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -129,6 +135,52 @@
         </div>
     </div>
 </div>
+
+<!-- //edit shadowing -->
+<div class="modal fade bd-example-modal-sm-edit1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Tambah Ungkapan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <form id="form-edit" >
+                <div class="position-relative form-group"><label for="exampleEmail" class="">Letak</label>
+                    <div class="form-row">
+                        <div class="col-md-3">
+                            <input name="id" id="id_quiz" hidden class="form-control" hidden>
+
+                            <input name="nomor" id="nomor_quiz" placeholder="" type="text" class="form-control" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="position-relative form-group">
+                    <label  class="">Kata dalam Hanquel</label>
+                    <input name="nomor" id="nomor_quiz1" placeholder="" type="text" class="form-control" hidden>
+                    <input name="pelafalan" id="pelafalan_quiz"  placeholder="" type="text" class="form-control" hidden>
+                    <input name="hangeul" id="hangeul_quiz"  placeholder="" type="text" class="form-control">
+                </div>
+                <div class="position-relative form-group">
+                    <label  class="">Arti atau Keterangan singkat</label>
+                    <input name="penjelasan" id="penjelasan_quiz" placeholder="" type="text" class="form-control"></div>
+                <div class="position-relative form-group">
+                    <label  class="">File Audio</label>
+                    <input name="url_pengucapan" id="url_pengucapan_quiz"  type="file" class="form-control-file">
+                    <small class="form-text text-muted">Format Mp3 Maksimal ukuran file 2MB</small>
+                </div>
+            </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" onclick="updatequiz($('#id_quiz').val())" class="btn btn-primary">Simpan</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- //sunting video -->
 <div class="modal fade bd-example-modal-sm-edit" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -145,7 +197,7 @@
                     <div class="form-row">
                         <div class="col-md-3">
                             <input name="id" id="id" hidden class="form-control">
-                            <input name="nomor" type="number" id="nomor_edit" disabled class="form-control">
+                            <input name="nomor_q" type="number" id="nomor_edit" disabled class="form-control">
                         </div>
                     </div>
                 </div>
@@ -203,12 +255,13 @@
 
         html = '';
         $.each(data.shadowing, function(index, row) {
+            console.log(row)
             html += '<tr>';
             html += '<td>' + row.nomor + '</td>';
             html += '<td>' + row.hangeul + '</td>';
             html += '<td>' + row.pelafalan + '</td>';
             html += '<td>' + `<audio controls><source src="` + row.url_pengucapan + `" type="audio/mpeg"></audio>` + '</td>';
-            html += '<td>' + `<a data-toggle="modal" data-target=".bd-example-modal-sm-edit" onclick="getEditVideo(\'' + row1.uuid + '\')" class="btn-icon btn-icon-only btn btn-info btn-sm mobile-toggle-header-nav" href="" style="margin:2px;">Edit</a><br>` + '<a href="" onclick="deleteVideo(\'' + row.uuid + '\')" style="margin:2px;" class="btn btn-danger btn-sm">Hapus</a>'+ '</td>';
+            html += '<td>' + '<a data-toggle="modal" data-target=".bd-example-modal-sm-edit1" onclick="getEditQuiz(\'' + row.shadowing_uuid + '\')" class="btn-icon btn-icon-only btn btn-info btn-sm mobile-toggle-header-nav" href="" style="margin:2px;">Edit</a><br>' + '<button onclick="hapus(`' + api + `admin/classroom/content/video/shadowing?token=` + row.shadowing_uuid + '`)" style="margin:2px;" class="btn btn-danger btn-sm">Hapus</button>'+ '</td>';
             html += '</tr>';
         });
         document.querySelector('.tbody1').innerHTML = html;
@@ -231,8 +284,6 @@
             url: 'https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content/video/detail?token=' + urlParams.get('token'),
             dataType: 'json',
             success: function(response) {
-                console.log(response)
-
                 if (response.message !== 'Success') {
                     // $.growl.warning({
                     //     message: response.message
@@ -256,7 +307,7 @@
             type: "post",
             url: 'https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content/video/update?token=' + id,
             data: {
-                'nomor': $("#nomor").val(),
+                'nomor': $("#nomor_q").val(),
                 'judul': $("#judul_video_edit").val(),
                 'tipe': 'Video',
                 'keterangan': $("#keterangan_edit").val(),
@@ -278,6 +329,9 @@
 
     //SHOW SHADOWING
     function getTambahShadowing() {
+        $('input[name="hangeul"]').keyup(function() {
+            $('input[name="pelafalan"]').val($(this).val());
+        });
         $.ajax({
             method: 'get',
             url: 'https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content/video/shadowing?token=' + urlParams.get('token'),
@@ -290,6 +344,7 @@
                     // });
                 } else if (response.message == 'Success') {
                     document.getElementById('nomor').value = response.data['nomor_shadowing'];
+                    document.getElementById('nomor1').value = response.data['nomor_shadowing'];
 
                 }
             }
@@ -299,30 +354,79 @@
 
     //CREATE SHADOWING
     function createshadowing() {
+        $('#cover-spin').show();
         $.ajax({
-            type: "post",
-            url: 'https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content/video/shadowing?token=' + urlParams.get('token'),
-            data: {
-                'nomor': $("#nomor").val(),
-                'hangeul': $("#hangeul").val(),
-                'pelafalan':  $("#hangeul").val(),
-                'penjelasan': $("#penjelasan").val(),
-                'url_pengucapan': $("#url_pengucapan").val(),
-            },
-
+            method: 'post',
+            url: api + 'admin/classroom/content/video/shadowing?token=' + urlParams.get('token'),
+            data: new FormData($('#form-create')[0]),
+            dataType: 'json',
+            contentType: false,
+            mimeType: "multipart/form-data",
+            processData: false,
             success: function(response) {
                 if (response.message !== 'Success') {
-                    // $.growl.warning({
-                    //     message: response.message
-                    // });
+                    notif('error', 'Silahkan cek form dan tipe file yang di upload');
                 } else if (response.message == 'Success') {
-                    // $(".btn-close").click();
-                    // window.location = "{{route('videosiswa')}}?id=" + urlParams.get('id');
+                    notif('success', 'Berhasil membuat kelas, Mohon tunggu');
+                     $('#cover-spin').hide();
+                    setTimeout(() => {
+                        window.location = "{{route('videosiswa')}}?token=" + urlParams.get('token');
+                    }, 1000);
                 }
-                // console.log(data)
-
             }
         });
+
+    }
+
+    //SHOW EDIT QUIZ
+    function getEditQuiz(id) {
+        $('input[name="hangeul"]').keyup(function() {
+            $('input[name="pelafalan"]').val($(this).val());
+        });
+        $.ajax({
+            method: 'get',
+            url : api + 'admin/classroom/content/video/shadowing/detail?token=' + id,
+            dataType: 'json',
+            success: function(response) {
+                console.log(response)
+                if (response.message !== 'Success') {
+                } else if (response.message == 'Success') {
+                    document.getElementById('id_quiz').value = response.data['shadowing_uuid'];
+                    document.getElementById('nomor_quiz1').value = response.data['nomor'];
+                    document.getElementById('nomor_quiz').value = response.data['nomor'];
+                    document.getElementById('hangeul_quiz').value = response.data['hangeul'];
+                    document.getElementById('pelafalan_quiz').value = response.data['pelafalan'];
+                    document.getElementById('penjelasan_quiz').value = response.data['penjelasan'];
+                }
+            }
+        });
+
+    }
+
+    //UPDATE VIDEO
+    function updatequiz(id) {
+        $('#cover-spin').show();
+        $.ajax({
+            method: 'post',
+            url: api + 'admin/classroom/content/video/shadowing/update?token=' + id,
+            data: new FormData($('#form-edit')[0]),
+            dataType: 'json',
+            contentType: false,
+            mimeType: "multipart/form-data",
+            processData: false,
+            success: function(response) {
+                if (response.message !== 'Success') {
+                    notif('error', 'Silahkan cek form dan tipe file yang di upload');
+                } else if (response.message == 'Success') {
+                    notif('success', 'Berhasil membuat kelas, Mohon tunggu');
+                     $('#cover-spin').hide();
+                    setTimeout(() => {
+                        window.location = "{{route('videosiswa')}}?token=" + urlParams.get('token');
+                    }, 1000);
+                }
+            }
+        });
+
     }
 
 
