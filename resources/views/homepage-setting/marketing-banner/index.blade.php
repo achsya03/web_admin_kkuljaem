@@ -5,24 +5,39 @@
 <a href="{{ route('homepage-setting-marketing-banner-create') }}" class="btn btn-focus">Tambah Banner</a>
 @endsection
 @section('content')
-<div class="row">
-    @foreach([1,2,3,4] as $row)
-    <div class="col-4">
-        <div class="card mb-4">
-            <img class="card-img-top" src="{{ url('css/assets/images/avatars/' .$row. '.jpg') }}" alt="Card image cap" style="height: 100px; object-fit: cover;">
-            <div class="card-body">
-                <h5 class="card-title">Banner {{ $row }}</h5>
-                <a href="{{ route('homepage-setting-marketing-banner-edit') }}" class="btn btn-primary">Edit</a>
-            </div>
-        </div>
-    </div>
-    @endforeach
+<div class="row" id="banner-content">
+
 </div>
 @endsection
 
 @section('js')
 <script>
-    $('table').DataTable();
+    $('#cover-spin').show();
+    $.ajax({
+        "url": api + "admin/banner",
+        "method": "get",
+        "headers": {
+            "Accept": "application/json",
+            "Authorization": 'bearer ' + token,
+        }
+    }).done(function(response) {
+        if (response.message == 'Success') {
+            html = '';
+            $.each(response.data, function(index, row) {
+                html += '<div class="col-4">';
+                html += '<div class="card mb-4">';
+                html += '<img class="card-img-top" src="' + row.url_web + '" alt="Card image cap" style="height: 100px; object-fit: cover;">';
+                html += '<div class="card-body">';
+                html += '<h5 class="card-title">' + row.judul_banner + '</h5>';
+                html += '<a href="{{ route("homepage-setting-marketing-banner-edit") }}?id=' + row.uuid + '" class="btn btn-primary">Edit</a>';
+                html += '</div>';
+                html += '</div>';
+                html += '</div>';
+            });
+            $('#banner-content').html(html);
+            $('#cover-spin').hide();
+        }
+    });
 </script>
 @endsection
 @extends('layouts.layout')

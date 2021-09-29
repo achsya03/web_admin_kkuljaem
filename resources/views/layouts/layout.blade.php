@@ -272,7 +272,7 @@
             });
         }
 
-        function hapus(url) {
+        function hapus(url, back_url = "") {
             Swal.fire({
                 title: 'Apakah anda yakin?',
                 text: "Langkah ini tidak dapat diurungkan, setelah menekan \"Ya\" maka data akan dihapus secara permanen",
@@ -297,7 +297,11 @@
                                 'Data berhasil dihapus!',
                                 'success'
                             )
-                            location.reload();
+                            if (back_url) {
+                                window.location.href = back_url;
+                            } else {
+                                location.reload();
+                            }
                         },
                         error: function() {
                             Swal.fire(
