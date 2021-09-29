@@ -44,8 +44,17 @@ Route::group(['prefix' => 'homepage-setting'], function () {
         Route::view('/create', 'homepage-setting.marketing-banner.create')->name('homepage-setting-marketing-banner-create');
         Route::view('/edit', 'homepage-setting.marketing-banner.edit')->name('homepage-setting-marketing-banner-edit');
     });
-    Route::view('/word-today', 'homepage-setting.word-today.index')->name('homepage-setting-word-today');
-    Route::view('/video-today', 'homepage-setting.video-today.index')->name('homepage-setting-video-today');
+    Route::group(['prefix' => 'word-today'], function () {
+        Route::view('/', 'homepage-setting.word-today.index')->name('homepage-setting-word-today');
+        Route::view('/create', 'homepage-setting.word-today.create')->name('homepage-setting-word-today-create');
+        Route::view('/detail', 'homepage-setting.word-today.detail')->name('homepage-setting-word-today-detail');
+    });
+    Route::group(['prefix' => 'video-today'], function () {
+        Route::view('/', 'homepage-setting.video-today.index')->name('homepage-setting-video-today');
+        Route::view('/create', 'homepage-setting.video-today.create')->name('homepage-setting-video-today-create');
+        Route::view('/detail', 'homepage-setting.video-today.detail')->name('homepage-setting-video-today-detail');
+        Route::view('/edit', 'homepage-setting.video-today.edit')->name('homepage-setting-video-today-edit');
+    });
 });
 Route::group(['prefix' => 'profile'], function () {
     Route::view('/myprofile', 'profile.my')->name('profile-my');

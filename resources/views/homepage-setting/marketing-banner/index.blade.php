@@ -5,9 +5,7 @@
 <a href="{{ route('homepage-setting-marketing-banner-create') }}" class="btn btn-focus">Tambah Banner</a>
 @endsection
 @section('content')
-<div class="row" id="banner-content">
-
-</div>
+<div class="row" id="banner-content"></div>
 @endsection
 
 @section('js')

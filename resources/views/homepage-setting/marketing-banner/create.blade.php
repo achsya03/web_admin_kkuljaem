@@ -26,7 +26,6 @@
         $.ajax({
             method: 'post',
             url: api + 'admin/banner',
-            // url: 'http://localhost:777',
             data: new FormData($('#form-create')[0]),
             dataType: 'json',
             contentType: false,

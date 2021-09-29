@@ -203,7 +203,9 @@
                                     </i>
                                 </div>
                                 <div class="page-title-text">
-                                    @yield('title')
+                                    <div class="title">
+                                        @yield('title')
+                                    </div>
                                     <div class="page-title-subheading">@yield('title-description')</div>
                                 </div>
                             </div>

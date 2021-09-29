@@ -70,7 +70,7 @@
     </ul>
 </li>
 <li>
-    <a href="{{ route('forum') }}">
+    <a href="#">
         <i class="metismenu-icon pe-7s-wallet"></i>
         Keuangan
         <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
