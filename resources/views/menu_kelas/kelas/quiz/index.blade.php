@@ -27,12 +27,11 @@
 <br>
 <div class="col-lg-13">
     <div class="mb-3 card">
-        <div class="card-body">
+        <div class="card-body"> 
             <div class="tab-content">
                 <div class="card-body">
                     <div>
-                        <div class="position-relative form-group">
-                            <a class="btn-icon btn-icon-only btn btn-primary mobile-toggle-header-nav" href="{{route('tambahsoalquiz')}}"> Tambah Soal</a>
+                        <div class="position-relative form-group route1">
                         </div>
                     </div>
                     <table class="table table-hover table-striped table-bordered dataTable">
@@ -104,6 +103,13 @@
             "dataType": 'json',
             "type": "GET",
             "dataSrc": function(response) {
+
+         //tambahsoal
+        html0000 ='';
+        html0000 += `<a class="btn-icon btn-icon-only btn btn-primary mobile-toggle-header-nav"  href="{{ route('tambahsoalquiz') }}?token=` + urlParams.get('token') +`" > Tambah Soal</a>`
+        document.querySelector('.route1').innerHTML = html0000;
+
+
                 $('#keterangan').html(response.data.keterangan);
                 $('#judul').html(response.data.judul);
                 return response.data.exam;
