@@ -45,19 +45,18 @@
                 <div class="tab-pane active" id="tab-eg8-1" role="tabpanel">
                     <div class="card-body">
                         <div>
-                            <div class="position-relative form-group"><a class="btn-icon btn-icon-only btn btn-primary mobile-toggle-header-nav" href="{{route('tambahsoalvideo')}}"> Tambah Soal</a></div>
+                        <div class="position-relative form-group route1">
                         </div>
-                        <table id="example" class="table table-hover table-striped table-bordered">
+                        </div>
+                        <table id="example2" class="table table-hover table-striped table-bordered">
                             <thead>
-                                <th>Coba</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
+                                <th>#</th>
+                                <th>Pertanyaan</th>
+                                <th>Jawaban Benar</th>
+                                <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody  class="tbody">
+                            <tbody  class="tbody2">
                             </tbody>
                         </table>
                     </div>
@@ -236,7 +235,15 @@
         const {
             data,
         } = datas;
+        console.log(data)
         $('.fa-spinner').removeClass('fa-spinner').removeClass('fa-spin');
+
+        //tambahsoal
+        html0000 ='';
+        html0000 += `<a class="btn-icon btn-icon-only btn btn-primary mobile-toggle-header-nav"  href="{{ route('tambahsoalvideo') }}?token=` + urlParams.get('token') +`" > Tambah Soal</a>`
+        document.querySelector('.route1').innerHTML = html0000;
+
+
 
         //show video
         html000 = '';
@@ -255,7 +262,6 @@
 
         html = '';
         $.each(data.shadowing, function(index, row) {
-            console.log(row)
             html += '<tr>';
             html += '<td>' + row.nomor + '</td>';
             html += '<td>' + row.hangeul + '</td>';
@@ -266,6 +272,20 @@
         });
         document.querySelector('.tbody1').innerHTML = html;
         $('#example1').DataTable();
+
+
+        html1 = '';
+        $.each(data.task, function(index1, row1) {
+            console.log(row1)
+            html1 += '<tr>';
+            html1 += '<td>' + row1.nomor + '</td>';
+            html1 += '<td>' + row1.pertanyaan + '</td>';
+            html1 += '<td>' + row1.jawaban + '</td>';
+            html1 += '<td>' + `<a  href="{{ route('editsoalvideo') }}?id=` + row1.task_uuid +`" class="btn-icon btn-icon-only btn btn-info btn-sm mobile-toggle-header-nav"  style="margin:2px;">Edit</a><br>` + '<button onclick="hapus(`' + api + `admin/classroom/content/video/task?token` + row1.task_uuid + '`)" style="margin:2px;" class="btn btn-danger btn-sm">Hapus</button>'+ '</td>';
+            html1 += '</tr>';
+        });
+        document.querySelector('.tbody2').innerHTML = html1;
+        $('#example2').DataTable();
 
 
 
