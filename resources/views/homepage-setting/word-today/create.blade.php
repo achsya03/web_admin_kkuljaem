@@ -20,6 +20,7 @@
 @section('js')
 @yield('form_js')
 <script>
+    $('input[type="date"]').val(urlParams.get('date'));
     $('#form-create').submit(function(e) {
         $('#cover-spin').show();
         e.preventDefault();

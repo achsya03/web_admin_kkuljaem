@@ -48,7 +48,6 @@
     $('.dataTable').dataTable({
         "ajax": {
             "url": api + "admin/word?jadwal=" + urlParams.get('date'),
-            "dataSrc": "data.word",
             "dataType": 'json',
             "type": "GET",
             "beforeSend": function(xhr) {

@@ -285,6 +285,7 @@
                 confirmButtonText: 'Ya',
                 cancelButtonText: 'Batalkan'
             }).then((result) => {
+                $('#cover-spin').show();
                 if (result.isConfirmed) {
                     $.ajax({
                         "url": url,
@@ -294,18 +295,20 @@
                             "Authorization": 'bearer ' + window.localStorage.getItem('token'),
                         },
                         success: function(response) {
-                            Swal.fire(
-                                'Sukses!',
-                                'Data berhasil dihapus!',
-                                'success'
-                            )
-                            if (back_url) {
-                                window.location.href = back_url;
-                            } else {
-                                location.reload();
-                            }
+                            $('#cover-spin').hide();
+                            // Swal.fire(
+                            //     'Sukses!',
+                            //     'Data berhasil dihapus!',
+                            //     'success'
+                            // )
+                            // if (back_url) {
+                            //     window.location.href = back_url;
+                            // } else {
+                            //     location.reload();
+                            // }
                         },
                         error: function() {
+                            $('#cover-spin').hide();
                             Swal.fire(
                                 'Gagal!',
                                 'Data tidak berhasil dihapus!',

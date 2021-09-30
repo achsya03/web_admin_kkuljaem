@@ -5,11 +5,11 @@
     </div>
     <div class="form-group">
         <label>Kata dalam Hanguel</label>
-        <input type="text" name="judul_banner" class="form-control" placeholder="Masukan Judul POS">
+        <input type="text" name="judul_banner" class="form-control" placeholder="Kata dalam Hanguel">
     </div>
     <div class="form-group">
         <label>Pelafalan dalam latin</label>
-        <input type="text" name="judul_banner" class="form-control" placeholder="Masukan Judul POS">
+        <input type="text" name="judul_banner" class="form-control" placeholder="Pelafalan dalam latin">
     </div>
     <div class="form-group">
         <label>Penjelasan Kata</label>
