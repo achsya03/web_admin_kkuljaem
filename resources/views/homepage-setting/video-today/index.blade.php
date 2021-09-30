@@ -14,6 +14,25 @@
 </div>
 @endsection
 
+@section('modal')
+<div class="modal fade" id="detail-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5>12/12/2021</h5>
+                <div class="video">
+
+                </div>
+                <a href="#" class="btn btn-edit btn-success">Sunting</a>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
 @section('js')
 <script>
     $('#cover-spin').show();
@@ -29,9 +48,9 @@
         if (response.message == 'Success') {
             $.each(response.data, function(index, row) {
                 data.push({
-                    title: row.hangeul,
+                    title: "Sudah terisi",
                     start: row.jadwal,
-                    id: "0001"
+                    id: row.uuid
                 });
             });
             var calendarEl = document.getElementById('video-calendar');
@@ -43,6 +62,7 @@
                     window.location.href = '{{ route("homepage-setting-video-today-create") }}?date=' + info.dateStr;
                 },
                 eventClick: function(info) {
+                    $('#cover-spin').show();
                     $.ajax({
                         "url": api + "admin/videos/detail?token=" + info.event.id,
                         "method": "get",
@@ -52,14 +72,16 @@
                         }
                     }).done(function(response) {
                         if (response.message == 'Success') {
+                            $('#cover-spin').hide();
                             $("#detail-modal").modal('show');
-                            $('video source').attr('src', response.data.url_video);
+                            $('.video').html('<video width="100%" controls><source src="' + response.data.url_video + '" type="video/mp4"> </video>');
+                            $('.btn-edit').attr('href', "{{ route('homepage-setting-video-today-edit') }}?id=" + response.data.uuid);
+                            $('.modal-body h5').html(moment(response.data.jadwal).format('DD/M/y'));
                             $('#detail-modal').on('hidden.bs.modal', function() {
-                                callPlayer('yt-player', 'stopVideo');
+                                $('.video').html('');
                             });
                         }
                     });
-
                 }
             });
             calendar.render();
@@ -68,23 +90,5 @@
     });
 </script>
 @endsection
-@section('modal')
-<div class="modal fade" id="detail-modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h5>12/12/2021</h5>
-                <video width="100%" controls>
-                    <source src="https://drive.google.com/uc?export=preview&id=12kB1Y3UxFl5BeKr1FlpXqXl-6avGoNAf" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <a href="{{ route('homepage-setting-video-today-edit') }}" class="btn btn-success">Sunting</a>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
+
 @extends('layouts.layout')

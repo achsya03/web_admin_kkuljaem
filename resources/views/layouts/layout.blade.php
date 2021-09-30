@@ -285,6 +285,7 @@
                 confirmButtonText: 'Ya',
                 cancelButtonText: 'Batalkan'
             }).then((result) => {
+                $('#cover-spin').show();
                 if (result.isConfirmed) {
                     $.ajax({
                         "url": url,
@@ -314,6 +315,7 @@
                         }
                     });
                 }
+                $('#cover-spin').hide();
             });
         }
 
