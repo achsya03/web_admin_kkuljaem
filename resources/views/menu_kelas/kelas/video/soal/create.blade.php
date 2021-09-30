@@ -61,7 +61,7 @@
                 } else if (response.message == 'Success') {
                     notif('success', 'Berhasil membuat kelas, Mohon tunggu');
                     setTimeout(() => {
-                        window.location = "{{route('videosiswa')}}?id=" + urlParams.get('token');
+                        window.location = "{{route('videosiswa')}}?token=" + urlParams.get('token');
                     }, 1000);
                 }
             }

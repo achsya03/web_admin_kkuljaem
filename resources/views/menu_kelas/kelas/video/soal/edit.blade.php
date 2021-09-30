@@ -43,6 +43,8 @@
                 document.getElementById('pertanyaan_teks').value = response.data['pertanyaan_teks'];
                 document.getElementById('jawaban').value = response.data['jawaban'];
                 document.getElementById('jenis_jawaban').value = response.data['pilihan'];
+                document.getElementById('jawaban_teks').value = response.data['jawaban_teks'];
+
 
                 //show file
                 html000 = '';

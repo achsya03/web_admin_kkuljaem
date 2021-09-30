@@ -281,7 +281,7 @@
             html1 += '<td>' + row1.nomor + '</td>';
             html1 += '<td>' + row1.pertanyaan + '</td>';
             html1 += '<td>' + row1.jawaban + '</td>';
-            html1 += '<td>' + `<a  href="{{ route('editsoalvideo') }}?id=` + row1.task_uuid +`" class="btn-icon btn-icon-only btn btn-info btn-sm mobile-toggle-header-nav"  style="margin:2px;">Edit</a><br>` + '<button onclick="hapus(`' + api + `admin/classroom/content/video/task?token` + row1.task_uuid + '`)" style="margin:2px;" class="btn btn-danger btn-sm">Hapus</button>'+ '</td>';
+            html1 += '<td>' + `<a  href="{{ route('editsoalvideo') }}?id=` + row1.task_uuid +`" class="btn-icon btn-icon-only btn btn-info btn-sm mobile-toggle-header-nav"  style="margin:2px;">Edit</a><br>` + '<button onclick="hapus(`' + api + `admin/classroom/content/video/task?token=` + row1.task_uuid + '`)" style="margin:2px;" class="btn btn-danger btn-sm">Hapus</button>'+ '</td>';
             html1 += '</tr>';
         });
         document.querySelector('.tbody2').innerHTML = html1;

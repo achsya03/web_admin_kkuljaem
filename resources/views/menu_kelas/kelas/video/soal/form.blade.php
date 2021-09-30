@@ -56,16 +56,21 @@
                 <h5>Jawaban {{ $jawaban }}</h5>
                 <div class="form-group mt-3 inputTeks d-none inputJawaban">
                     <label>Teks Jawaban</label>
-                    <input name="jawaban_teks" placeholder=""  class="form-control">
+                    <input name="jawaban_teks[]" placeholder=""  class="form-control">
+                    
                 </div>
                 <div class="mt-3 inputGambar d-none inputJawaban">
                     <label>File Gambar</label>
-                    <input name="gambar_opsi" type="file" class="form-control-file">
+                    <input name="gambar_opsi[]" type="file" class="form-control-file">
+        <div class="img1" id="img1"></div>
+
                     <small class="form-text text-muted">Format jpg ukuran 12 x 12</small>
                 </div>
                 <div class="mt-3 inputAudio d-none inputJawaban">
                     <label>File Audio</label>
-                    <input name="url_opsi" type="file" class="form-control-file">
+                    <input name="url_opsi[]" type="file" class="form-control-file">
+        <div class="img1" id="audio1"></div>
+
                     <small class="form-text text-muted">Format jpg ukuran 12 x 12</small>
                 </div>
             </div>
