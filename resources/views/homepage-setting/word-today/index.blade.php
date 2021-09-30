@@ -40,7 +40,7 @@
                 themeSystem: 'bootstrap',
                 events: data,
                 dateClick: function(info) {
-                    window.location.href = '{{ route("homepage-setting-word-today-create") }}?date=' + info.dateStr;
+                    window.location.href = '{{ route("homepage-setting-word-today-detail") }}?date=' + info.dateStr;
                 },
                 eventClick: function(info) {
                     window.location.href = info.event.url;

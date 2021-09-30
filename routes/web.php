@@ -48,6 +48,7 @@ Route::group(['prefix' => 'homepage-setting'], function () {
         Route::view('/', 'homepage-setting.word-today.index')->name('homepage-setting-word-today');
         Route::view('/create', 'homepage-setting.word-today.create')->name('homepage-setting-word-today-create');
         Route::view('/detail', 'homepage-setting.word-today.detail')->name('homepage-setting-word-today-detail');
+        Route::view('/edit', 'homepage-setting.word-today.edit')->name('homepage-setting-word-today-edit');
     });
     Route::group(['prefix' => 'video-today'], function () {
         Route::view('/', 'homepage-setting.video-today.index')->name('homepage-setting-video-today');

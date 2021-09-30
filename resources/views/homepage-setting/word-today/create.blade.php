@@ -26,7 +26,7 @@
         e.preventDefault();
         $.ajax({
             method: 'post',
-            url: api + 'admin/banner',
+            url: api + 'admin/word',
             data: new FormData($('#form-create')[0]),
             dataType: 'json',
             contentType: false,
@@ -43,7 +43,7 @@
                 } else if (response.message == 'Success') {
                     notif('success', 'Berhasil menambah banner, Mohon tunggu');
                     setTimeout(() => {
-                        window.location = "{{route('homepage-setting-marketing-banner')}}";
+                        window.location = "{{route('homepage-setting-word-today')}}";
                     }, 1000);
                 }
             }

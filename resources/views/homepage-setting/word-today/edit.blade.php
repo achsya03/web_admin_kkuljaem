@@ -1,4 +1,4 @@
-@section('title', 'Sunting Video Hari Ini')
+@section('title', 'Sunting Kata Hari Ini')
 @section('title-description', 'Pengaturan Homepage')
 @section('title-icon', 'pe-7s-home')
 
@@ -7,9 +7,8 @@
     <div class="card card-body">
         <form id="form-edit" action="#">
             <div class="row">
-                @include('homepage-setting.video-today.form')
+                @include('homepage-setting.word-today.form')
                 <div class="col-12">
-                    <button type="button" class="btn btn-danger">Hapus</button>
                     <button type="submit" class="btn btn-success pull-right">Simpan</button>
                 </div>
             </div>
@@ -23,7 +22,7 @@
 <script>
     $('#cover-spin').show();
     $.ajax({
-        "url": api + "admin/videos/detail?token=" + urlParams.get('id'),
+        "url": api + "admin/word/detail?token=" + urlParams.get('id'),
         "method": "get",
         "headers": {
             "Accept": "application/json",
@@ -31,12 +30,11 @@
         }
     }).done(function(response) {
         $('#cover-spin').hide();
-        if (response.message == 'Success') {
+        if (response.message == "Success") {
+            $('input[name="hangeul"]').val(response.data.hangeul);
             $('input[name="jadwal"]').val(response.data.jadwal);
-            $('input[name="url_video_preview"]').val('https://drive.google.com/file/d/' + response.data.url_video.split("=")[2] + '/view').change();
-            $('.btn-danger').click(function() {
-                hapus(api + 'admin/videos?token=' + response.data.uuid, '{{ route("homepage-setting-video-today") }}');
-            });
+            $('input[name="pelafalan"]').val(response.data.pelafalan);
+            editor.setData(response.data.penjelasan);
         }
     });
 
@@ -45,7 +43,7 @@
         e.preventDefault();
         $.ajax({
             method: 'post',
-            url: api + 'admin/videos/update?token=' + urlParams.get('id'),
+            url: api + 'admin/word/update?token=' + urlParams.get('id'),
             data: new FormData($('#form-edit')[0]),
             dataType: 'json',
             contentType: false,
@@ -60,9 +58,9 @@
                 if (response.message !== 'Success') {
                     notif('error', 'Silahkan cek form dan tipe file yang di upload');
                 } else if (response.message == 'Success') {
-                    notif('success', 'Berhasil merubah video, Mohon tunggu');
+                    notif('success', 'Berhasil menambah banner, Mohon tunggu');
                     setTimeout(() => {
-                        window.location = "{{route('homepage-setting-video-today')}}";
+                        window.location = "{{route('homepage-setting-word-today')}}";
                     }, 1000);
                 }
             }
