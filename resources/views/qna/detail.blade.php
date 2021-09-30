@@ -57,8 +57,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div>Jawaban anda
-                </div>
+                <div>Jawaban anda</div>
                 <textarea name="#" rows="5" class="form-control"></textarea>
                 <div><small>Jumlah Kata 0(Max 500 karakter)</small></div>
                 <button class="btn btn-success mb-2">Ubah</button> <br>
@@ -72,7 +71,7 @@
 @section('js')
 <script>
     $.ajax({
-        "url": api + "qna/detail?token=" + urlParams.get('token'),
+        "url": api + "admin/qna/detail?token=" + urlParams.get('token'),
         "method": "GET",
         "headers": {
             "Accept": "application/json",

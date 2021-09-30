@@ -38,7 +38,7 @@
 <script>
     $('.dataTable').dataTable({
         "ajax": {
-            "url": api + "qna",
+            "url": api + "admin/qna",
             "dataType": 'json',
             "type": "GET",
             "beforeSend": function(xhr) {
@@ -53,7 +53,7 @@
                 return data.substring(0, 15) + '...';
             }
         }, {
-            "data": "nama_pengirim"
+            "data": "user_post"
         }, {
             "data": "tgl_post",
             "render": function(data) {
