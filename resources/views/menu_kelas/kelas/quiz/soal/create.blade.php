@@ -45,6 +45,8 @@
 
 //CREATE
     $('#change-pass-form').submit(function(e) {
+    $('#cover-spin').show();
+
         e.preventDefault();
         $.ajax({
             method: 'post',
@@ -60,12 +62,14 @@
                 } else if (response.message == 'Success') {
                     notif('success', 'Berhasil membuat kelas, Mohon tunggu');
                     setTimeout(() => {
-                        window.location = "{{route('quizsiswa')}}?id=" + urlParams.get('token');
+                        window.location = "{{route('quizsiswa')}}?token=" + urlParams.get('token');
                     }, 1000);
                 }
             }
         });
     });
+
+    $('#cover-spin').hide();
 
 
 

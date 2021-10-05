@@ -37,17 +37,18 @@
         success: function(response) {
             console.log(response)
             if (response.message !== 'Success') {
+                console.log(response)
 
             } else if (response.message == 'Success') {
                 document.getElementById('nomor').value = response.data['nomor'];
                 document.getElementById('pertanyaan_teks').value = response.data['pertanyaan_teks'];
                 document.getElementById('jawaban').value = response.data['jawaban'];
-                document.getElementById('jenis_jawaban').value = response.data['pilihan'];
-                document.getElementById('jawaban_teks').value = response.data['jawaban_teks'];
+                document.getElementById('jenis_jawaban').value = response.data['jenis_jawaban'];
+
 
 
                 //show file
-                html000 = '';
+                html000 = '';   
                 html000 += `<img src="` + response.data.url_gambar + `" width="300" height="100" style="object-fit: cover;">`
                 document.querySelector('.img').innerHTML = html000;
 
@@ -56,12 +57,16 @@
                 html001 += `<audio controls><source src="` + response.data.url_file + `" type="audio/mpeg"></audio>`
                 document.querySelector('.audio').innerHTML = html001;
 
+                
+
             }
         }
     });
 
 //UPDATE
 $('#change-pass-form').submit(function(e) {
+    $('#cover-spin').show();
+
         e.preventDefault();
         $.ajax({
             method: 'post',
@@ -75,14 +80,17 @@ $('#change-pass-form').submit(function(e) {
                 if (response.message !== 'Success') {
                     notif('error', 'Silahkan cek form dan tipe file yang di upload');
                 } else if (response.message == 'Success') {
+
                     notif('success', 'Berhasil membuat kelas, Mohon tunggu');
                     setTimeout(() => {
-                        window.location = "{{route('videosiswa')}}?id=" + urlParams.get('id');
+                        window.location = "{{route('videosiswa')}}?token=" + urlParams.get('id');
                     }, 1000);
                 }
             }
         });
     });
+    $('#cover-spin').hide();
+
 
 </script>
 @endsection
