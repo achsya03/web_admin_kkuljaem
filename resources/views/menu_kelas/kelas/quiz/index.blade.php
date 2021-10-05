@@ -37,6 +37,7 @@
                     <table class="table table-hover table-striped table-bordered dataTable">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Pertanyaan</th>
                                 <th>Jawaban Benar</th>
                                 <th width="1px" data-orderable="false">Action</th>
@@ -103,6 +104,7 @@
             "dataType": 'json',
             "type": "GET",
             "dataSrc": function(response) {
+                console.log(response)
 
          //tambahsoal
         html0000 ='';
@@ -119,6 +121,8 @@
             },
         },
         "columns": [{
+            "data": "nomor"
+        },{
             "data": "pertanyaan"
         }, {
             "data": "jawaban"
