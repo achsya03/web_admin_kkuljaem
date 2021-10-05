@@ -12,7 +12,7 @@
         <div class="custom-file">
             <input type="file" name="url_mobile" class="custom-file-input" onchange="update_preview(this)">
             <label class="custom-file-label">Pilih File</label>
-            <div class="small">Format *.jpg ukuran gambar 380 x 254px dengan maksimal ukuran file 2MB</div>
+            <div class="small">Format *.jpg ukuran gambar 380px x 254px dengan maksimal ukuran file 2MB</div>
         </div>
     </div>
     <div class="form-group">

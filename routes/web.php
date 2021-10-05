@@ -25,11 +25,10 @@ Route::group(['prefix' => 'qna'], function () {
 });
 Route::group(['prefix' => 'forum'], function () {
     Route::view('/', 'forum.index')->name('forum');
-    Route::view('/create', 'forum.create')->name('forum-create');
     Route::group(['prefix' => 'topik'], function () {
         Route::view('/', 'forum.topik.index')->name('forum-topik');
+        Route::view('/create', 'forum.topik.create')->name('forum-topik-create');
         Route::view('/detail', 'forum.topik.detail')->name('forum-topik-detail');
-        Route::view('/detail/1', 'forum.topik.saya')->name('forum-topik-detail-saya');
         Route::view('/edit', 'forum.topik.edit')->name('forum-topik-edit');
     });
 });
