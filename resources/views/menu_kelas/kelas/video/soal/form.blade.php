@@ -62,14 +62,12 @@
                 <div class="mt-3 inputGambar d-none inputJawaban">
                     <label>File Gambar</label>
                     <input name="gambar_opsi[]" type="file" class="form-control-file">
-        <div class="img1" id="img1"></div>
 
                     <small class="form-text text-muted">Format jpg ukuran 12 x 12</small>
                 </div>
                 <div class="mt-3 inputAudio d-none inputJawaban">
                     <label>File Audio</label>
                     <input name="url_opsi[]" type="file" class="form-control-file">
-        <div class="img1" id="audio1"></div>
 
                     <small class="form-text text-muted">Format jpg ukuran 12 x 12</small>
                 </div>

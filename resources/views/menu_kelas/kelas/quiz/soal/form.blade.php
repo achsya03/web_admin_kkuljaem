@@ -11,7 +11,7 @@
     </div>
     <div>
         <label class="mt-2">File Gambar</label>
-        <input name="nomor" id="nomor" type="text" class="form-control" hidden>
+        <input name="nomor" id="nomor" type="text" class="form-control" >
         <input name="gambar_pertanyaan" id="gambar_pertanyaan" type="file" class="form-control-file">
         <div class="img" id="img"></div>
 

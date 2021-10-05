@@ -46,6 +46,8 @@
 
 //CREATE
     $('#change-pass-form').submit(function(e) {
+    $('#cover-spin').show();
+
         e.preventDefault();
         $.ajax({
             method: 'post',
@@ -67,6 +69,8 @@
             }
         });
     });
+    $('#cover-spin').hide();
+
 
 
 
