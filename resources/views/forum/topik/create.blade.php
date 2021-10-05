@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>
-        @foreach([1,2,3] as $row)
+        @foreach([0,1,2] as $row)
         <div class="row">
             <div class="col-5">
                 <div class="position-relative form-group">
@@ -59,13 +59,13 @@
             <div class="col-5">
                 <div class="row">
                     <div class="col-4">
+                        <img preview="post_image[0]" src="#" width="100%">
+                    </div>
+                    <div class="col-4">
                         <img preview="post_image[1]" src="#" width="100%">
                     </div>
                     <div class="col-4">
                         <img preview="post_image[2]" src="#" width="100%">
-                    </div>
-                    <div class="col-4">
-                        <img preview="post_image[3]" src="#" width="100%">
                     </div>
                 </div>
             </div>
@@ -107,7 +107,7 @@
                 } else if (response.message == 'Success') {
                     notif('success', 'Berhasil menambah banner, Mohon tunggu');
                     setTimeout(() => {
-                        // window.location = "{{route('homepage-setting-marketing-banner')}}";
+                         window.location = "{{route('forum-topik')}}?token=" + urlParams.get('token');
                     }, 1000);
                 }
             }
