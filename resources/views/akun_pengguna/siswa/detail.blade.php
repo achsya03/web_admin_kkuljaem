@@ -3,18 +3,18 @@
 @section('title-icon', 'pe-7s-bookmarks')
 @section('content')
 
-<h4 style="color:black"><strong>Nanda Mohammad</strong></h4>
-nandamohammad@gmail.com <br>
+<h4 style="color:black" id="nama"><strong>Nanda Mohammad</strong></h4>
+<a id="email">nandamohammad@gmail.com</a> <br>
 
-<span style="color:black"><strong>Status</strong></span><br>Member
+<span style="color:black" ><strong>Status</strong></span><br><a id="status">Member</a>
 <br>
-<span style="color:black"><strong>Jenis Kelamin</strong></span><br>Laki-Laki
-<br>
-
-<span style="color:black"><strong>Tanggal Lahir</strong></span><br>nandamohammad@gmail.com5>
+<span style="color:black"><strong>Jenis Kelamin</strong></span><br><a id="jenis_kel">Laki-Laki</a>
 <br>
 
-<span style="color:black"><strong>Alamat</strong></span><br>nandamohammad@gmail.com
+<span style="color:black"><strong>Tanggal Lahir</strong></span><br><a id="email"> @gmail.com5</a>
+<br>
+
+<span style="color:black"><strong>Alamat</strong></span><br><a id="alamat">nandamohammad@gmail.com</a>
 
 
 <br>
@@ -70,4 +70,37 @@ nandamohammad@gmail.com <br>
     </div>
 </div>
 @endsection
+
+@section('js')
+<script>
+    function load_detail() {
+        $.ajax({
+            "url": api + "user/detail?=token" + urlParams.get('id'),
+            "method": "GET",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": 'bearer ' + token,
+            },
+        }).done(function(response) {
+            $('#cover-spin').hide();
+            if (response.message == 'Success') {
+                console.log(response)
+                html = '';
+                document.getElementById('nama').textContent = response.data.user.nama;
+                document.getElementById('email').textContent = response.data.user.email;
+                document.getElementById('status').textContent = response.data.user.status;
+                document.getElementById('jenis_kel').textContent = response.data.user.jenis_kel;
+                document.getElementById('tgl_lahir').textContent = response.data.user.tgl_lahir;
+                document.getElementById('alamat').textContent = response.data.user.alamat;
+
+
+
+            }
+        });
+    }
+    load_detail();
+</script>
+
+@endsection
+
 @extends('layouts.layout')

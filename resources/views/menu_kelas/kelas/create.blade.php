@@ -21,6 +21,7 @@
 </div>
 @endsection
 @section('js')
+@yield('form_js')
 <script>
     //ambil data mentor
     $.ajax({
@@ -43,6 +44,7 @@
 
     //CREATE
     $('#change-pass-form').submit(function(e) {
+        $('#cover-spin').show();
         e.preventDefault();
         $.ajax({
             method: 'post',
@@ -53,6 +55,7 @@
             mimeType: "multipart/form-data",
             processData: false,
             success: function(response) {
+                 $('#cover-spin').hide();
                 if (response.message !== 'Success') {
                     notif('error', 'Silahkan cek form dan tipe file yang di upload');
                 } else if (response.message == 'Success') {

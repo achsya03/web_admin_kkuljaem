@@ -1,5 +1,5 @@
-@section('title', 'Konten Kelas')
-@section('title-description', 'Manajemen Grup Kelas, Data kelas dan Materi pembelajaran')
+@section('title', '')
+@section('title-description', '')
 @section('title-icon', 'pe-7s-bookmarks')
 @section('content')
 <div class="row">
@@ -19,7 +19,7 @@
         <div>
             <span style="color:black"><strong>Mentor</strong></span><br>
             <i class="fa fa-spin fa-spinner"></i>
-            <a id="mentor"></a>
+            <a class="mentor"></a>
             <br><br>
         </div>
         <div class="route">
@@ -269,6 +269,19 @@
 @section('js')
 <script>
 
+    //show view atas
+        async function getview() {
+        const response = await fetch('https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content?token=' + urlParams.get('id'));
+        const datas = await response.json();
+        const {
+            data,
+        } = datas;
+        $('.page-title-text').html(data.judul_class + '<div class="page-title-subheading">' + data.deskripsi_class + '</div>');
+
+    }
+    getview();
+
+
 
     //SHOW DATA
     async function getISS() {
@@ -298,9 +311,16 @@
 
         document.getElementById('judul').textContent = data.judul_class;
         document.getElementById('deskripsi').textContent = data.deskripsi_class;
+        
+        html99 = '';
         $.each(data.mentor, function(index3, row3) {
-            document.getElementById('mentor').textContent = row3.nama_mentor;
+            html99 += '<tr>';
+            html99 += '<td>' + row3.nama_mentor  + '</td>' + ', ';
+            html99 += '<tr>';
+
         });
+        document.querySelector('.mentor').innerHTML = html99;
+
         html = '';
         $.each(data.materi, function(index, row) {
             html += '<tr>';

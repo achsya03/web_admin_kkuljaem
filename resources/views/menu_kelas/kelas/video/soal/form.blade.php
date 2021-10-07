@@ -56,7 +56,7 @@
                 <h5>Jawaban {{ $jawaban }}</h5>
                 <div class="form-group mt-3 inputTeks d-none inputJawaban">
                     <label>Teks Jawaban</label>
-                    <input name="jawaban_teks[]" placeholder=""  class="form-control">
+                    <input name="jawaban_teks[]" placeholder=""  class="form-control" id="jawaban_teks_{{$jawaban}}">
                     
                 </div>
                 <div class="mt-3 inputGambar d-none inputJawaban">

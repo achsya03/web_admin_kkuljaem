@@ -43,8 +43,7 @@
                 document.getElementById('nomor').value = response.data['nomor'];
                 document.getElementById('pertanyaan_teks').value = response.data['pertanyaan_teks'];
                 document.getElementById('jawaban').value = response.data['jawaban'];
-                document.getElementById('jenis_jawaban').value = response.data['jenis_jawaban'];
-
+                $('#jenis_jawaban').val(response.data['jenis_jawaban']).change();
 
 
                 //show file

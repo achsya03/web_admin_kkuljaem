@@ -4,10 +4,7 @@
 @section('content')
 <div>
     <div class="form-row cards">
-        <div class=" col-md 12 alert alert-focus alert-block" style="text-align:center;">
-            <strong> <i class="fa fa-spin fa-spinner"></i>Mohon Tunggu Sebentar ...
-            </strong>
-        </div>
+       
     </div>
     <div class="form-row cardss">
 
@@ -49,44 +46,45 @@
 @section('js')
 <script>
 
- 
-    //SHOW DATA
-    async function getISS() {
-        const response = await fetch('https://floating-harbor-93486.herokuapp.com/api/admin/classroom-group');
-        const datas = await response.json();
-        const {
-            data,
-        } = datas;
+//show
+function load_menukelas() {
+        $('#cover-spin').show();
+        $.ajax({
+            "url": api + "admin/classroom-group",
+            "method": "GET",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": 'bearer ' + token,
+            },
+        }).done(function(response) {
+            $('#cover-spin').hide();
+            if (response.message == 'Success') {
+                console.log(response)
+                var id = response.data.slice(0);
+                    id.sort(function(a,b) {
+                    var x = a.nama.toLowerCase();
+                    var y = b.nama.toLowerCase();
+                    return x < y ? -1 : x > y ? 1 : 0;
+                });
 
-        
-        var id = data.slice(0);
-            id.sort(function(a,b) {
-            var x = a.nama.toLowerCase();
-            var y = b.nama.toLowerCase();
-            return x < y ? -1 : x > y ? 1 : 0;
-        });
 
- console.log(id)
-    
-        $('.fa-spinner').removeClass('fa-spinner').removeClass('fa-spin');
+                html = '';
+                    $.each(id, function(index, row) {
+                        html += '<div class="col-md-4">';
+                        html += '<div class = "main-card mb-3 card" >';
+                        html += '<div class = "card-body" >';
+                        html += `<a href="{{route('kelas')}}?id=` + row.uuid + `"  class="text-dark"><h5><strong><u>` + row.nama + '</strong></u>' + '(' + row.jml_kelas + ')' + ' </h5></a><p>' + row.deskripsi.substring(0, 40) + '...'; + '</p>';
+                        html += '<div class="position-relative form-row"><div class="col-md-1"><a data-toggle="modal" data-target=".bd-example-modal-sm" class="btn-icon  btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav" href="#" onclick="getEdit(\'' + row.uuid + '\')">Edit</a></div><div style="text-align:right;" class="col-md-11"><a class="btn-icon  btn-icon-only btn btn-danger btn-sm" href="#" onclick="hapus(`' + api + 'admin/classroom-group/delete?token=' + row.uuid + '`)">Hapus</a></div></div>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</div>';
+                    });
+                    document.querySelector('.cards').innerHTML = html;
 
-        html = '';
-        $.each(id, function(index, row) {
-            html += '<div class="col-md-4">';
-            html += '<div class = "main-card mb-3 card" >';
-            html += '<div class = "card-body" >';
-            html += `<a href="{{route('kelas')}}?id=` + row.uuid + `"  class="text-dark"><h5><strong><u>` + row.nama + '</strong></u>' + '(' + row.jml_kelas + ')' + ' </h5></a><p>' + row.deskripsi.substring(0, 40) + '...'; + '</p>';
-            html += '<div class="position-relative form-row"><div class="col-md-1"><a data-toggle="modal" data-target=".bd-example-modal-sm" class="btn-icon  btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav" href="#" onclick="getEdit(\'' + row.uuid + '\')">Edit</a></div><div style="text-align:right;" class="col-md-11"><a class="btn-icon  btn-icon-only btn btn-danger btn-sm" href="#" onclick="hapus(`' + api + 'admin/classroom-group/delete?token=' + row.uuid + '`)">Hapus</a></div></div>';
-            html += '</div>';
-            html += '</div>';
-            html += '</div>';
-            html += '</div>';
-        });
-        document.querySelector('.cards').innerHTML = html;
-
-        html1 = '';
-        html1 += `<div class="col-md-4"><div class="main-card mb-3 card"><div class="card-body"><h5><strong>Tambah Grup Kelas</strong></h5><form id="change-pass-form"><div class="position-relative form-group"><label class="">Label Grup Kelas</label><input name="nama" placeholder="" class="form-control"></div><div class="position-relative form-group"><label for="exampleEmail" class="">Penjelasan Singkat Grup Kelas</label><input name="deskripsi" placeholder="" class="form-control"></div><div class="position-relative form-group"><button type="submit" class="btn-icon btn-focus btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">Tambahkan Modal</button></div></form></div></div></div>`;
-        document.querySelector('.cardss').innerHTML = html1;
+                    html1 = '';
+                    html1 += `<div class="col-md-4"><div class="main-card mb-3 card"><div class="card-body"><h5><strong>Tambah Grup Kelas</strong></h5><form id="change-pass-form"><div class="position-relative form-group"><label class="">Label Grup Kelas</label><input name="nama" placeholder="" class="form-control"></div><div class="position-relative form-group"><label for="exampleEmail" class="">Penjelasan Singkat Grup Kelas</label><input name="deskripsi" placeholder="" class="form-control"></div><div class="position-relative form-group"><button type="submit" class="btn-icon btn-focus btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">Tambahkan Modal</button></div></form></div></div></div>`;
+                    document.querySelector('.cardss').innerHTML = html1;
 
         //CREATE
         $('#change-pass-form').submit(function(e) {
@@ -108,9 +106,14 @@
                 }
             });
         });
-    }
-    getISS();
 
+
+        
+            }
+        });
+    }
+    load_menukelas();
+ 
     //SHOW EDIT
     function getEdit(id) {
         $.ajax({
@@ -155,7 +158,7 @@
         });
     }
 
-    //delete
+
 
 </script>
 @endsection

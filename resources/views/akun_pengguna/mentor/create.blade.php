@@ -9,7 +9,7 @@
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <h5 class="card-title">Tambah Akun Siswa</h5>
-                    <form action="{{ url('/user/form/insert') }}" method="POST">
+                    <form id="change-pass-form">
                         @include('akun_pengguna.mentor.form')
                         <br>
                         <br>
@@ -21,5 +21,37 @@
     </div>
 </div>
 @endsection
+@section('js')
+<script>
+    //CREATE
+    $('#change-pass-form').submit(function(e) {
+    $('#cover-spin').show();
 
+    e.preventDefault();
+        $.ajax({
+            method: 'post',
+            url: api + 'admin/user/mentor',
+            data: new FormData($('#change-pass-form')[0]),
+            dataType: 'json',
+            contentType: false,
+            mimeType: "multipart/form-data",
+            processData: false,
+            success: function(response) {
+                if (response.message !== 'Your Email Registration Success. Please Activate From Your Email') {
+                    notif('error', 'Silahkan cek form dan tipe file yang di upload');
+                         $('#cover-spin').hide();
+        
+                } else if (response.message == 'Your Email Registration Success. Please Activate From Your Email') {
+                    notif('success', 'Berhasil membuat kelas, Mohon tunggu');
+                    setTimeout(() => {
+                        window.location = "{{route('mentor')}}";
+                    }, 1000);
+                }
+            }
+        });
+    });
+    $('#cover-spin').hide();
+
+</script>
+@endsection
 @extends('layouts.layout')

@@ -1,5 +1,5 @@
-@section('title', 'Kelas Kategori')
-@section('title-description', 'Kelas Kategori')
+@section('title', '')
+@section('title-description', '')
 @section('title-icon', 'pe-7s-bookmarks')
 @section('content')
 <div class="tambah">
