@@ -31,7 +31,7 @@
     //show edit
     $.ajax({
         method: 'get',
-        url: api + 'admin/classroom/content/video/task/detail?token=' + urlParams.get('id'),
+        url: api + 'admin/classroom/content/quiz/exam/detail?token=' + urlParams.get('token'),
         dataType: 'json',
         success: function(response) {
             console.log(response)
