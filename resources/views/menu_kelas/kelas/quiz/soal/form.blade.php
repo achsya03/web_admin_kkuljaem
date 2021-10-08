@@ -27,7 +27,7 @@
         <label class="custom-file-label">Pilih File</label>
         <div class="small">Format jpg ukuran 12 x 12</div>
     </div>
-    <img  src="#" name="gambar_pertanyaan_preview" style="min-width: 300px; max-height: 150px; object-fit:cover;">
+    <img id="gambar_pertanyaan_preview" class="d-none"  src="#" name="gambar_pertanyaan_preview" style="min-width: 300px; max-height: 150px; object-fit:cover;">
     </div>
 
 
@@ -38,25 +38,8 @@
         <label class="custom-file-label">Pilih File</label>
         <div class="small">Format jpg ukuran 12 x 12</div>
     </div>
-    <audio  name="url_pertanyaan_preview" controls><source  class="audio"  src="#" type="audio/mpeg"></audio>
+    <audio id="url_pertanyaan_preview" class="d-none" controls><source  class="audio"  src="#" type="audio/mpeg"></audio>
     </div>
-
-
-
-
-    <!-- <div>
-        <label class="mt-2">File Gambar</label>
-        <input name="gambar_pertanyaan" id="gambar_pertanyaan" type="file" class="form-control-file">
-        <div class="img" id="img"></div>
-
-        <small class="form-text text-muted">Format jpg ukuran 12 x 12</small>
-    </div>
-    <div>
-        <label class="mt-3">File Audio</label>
-        <input name="url_pertanyaan"  id="url_pertanyaan" type="file" class="form-control-file">
-        <div class="audio" id="audio"></div>
-        <small class="form-text text-muted">Format jpg ukuran 12 x 12</small>
-    </div> -->
 
     <div class="row mt-3">
         <div class="position-relative form-group col-md-6"><label for="exampleSelect" class="">Jawaban Benar</label>
@@ -90,18 +73,18 @@
                 <div class="form-group mt-3 inputTeks d-none inputJawaban">
                     <label>Teks Jawaban</label>
                     <input name="jawaban_teks[]" placeholder=""  class="form-control" id="jawaban_teks_{{$jawaban}}">
-                    
                 </div>
                 <div class="mt-3 inputGambar d-none inputJawaban">
                     <label>File Gambar</label>
-                    <input name="gambar_opsi[]" type="file" class="form-control-file">
-
+                    <input type="file" name="gambar_opsi[]" id="gambar_opsi_{{$jawaban}}" accept="image/*" class="custom-file" onchange="update_preview(this)" >
+                    <img src="#" class="d-none" id="gambar_opsi_{{$jawaban}}_preview" style="min-width: 300px; max-height: 150px; object-fit:cover;">
                     <small class="form-text text-muted">Format jpg ukuran 12 x 12</small>
                 </div>
                 <div class="mt-3 inputAudio d-none inputJawaban">
                     <label>File Audio</label>
-                    <input name="url_opsi[]" type="file" class="form-control-file">
-
+                    <input name="url_opsi[]" id="url_opsi_{{$jawaban}}" accept=".mp3,audio/*" type="file" class="form-control-file"  onchange="update_preview(this)">
+                    <br>
+                    <audio id="url_opsi_{{$jawaban}}_preview" class="d-none" controls><source  class="audio"  src="#" type="audio/mpeg"></audio>
                     <small class="form-text text-muted">Format jpg ukuran 12 x 12</small>
                 </div>
             </div>
@@ -111,19 +94,25 @@
 
     @section('form_js')
     <script>
+        // $('img[name="gambar_pertanyaan_preview"]').change(function() {
+        //     $('.gambar_pertanyaan_preview').addClass('d-none');
+        //     $('.input' + $(this).val()).removeClass('d-none');
+        // });
+
         $('select[name="jenis_jawaban"]').change(function() {
-            $('#cover-spin').show();
             $('.inputJawaban').addClass('d-none');
             $('.input' + $(this).val()).removeClass('d-none');
-            $('#cover-spin').hide();
         });
 
         function update_preview(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                $('img[name="' + $(input).attr('name') + '_preview"]').attr('src', e.target.result);
-                $('audio[name="' + $(input).attr('name') + '_preview"]').attr('src', e.target.result);
+                $('img[id="' + $(input).attr('id') + '_preview"]').attr('src', e.target.result);
+                $('img[id="' + $(input).attr('id') + '_preview"]').removeClass('d-none');
+
+                $('audio[id="' + $(input).attr('id') + '_preview"]').attr('src', e.target.result);
+                $('audio[id="' + $(input).attr('id') + '_preview"]').removeClass('d-none');
 
             }
             reader.readAsDataURL(input.files[0]);

@@ -38,7 +38,7 @@
         <label class="custom-file-label">Pilih File</label>
         <div class="small">Format jpg ukuran 12 x 12</div>
     </div>
-    <audio name="url_pertanyaan_preview" controls><source  class="audio"  src="#" type="audio/mpeg"></audio>
+    <audio id="url_pertanyaan_preview" class="d-none" controls><source  class="audio"  src="#" type="audio/mpeg"></audio>
     </div>
 
     <div class="row mt-3">
@@ -77,12 +77,14 @@
                 <div class="mt-3 inputGambar d-none inputJawaban">
                     <label>File Gambar</label>
                     <input type="file" name="gambar_opsi[]" id="gambar_opsi_{{$jawaban}}" accept="image/*" class="custom-file" onchange="update_preview(this)" >
-                    <img src="#" id="gambar_opsi_{{$jawaban}}_preview" style="min-width: 300px; max-height: 150px; object-fit:cover;">
+                    <img src="#" class="d-none" id="gambar_opsi_{{$jawaban}}_preview" style="min-width: 300px; max-height: 150px; object-fit:cover;">
                     <small class="form-text text-muted">Format jpg ukuran 12 x 12</small>
                 </div>
                 <div class="mt-3 inputAudio d-none inputJawaban">
                     <label>File Audio</label>
-                    <input name="url_opsi[]" type="file" class="form-control-file" id="url_opsi_{{$jawaban}}">
+                    <input name="url_opsi[]" id="url_opsi_{{$jawaban}}" accept=".mp3,audio/*" type="file" class="form-control-file"  onchange="update_preview(this)">
+                    <br>
+                    <audio id="url_opsi_{{$jawaban}}_preview" class="d-none" controls><source  class="audio"  src="#" type="audio/mpeg"></audio>
                     <small class="form-text text-muted">Format jpg ukuran 12 x 12</small>
                 </div>
             </div>
@@ -109,7 +111,9 @@
                 $('img[id="' + $(input).attr('id') + '_preview"]').attr('src', e.target.result);
                 $('img[id="' + $(input).attr('id') + '_preview"]').removeClass('d-none');
 
-                $('audio[name="' + $(input).attr('name') + '_preview"]').attr('src', e.target.result);
+                $('audio[id="' + $(input).attr('id') + '_preview"]').attr('src', e.target.result);
+                $('audio[id="' + $(input).attr('id') + '_preview"]').removeClass('d-none');
+
             }
             reader.readAsDataURL(input.files[0]);
         }

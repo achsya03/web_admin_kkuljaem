@@ -41,22 +41,36 @@
             } else if (response.message == 'Success') {
                 console.log(jenis_jawaban)
                 document.getElementById('nomor').value = response.data['nomor'];
+                document.getElementById('nomor_1').value = response.data['nomor'];
                 document.getElementById('pertanyaan_teks').value = response.data['pertanyaan_teks'];
                 document.getElementById('jawaban').value = response.data['jawaban'];
                 $('#jenis_jawaban').val(response.data['jenis_jawaban']).change();
 
-
-
-                //show file
+                 //show file
+                 $('img[name="gambar_pertanyaan_preview"]').attr('src', response.data.url_gambar).removeClass('d-none');
                 $('img[name="gambar_pertanyaan_preview"]').attr('src', response.data.url_gambar);
-                $('audio[name="url_pertanyaan_preview"]').attr('src', response.data.url_file);
                 
+              //  $('audio[id="' + $(input).attr('id') + '_preview"]').removeClass('d-none');
+                $('audio[id="url_pertanyaan_preview"]').attr('src', response.data.url_file).removeClass('d-none');
+                $('audio[id="url_pertanyaan_preview"]').attr('src', response.data.url_file);
+                
+
                 //show jawaban
-                html01 = '';
                 $.each(response.data.pilihan, function(index, row) {
-                    console.log(row);
-                    $('#jawaban_teks_' + jawaban_id).val(row.jawaban_teks);
+                    $('#jawaban_teks_' + row.jawaban_id).val(row.jawaban_teks).removeClass('d-none');
+                    $('#jawaban_teks_' + row.jawaban_id).val(row.jawaban_teks);
                 });
+
+                $.each(response.data.pilihan, function(index, row) {
+                    $('#gambar_opsi_' + row.jawaban_id + '_preview').attr('src', row.url_gambar).removeClass('d-none');
+                    $('#gambar_opsi_' + row.jawaban_id + '_preview').attr('src', row.url_gambar);
+                });
+
+                $.each(response.data.pilihan, function(index, row) {
+                    $('#url_opsi_' + row.jawaban_id + '_preview').attr('src', row.url_file).removeClass('d-none');
+                    $('#url_opsi_' + row.jawaban_id + '_preview').attr('src', row.url_file);
+                });
+
 
                 
 
@@ -71,7 +85,7 @@ $('#change-pass-form').submit(function(e) {
         e.preventDefault();
         $.ajax({
             method: 'post',
-            url: api + 'admin/classroom/content/video/task/update?token=' + urlParams.get('id'),
+            url: api + 'admin/classroom/content/video/task/update?token=' + urlParams.get('token'),
             data: new FormData($('#change-pass-form')[0]),
             dataType: 'json',
             contentType: false,

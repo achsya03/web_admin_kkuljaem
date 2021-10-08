@@ -142,7 +142,7 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Tambah Ungkapan</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Sunting Ungkapan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -277,7 +277,6 @@
         html000 = '';
         
         html000 += '<iframe width="500" height="220" src="https://www.youtube.com/embed/'+ data.url_video.split("=")[1] + '"></iframe> '
-console.log(html000)
       //  html000 += `<video id='my-video' controls controlsList="nodownload" preload='auto'width="500" height="220"><source src="` + data.url_video + `" type='video/mp4'></video>`
         document.querySelector('.thumb1').innerHTML = html000;
 
