@@ -1,5 +1,5 @@
 @section('title', 'Sunting Soal ')
-@section('title-description', 'Kelas/Kelas Perkenalan/ Video Perkenalan 1')
+@section('title-description', 'Kelas/Kelas Perkenalan/ Quiz')
 @section('title-icon', 'pe-7s-bookmarks')
 @section('content')
 <div class="row">
@@ -39,22 +39,24 @@
                 console.log(response)
 
             } else if (response.message == 'Success') {
+                console.log(jenis_jawaban)
                 document.getElementById('nomor').value = response.data['nomor'];
                 document.getElementById('pertanyaan_teks').value = response.data['pertanyaan_teks'];
                 document.getElementById('jawaban').value = response.data['jawaban'];
-                document.getElementById('jenis_jawaban').value = response.data['jenis_jawaban'];
+                $('#jenis_jawaban').val(response.data['jenis_jawaban']).change();
 
 
 
                 //show file
-                html000 = '';   
-                html000 += `<img src="` + response.data.url_gambar + `" width="300" height="100" style="object-fit: cover;">`
-                document.querySelector('.img').innerHTML = html000;
-
-                //show audio
-                html001 = '';
-                html001 += `<audio controls><source src="` + response.data.url_file + `" type="audio/mpeg"></audio>`
-                document.querySelector('.audio').innerHTML = html001;
+                $('img[name="gambar_pertanyaan_preview"]').attr('src', response.data.url_gambar);
+                $('audio[name="url_pertanyaan_preview"]').attr('src', response.data.url_file);
+                
+                //show jawaban
+                html01 = '';
+                $.each(response.data.pilihan, function(index, row) {
+                    console.log(row);
+                    $('#jawaban_teks_' + jawaban_id).val(row.jawaban_teks);
+                });
 
                 
 
@@ -77,8 +79,12 @@ $('#change-pass-form').submit(function(e) {
             processData: false,
             success: function(response) {
                 if (response.message !== 'Success') {
+    $('#cover-spin').hide();
+
                     notif('error', 'Silahkan cek form dan tipe file yang di upload');
                 } else if (response.message == 'Success') {
+    $('#cover-spin').hide();
+
 
                     notif('success', 'Berhasil membuat kelas, Mohon tunggu');
                     setTimeout(() => {
@@ -88,7 +94,6 @@ $('#change-pass-form').submit(function(e) {
             }
         });
     });
-    $('#cover-spin').hide();
 
 
 </script>

@@ -306,6 +306,8 @@
         html0 = '';
         html0 += `<a href="{{route('editkelas')}}?id=` + data.class_uuid + '&token=' + data.group_uuid + `" type="button" class=" mb-2 mr-2 btn btn-primary"> Sunting Kelas </a>`
         document.querySelector('.route').innerHTML = html0;
+
+        
         html0 += `<a href="{{route('progressiswa')}}?id=` + data.class_uuid + `" type="button" class=" mb-2 mr-2 btn btn-primary"> Progress Siswa </a>`
         document.querySelector('.route').innerHTML = html0;
 
@@ -314,9 +316,8 @@
         
         html99 = '';
         $.each(data.mentor, function(index3, row3) {
-            html99 += '<tr>';
-            html99 += '<td>' + row3.nama_mentor  + '</td>' + ', ';
-            html99 += '<tr>';
+             const A = [row3.nama_mentor];
+             html99 += '<td>' + A  + '</td>' + ' ';
 
         });
         document.querySelector('.mentor').innerHTML = html99;
@@ -378,7 +379,7 @@
                 'judul': $("#judul_video").val(),
                 'tipe': 'Video',
                 'keterangan': $("#keterangan").val(),
-                'url_video': 'https://drive.google.com/uc?export=download&id=' + $("#url_video").val().split("/")[5],
+                'url_video': $("#url_video").val(),
             },
 
             success: function(response) {
@@ -407,7 +408,7 @@
                 'judul': $("#judul_video_edit").val(),
                 'tipe': 'Video',
                 'keterangan': $("#keterangan_edit").val(),
-                'url_video': 'https://drive.google.com/uc?export=download&id=' + $("#url_video_edit").val().split("/")[5],
+                'url_video': $("#url_video_edit").val(),
             },
             success: function(response) {
                 if (response.message !== 'Success') {
@@ -533,7 +534,7 @@
 
 
 
-    //SHOW EDIT VIDEO
+    //SHOW EDIT quiz
     function editQuiz(id) {
     $.ajax({
         method: 'get',
@@ -559,7 +560,7 @@
     }
 
 
-       // update video
+       // update quiz
         function updatequiz(id) {
         $.ajax({
             type: "post",

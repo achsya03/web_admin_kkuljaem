@@ -1,5 +1,5 @@
-@section('title', 'Video 1')
-@section('title-description', 'Manajemen Grup Kelas, Data kelas dan Materi pembelajaran')
+@section('title', '')
+@section('title-description', '')
 @section('title-icon', 'pe-7s-bookmarks')
 @section('content')
 
@@ -35,8 +35,10 @@
     <div class="mb-3 card">
         <div class="card-header card-header-tab-animation">
             <ul class="nav">
-                <li class="nav-item"><a data-toggle="tab" href="#tab-eg8-1" class=" active nav-link">Latihan (12 episode)</a></li>
-                <li class="nav-item"><a data-toggle="tab" href="#tab-eg8-2" class="nav-link">Shadowing (20 Soal)</a></li>
+                <li class="nav-item jml_video">
+                </li>
+                <li class="nav-item jml_shadowing">
+                </li>
             </ul>
         </div>
         <div class="card-body">
@@ -227,7 +229,25 @@
 
 @section('js')
 
+
+
 <script>
+
+
+    //show view atas
+    async function getview() {
+        const response = await fetch('https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content/video/all?token=' + urlParams.get('token'));
+        const datas = await response.json();
+        const {
+            data,
+        } = datas;
+        $('.page-title-text').html(data.judul + '<div class="page-title-subheading">' + data.keterangan + '</div>');
+
+    }
+    getview();
+
+ 
+
     //SHOW DATA
     async function getISS() {
         const response = await fetch('https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content/video/all?token=' + urlParams.get('token'));
@@ -243,11 +263,22 @@
         html0000 += `<a class="btn-icon btn-icon-only btn btn-primary mobile-toggle-header-nav"  href="{{ route('tambahsoalvideo') }}?token=` + urlParams.get('token') +`" > Tambah Soal</a>`
         document.querySelector('.route1').innerHTML = html0000;
 
+        //show jumlah shadowing dan video
+        html99 = '';
+        html99 += `<a data-toggle="tab" href="#tab-eg8-1" class="active nav-link"><strong>Latihan<strong></a>` + '(' + data.jml_task + ')';
+        document.querySelector('.jml_video').innerHTML = html99;
+
+        html999 = '';
+        html999 += `<a data-toggle="tab" href="#tab-eg8-2" class="nav-link""><strong>Shadowing<strong></a>` + '(' + data.jml_shadowing + ')';
+        document.querySelector('.jml_shadowing').innerHTML = html999;
 
 
         //show video
         html000 = '';
-        html000 += `<video id='my-video' controls controlsList="nodownload" preload='auto'width="500" height="220"><source src="` + data.url_video + `" type='video/mp4'></video>`
+        
+        html000 += '<iframe width="500" height="220" src="https://www.youtube.com/embed/'+ data.url_video.split("=")[1] + '"></iframe> '
+console.log(html000)
+      //  html000 += `<video id='my-video' controls controlsList="nodownload" preload='auto'width="500" height="220"><source src="` + data.url_video + `" type='video/mp4'></video>`
         document.querySelector('.thumb1').innerHTML = html000;
 
         //sunting video
@@ -281,7 +312,7 @@
             html1 += '<td>' + row1.nomor + '</td>';
             html1 += '<td>' + row1.pertanyaan + '</td>';
             html1 += '<td>' + row1.jawaban + '</td>';
-            html1 += '<td>' + `<a  href="{{ route('editsoalvideo') }}?id=` + row1.task_uuid +`" class="btn-icon btn-icon-only btn btn-info btn-sm mobile-toggle-header-nav"  style="margin:2px;">Edit</a><br>` + '<button onclick="hapus(`' + api + `admin/classroom/content/video/task?token=` + row1.task_uuid + '`)" style="margin:2px;" class="btn btn-danger btn-sm">Hapus</button>'+ '</td>';
+            html1 += '<td>' + `<a  href="{{ route('editsoalvideo') }}?id=` + row1.task_uuid + '&token=' + urlParams.get('token')+`" class="btn-icon btn-icon-only btn btn-info btn-sm mobile-toggle-header-nav"  style="margin:2px;">Edit</a><br>` + '<button onclick="hapus(`' + api + `admin/classroom/content/video/task?token=` + row1.task_uuid + '`)" style="margin:2px;" class="btn btn-danger btn-sm">Hapus</button>'+ '</td>';
             html1 += '</tr>';
         });
         document.querySelector('.tbody2').innerHTML = html1;

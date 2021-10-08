@@ -14,17 +14,17 @@
 <div class="form-group">
     <label>Banner Kelas Web</label>
     <div class="custom-file">
-        <input type="file" name="url_web" id="url_web" accept="image/*" class="custom-file-input" onchange="update_preview(this)" required>
+        <input type="file" name="url_web" id="url_web" accept="image/*" class="custom-file-input" onchange="update_preview(this)" >
         <label class="custom-file-label">Pilih File</label>
         <div class="small">Format .jpg ukuran gambar 580 x 323px dengan maksimal ukuran file 2MB</div>
     </div>
-    <img src="#" name="url_web_preview" style="min-width: 300px; max-height: 150px; object-fit:cover;">
+    <img  class="img"src="#" name="url_web_preview" style="min-width: 300px; max-height: 150px; object-fit:cover;">
 </div>
 
 <div class="form-group">
     <label>Banner Kelas Mobile</label>
     <div class="custom-file">
-        <input type="file" name="url_mobile" id="url_mobile" accept="image/*" class="custom-file-input" onchange="update_preview(this)" required>
+        <input type="file" name="url_mobile" id="url_mobile" accept="image/*" class="custom-file-input" onchange="update_preview(this)" >
         <label class="custom-file-label">Pilih File</label>
         <div class="small">Format .jpg ukuran gambar 580 x 323px dengan maksimal ukuran file 2MB</div>
     </div>

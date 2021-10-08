@@ -50,20 +50,17 @@
                 });
 
                 //show file
-                html000 = '';
-                html000 += `<img src="` + response.data.url_web + `" width="300" height="100" style="object-fit: cover;">`
-                document.querySelector('.img').innerHTML = html000;
+                $('img[name="url_web_preview"]').attr('src', response.data.url_web);
+                $('img[name="url_mobile_preview"]').attr('src', response.data.url_mobile);
 
-                //show file
-                html001 = '';
-                html001 += `<img src="` + response.data.url_mobile + `" width="300" height="100" style="object-fit: cover;">`
-                document.querySelector('.img1').innerHTML = html001;
+              
             }
         }
     });
 
     //update
     $('#change-pass-form1').submit(function(e) {
+        $('#cover-spin').show();
         e.preventDefault();
         $.ajax({
             method: 'post',
@@ -75,8 +72,12 @@
             processData: false,
             success: function(response) {
                 if (response.message !== 'Success') {
+                    $('#cover-spin').hide();
+
                     notif('error', 'Silahkan cek form dan tipe file yang di upload');
                 } else if (response.message == 'Success') {
+                    $('#cover-spin').hide();
+
                     notif('success', 'Berhasil membuat kelas, Mohon tunggu');
                     setTimeout(() => {
                         window.location = "{{route('detailkelas')}}?id=" + urlParams.get('id');

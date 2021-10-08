@@ -1,5 +1,5 @@
 @section('title', 'Sunting Soal ')
-@section('title-description', 'Kelas/Kelas Perkenalan/ Video Perkenalan 1')
+@section('title-description', 'Kelas/Kelas Perkenalan/ Video')
 @section('title-icon', 'pe-7s-bookmarks')
 @section('content')
 <div class="row">
@@ -41,21 +41,32 @@
 
             } else if (response.message == 'Success') {
                 document.getElementById('nomor').value = response.data['nomor'];
+                document.getElementById('nomor_1').value = response.data['nomor'];
+
                 document.getElementById('pertanyaan_teks').value = response.data['pertanyaan_teks'];
                 document.getElementById('jawaban').value = response.data['jawaban'];
                 $('#jenis_jawaban').val(response.data['jenis_jawaban']).change();
 
-
                 //show file
-                html000 = '';   
-                html000 += `<img src="` + response.data.url_gambar + `" width="300" height="100" style="object-fit: cover;">`
-                document.querySelector('.img').innerHTML = html000;
+                $('img[name="gambar_pertanyaan_preview"]').attr('src', response.data.url_gambar);
+                $('audio[name="url_pertanyaan_preview"]').attr('src', response.data.url_file);
+                
 
-                //show audio
-                html001 = '';
-                html001 += `<audio controls><source src="` + response.data.url_file + `" type="audio/mpeg"></audio>`
-                document.querySelector('.audio').innerHTML = html001;
+                //show jawaban
+                $.each(response.data.pilihan, function(index, row) {
+                    $('#jawaban_teks_' + row.jawaban_id).val(row.jawaban_teks);
+                });
 
+                $.each(response.data.pilihan, function(index, row) {
+                    $('#gambar_opsi_' + row.jawaban_id + '_preview').attr('src', row.url_gambar);
+                });
+
+                $.each(response.data.pilihan, function(index, row) {
+                    $('#url_opsi_' + row.jawaban_id).val(row.url_gambar);
+                });
+
+
+                
                 
 
             }
@@ -65,7 +76,6 @@
 //UPDATE
 $('#change-pass-form').submit(function(e) {
     $('#cover-spin').show();
-
         e.preventDefault();
         $.ajax({
             method: 'post',
@@ -77,12 +87,15 @@ $('#change-pass-form').submit(function(e) {
             processData: false,
             success: function(response) {
                 if (response.message !== 'Success') {
+    $('#cover-spin').hide();
+
                     notif('error', 'Silahkan cek form dan tipe file yang di upload');
                 } else if (response.message == 'Success') {
+    $('#cover-spin').hide();
 
                     notif('success', 'Berhasil membuat kelas, Mohon tunggu');
                     setTimeout(() => {
-                        window.location = "{{route('videosiswa')}}?token=" + urlParams.get('id');
+                        window.location = "{{route('videosiswa')}}?token=" + urlParams.get('token');
                     }, 1000);
                 }
             }

@@ -1,5 +1,5 @@
 @section('title', 'Tambah Soal ')
-@section('title-description', 'Kelas/Kelas Perkenalan/ Video Perkenalan 1')
+@section('title-description', 'Kelas/Kelas Perkenalan/ Video')
 @section('title-icon', 'pe-7s-bookmarks')
 @section('content')
 <div class="row">
@@ -26,6 +26,7 @@
 @endsection
 
 @section('js')
+
 @yield('form_js')
 <script>
     //show create
@@ -39,6 +40,8 @@
 
             } else if (response.message == 'Success') {
                 document.getElementById('nomor').value = response.data['nomor_soal'];
+                document.getElementById('nomor_1').value = response.data['nomor_soal'];
+
             }
         }
     });
@@ -47,7 +50,6 @@
 //CREATE
     $('#change-pass-form').submit(function(e) {
     $('#cover-spin').show();
-
         e.preventDefault();
         $.ajax({
             method: 'post',
@@ -59,8 +61,12 @@
             processData: false,
             success: function(response) {
                 if (response.message !== 'Success') {
+                $('#cover-spin').hide();
+
                     notif('error', 'Silahkan cek form dan tipe file yang di upload');
                 } else if (response.message == 'Success') {
+                $('#cover-spin').hide();
+
                     notif('success', 'Berhasil membuat kelas, Mohon tunggu');
                     setTimeout(() => {
                         window.location = "{{route('videosiswa')}}?token=" + urlParams.get('token');
@@ -69,7 +75,6 @@
             }
         });
     });
-    $('#cover-spin').hide();
 
 
 

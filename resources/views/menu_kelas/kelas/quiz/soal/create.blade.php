@@ -1,5 +1,5 @@
 @section('title', 'Tambah Soal ')
-@section('title-description', 'Kelas/Kelas Perkenalan/ Video Perkenalan 1')
+@section('title-description', 'Kelas/Kelas Perkenalan/ Quiz')
 @section('title-icon', 'pe-7s-bookmarks')
 @section('content')
 <div class="row">
@@ -13,7 +13,7 @@
                     <h5 class="font-weight-bold mt-4">Forum Tambah Soal</h5>
                 </div>
                 <form id="change-pass-form">
-                        @include('menu_kelas.kelas.video.soal.form')
+                        @include('menu_kelas.kelas.quiz.soal.form')
                         <br>
                     <div class="form-row col-md-5">
                     <button type="submit" class="mt-1 btn btn-success">Simpan</button>
@@ -38,6 +38,8 @@
 
             } else if (response.message == 'Success') {
                 document.getElementById('nomor').value = response.data['nomor_soal'];
+                document.getElementById('nomor_1').value = response.data['nomor_soal'];
+
             }
         }
     });
@@ -58,8 +60,12 @@
             processData: false,
             success: function(response) {
                 if (response.message !== 'Success') {
+                    $('#cover-spin').hide();
+
                     notif('error', 'Silahkan cek form dan tipe file yang di upload');
                 } else if (response.message == 'Success') {
+                     $('#cover-spin').hide();
+
                     notif('success', 'Berhasil membuat kelas, Mohon tunggu');
                     setTimeout(() => {
                         window.location = "{{route('quizsiswa')}}?token=" + urlParams.get('token');
@@ -69,7 +75,6 @@
         });
     });
 
-    $('#cover-spin').hide();
 
 
 

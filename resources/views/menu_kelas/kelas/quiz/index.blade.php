@@ -1,5 +1,5 @@
-@section('title', 'Kelas Percakapan 1')
-@section('title-description', 'Manajemen Grup Kelas, Data kelas dan Materi pembelajaran')
+@section('title', '')
+@section('title-description', '')
 @section('title-icon', 'pe-7s-bookmarks')
 @section('content')
 
@@ -85,26 +85,26 @@
 @endsection
 @section('js')
 <script>
-    // $.ajax({
-    //     "url": api + "admin/classroom/content/quiz/all?token=" + urlParams.get('token'),
-    //     "method": "GET",
-    //     "headers": {
-    //         "Accept": "application/json",
-    //         "Authorization": 'bearer ' + token,
-    //     },
-    // }).done(function(response) {
-    //     if (response.message == 'Success') {
-    //         $('#keterangan').html(response.data.keterangan);
-    //         $('#judul').html(response.data.judul);
-    //     }
-    // });
+
+//show view atas
+    async function getview() {
+        const response = await fetch('https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content/quiz/all?token=' + urlParams.get('token'));
+        const datas = await response.json();
+        const {
+            data,
+        } = datas;
+        console.log(data)
+        $('.page-title-text').html(data.judul + '<div class="page-title-subheading">' + data.keterangan + '</div>');
+
+    }
+    getview();
+
     $('.dataTable').dataTable({
         "ajax": {
             "url": api + "admin/classroom/content/quiz/all?token=" + urlParams.get('token'),
             "dataType": 'json',
             "type": "GET",
             "dataSrc": function(response) {
-                console.log(response)
 
          //tambahsoal
         html0000 ='';

@@ -1,6 +1,16 @@
 @php($jawabans = ['A', 'B', 'C', 'D'])
 <div class="card-body">
     <div class="row">
+        <div class="col-4">
+            <div class="form-group">
+                <label for="exampleEmail" class="">Soal ke</label>
+                <input name="nomor" id="nomor" type="text" class="form-control col-md-2" disabled >
+                <input name="nomor" id="nomor_1" type="text" class="form-control col-md-2" hidden >
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-6">
             <div class="form-group">
                 <label for="exampleEmail" class="">Pertanyaan</label>
@@ -9,22 +19,28 @@
             </div>
         </div>
     </div>
-    <div>
-        <label class="mt-2">File Gambar</label>
-        <input name="nomor" id="nomor" type="text" class="form-control" hidden>
-        <input name="gambar_pertanyaan" id="gambar_pertanyaan" type="file" class="form-control-file">
-        <div class="img" id="img"></div>
 
-        <small class="form-text text-muted">Format jpg ukuran 12 x 12</small>
+    <div class="form-group">
+    <label>File Gambar</label>
+    <div class="custom-file">
+        <input type="file" name="gambar_pertanyaan" id="gambar_pertanyaan" accept="image/*" class="custom-file-input" onchange="update_preview(this)" >
+        <label class="custom-file-label">Pilih File</label>
+        <div class="small">Format jpg ukuran 12 x 12</div>
     </div>
-    <div>
-        <label class="mt-3">File Audio</label>
-        <input name="url_pertanyaan"  id="url_pertanyaan" type="file" class="form-control-file">
-        <div class="audio" id="audio"></div>
+    <img id="gambar_pertanyaan_preview" class="d-none"  src="#" name="gambar_pertanyaan_preview" style="min-width: 300px; max-height: 150px; object-fit:cover;">
+    </div>
 
-        
-        <small class="form-text text-muted">Format jpg ukuran 12 x 12</small>
+
+    <div class="form-group">
+    <label>Audio</label>
+    <div class="custom-file">
+        <input type="file" name="url_pertanyaan" id="url_pertanyaan" accept=".mp3,audio/*" class="custom-file-input" onchange="update_preview(this)" >
+        <label class="custom-file-label">Pilih File</label>
+        <div class="small">Format jpg ukuran 12 x 12</div>
     </div>
+    <audio name="url_pertanyaan_preview" controls><source  class="audio"  src="#" type="audio/mpeg"></audio>
+    </div>
+
     <div class="row mt-3">
         <div class="position-relative form-group col-md-6"><label for="exampleSelect" class="">Jawaban Benar</label>
             <select name="jawaban" id="jawaban" class="custom-select">
@@ -57,18 +73,16 @@
                 <div class="form-group mt-3 inputTeks d-none inputJawaban">
                     <label>Teks Jawaban</label>
                     <input name="jawaban_teks[]" placeholder=""  class="form-control" id="jawaban_teks_{{$jawaban}}">
-                    
                 </div>
                 <div class="mt-3 inputGambar d-none inputJawaban">
                     <label>File Gambar</label>
-                    <input name="gambar_opsi[]" type="file" class="form-control-file">
-
+                    <input type="file" name="gambar_opsi[]" id="gambar_opsi_{{$jawaban}}" accept="image/*" class="custom-file" onchange="update_preview(this)" >
+                    <img src="#" id="gambar_opsi_{{$jawaban}}_preview" style="min-width: 300px; max-height: 150px; object-fit:cover;">
                     <small class="form-text text-muted">Format jpg ukuran 12 x 12</small>
                 </div>
                 <div class="mt-3 inputAudio d-none inputJawaban">
                     <label>File Audio</label>
-                    <input name="url_opsi[]" type="file" class="form-control-file">
-
+                    <input name="url_opsi[]" type="file" class="form-control-file" id="url_opsi_{{$jawaban}}">
                     <small class="form-text text-muted">Format jpg ukuran 12 x 12</small>
                 </div>
             </div>
@@ -78,11 +92,27 @@
 
     @section('form_js')
     <script>
+        // $('img[name="gambar_pertanyaan_preview"]').change(function() {
+        //     $('.gambar_pertanyaan_preview').addClass('d-none');
+        //     $('.input' + $(this).val()).removeClass('d-none');
+        // });
+
         $('select[name="jenis_jawaban"]').change(function() {
-            $('#cover-spin').show();
             $('.inputJawaban').addClass('d-none');
             $('.input' + $(this).val()).removeClass('d-none');
-            $('#cover-spin').hide();
         });
+
+        function update_preview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('img[id="' + $(input).attr('id') + '_preview"]').attr('src', e.target.result);
+                $('img[id="' + $(input).attr('id') + '_preview"]').removeClass('d-none');
+
+                $('audio[name="' + $(input).attr('name') + '_preview"]').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
     </script>
     @endsection
