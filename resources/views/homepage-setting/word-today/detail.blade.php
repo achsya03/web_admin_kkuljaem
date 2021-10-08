@@ -44,7 +44,8 @@
     $('.page-title-text .title').html(moment(urlParams.get('date')).format('DD MMMM YYYY'));
     $('.dataTable').dataTable({
         "ajax": {
-            "url": api + "admin/word?jadwal=" + urlParams.get('date'),
+            "url": api + "admin/word/schedule?jadwal=" + urlParams.get('date'),
+            "dataSrc": "data.word",
             "dataType": 'json',
             "type": "GET",
             "beforeSend": function(xhr) {
