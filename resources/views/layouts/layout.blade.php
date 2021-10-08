@@ -370,6 +370,11 @@
         }
 
         function notif(type, message) {
+            if (type == 'error') {
+                if (typeof message === 'object') {
+                    message = 'Silahkan Cek Ulang Form';
+                }
+            }
             $.toast({
                 heading: ' ',
                 text: message,
