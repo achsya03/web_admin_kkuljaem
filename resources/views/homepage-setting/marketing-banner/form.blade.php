@@ -6,6 +6,7 @@
             <label class="custom-file-label">Pilih File</label>
             <div class="small">Format *.jpg ukuran gambar 580px x 323px dengan maksimal ukuran file 2MB</div>
         </div>
+        <img src="#" name="url_web_preview" style="min-width: 300px; max-height: 150px; object-fit:cover;">
     </div>
     <div class="form-group">
         <label>Banner Mobile</label>
@@ -14,9 +15,6 @@
             <label class="custom-file-label">Pilih File</label>
             <div class="small">Format *.jpg ukuran gambar 380px x 254px dengan maksimal ukuran file 2MB</div>
         </div>
-    </div>
-    <div class="form-group">
-        <img src="#" name="url_web_preview" style="min-width: 300px; max-height: 150px; object-fit:cover;">
         <img src="#" name="url_mobile_preview" style="min-width: 300px; max-height: 150px; object-fit:cover;">
     </div>
     <div class="form-group">

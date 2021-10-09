@@ -33,7 +33,10 @@ Route::group(['prefix' => 'forum'], function () {
     });
 });
 Route::group(['prefix' => 'application-setting'], function () {
-    Route::view('/reference-id', 'application-setting.reference-id')->name('application-setting-reference-id');
+    Route::group(['prefix' => 'reference-id'], function () {
+        Route::view('/', 'application-setting.reference-id.index')->name('application-setting-reference-id');
+        Route::view('/list', 'application-setting.reference-id.list')->name('application-setting-reference-id-list');
+    });
     Route::view('/general', 'application-setting.general')->name('application-setting-general');
     Route::view('/about', 'application-setting.about')->name('application-setting-about');
 });
