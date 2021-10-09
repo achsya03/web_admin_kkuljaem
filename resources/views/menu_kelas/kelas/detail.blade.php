@@ -483,7 +483,7 @@
                     document.getElementById('nomor_edit').value = response.data['nomor'];
                     document.getElementById('judul_video_edit').value = response.data['judul'];
                     document.getElementById('keterangan_edit').value = response.data['keterangan'];
-                    document.getElementById('url_video_edit').value = 'https://drive.google.com/file/d/' + response.data['url_video'].split("/")[4];
+                    document.getElementById('url_video_edit').value = response.data['url_video'];
 
                 }
             }
