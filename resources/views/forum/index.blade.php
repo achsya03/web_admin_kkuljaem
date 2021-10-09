@@ -31,7 +31,7 @@
                     <div class="position-relative form-group">
                         <label for="exampleEmail11" class="">Topik</label>
                         <input name="uuid" type="hidden" class="form-control">
-                        <input name="judul" placeholder="Nama Topik" type="text" class="form-control">
+                        <input name="judul_1" placeholder="Nama Topik" type="text" class="form-control">
                     </div>
                     <button type="submit" class="btn btn-success">Simpan</button>
                 </form>
@@ -105,7 +105,7 @@
             $('#cover-spin').hide();
             if (response.message == 'Success') {
                 $("#detail_modal").modal('show');
-                $('input[name="judul"]').val(response.data.judul);
+                $('input[name="judul_1"]').val(response.data.judul);
                 $('input[name="uuid"]').val(response.data.uuid);
             }
         });
@@ -118,7 +118,7 @@
             "url": api + "admin/theme/update?token=" + $('input[name="uuid"]').val(),
             "method": "post",
             "data": {
-                "judul": $('input[name="judul"]').val()
+                "judul": $('input[name="judul_1"]').val()
             },
             "headers": {
                 "Accept": "application/json",
