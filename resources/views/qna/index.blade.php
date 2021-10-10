@@ -36,7 +36,7 @@
 
 @section('js')
 <script>
-    $('.dataTable').dataTable({
+    table = $('.dataTable').DataTable({
         "ajax": {
             "url": api + "admin/qna",
             "dataType": 'json',
@@ -70,6 +70,23 @@
                 return `<a href="{{ route('qna-detail') }}?token=` + data + `" class="btn btn-sm btn-focus">Detail</a>`;
             }
         }]
+    });
+
+    $.ajax({
+        "url": api + "admin/classroom-group",
+        "method": "get",
+        "headers": {
+            "Accept": "application/json",
+            "Authorization": 'bearer ' + token,
+        }
+    }).done(function(response) {
+        if (response.message == "Success") {
+            html = '<option value="#">Semua Kelas</option>';
+            $.each(response.data, function(index, row) {
+                html += '<option value="' + row.uuid + '">' + row.nama + '</option>';
+            });
+            $('.custom-select').html(html);
+        }
     });
 </script>
 @endsection
