@@ -85,7 +85,7 @@ $('#change-pass-form').submit(function(e) {
         e.preventDefault();
         $.ajax({
             method: 'post',
-            url: api + 'admin/classroom/content/video/task/update?token=' + urlParams.get('token'),
+            url: api + 'admin/classroom/content/quiz/exam/update?token' + urlParams.get('token'),
             data: new FormData($('#change-pass-form')[0]),
             dataType: 'json',
             contentType: false,
