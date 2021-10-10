@@ -21,6 +21,7 @@
 @endsection
 @section('js')
 <script>
+    $('#cover-spin').show();
     $('.table').dataTable({
         "ajax": {
             "url": api + "admin/reference/student?token=" + urlParams.get('token'),
@@ -48,6 +49,7 @@
             }
         }
     });
+    $('#cover-spin').hide();
 </script>
 @endsection
 @extends('layouts.layout')

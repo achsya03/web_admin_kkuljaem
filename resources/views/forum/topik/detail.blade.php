@@ -24,10 +24,10 @@
                 <div class="row gambar"> </div>
             </div>
         </div>
-        <button class="btn btn-focus">Sukai</button>
-        <button class="btn btn-focus user_posting_false d-none">Laporkan</button>
-        <button class="btn btn-focus user_posting_true d-none">Sunting</button>
-        <button class="btn btn-focus user_posting_true d-none">Hapus</button>
+        <button class="btn btn-focus btn-like">Sukai</button>
+        <button class="btn btn-focus btn-report user_posting_false d-none">Laporkan</button>
+        <a href="#" class="btn btn-focus btn-sunting user_posting_true d-none">Sunting</a>
+        <button class="btn btn-focus btn-hapus user_posting_true d-none">Hapus</button>
     </div>
     <div class="position-relative form-group">
         <label class="font-weight-bold mb-0">Beri Komentar</label>
@@ -44,7 +44,7 @@
 @endsection
 
 @section('modal')
-<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog">
+<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
@@ -55,10 +55,10 @@
             </div>
             <div class="modal-body">
                 <div>Jawaban anda</div>
-                <textarea name="jawaban" rows="5" class="form-control"></textarea>
+                <textarea name="comment_isi" rows="5" class="form-control"></textarea>
                 <div><small>Jumlah Kata 0(Max 500 karakter)</small></div>
                 <button class="btn btn-success mb-2">Ubah</button> <br>
-                <button class="btn btn-danger">Hapus Komentar</button>
+                <button class="btn btn-danger" id="btn-hapus-comment">Hapus Komentar</button>
             </div>
         </div>
     </div>
@@ -86,7 +86,27 @@
                 $('#nama_pengirim').html(response.data.posting[0].nama_pengirim);
                 $('#deskripsi').html(response.data.posting[0].deskripsi);
                 $('#react').html(response.data.posting[0].jml_like + ' Suka ' + response.data.posting[0].jml_komen + ' Komentar');
-                // $('#user_posting')
+                $('.btn-sunting').attr('href', '{{ route("forum-topik-edit") }}?token=' + response.data.posting[0].post_uuid);
+                if (response.data.posting[0].user_posting == "True") {
+                    $('.user_posting_true').removeClass('d-none');
+                } else {
+                    $('.user_posting_false').removeClass('d-none');
+                }
+                if (response.data.posting[0].user_like == "True") {
+                    $('.btn-like').html('Batal Sukai');
+                    $('.btn-like').attr('onclick', 'dislike()');
+                } else {
+                    $('.btn-like').html('Sukai');
+                    $('.btn-like').attr('onclick', 'like()');
+                }
+                if (response.data.posting[0].user_lapor == "True") {
+                    $('.btn-report').attr('onclick', 'unreport()');
+                    $('.btn-report').html('Batal Laporkan');
+                } else {
+                    $('.btn-report').attr('onclick', 'report()');
+                    $('.btn-report').html('Laporkan');
+                }
+                $('.btn-hapus').attr('onclick', "hapus('" + api + "admin/forum/post?token=" + response.data.posting[0].post_uuid + "', '" + window.localStorage.getItem(`backurl_{{ $_SERVER['REQUEST_URI'] }}`) + "')");
 
                 html = '';
                 $.each(response.data.comment, function(index, row) {
@@ -104,7 +124,7 @@
                 html = '';
                 $.each(response.data.posting[0].gambar, function(index, row) {
                     html += '<div class="col-4">';
-                    html += `<img src="{{ url('css/assets/images/avatars/1.jpg') }}" width="100%">`;
+                    html += '<img src="' + row.url_gambar + '" width="100%">';
                     html += '</div>';
                 });
                 $('.gambar').html(html);
@@ -112,7 +132,152 @@
         });
     }
 
+    function like() {
+        $('#cover-spin').show();
+        $.ajax({
+            "url": api + "qna/like?token=" + urlParams.get('token'),
+            "method": "post",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": 'bearer ' + token,
+            }
+        }).done(function(response) {
+            $('#cover-spin').hide();
+            load_content();
+        });
+    }
+
+    function dislike() {
+        $('#cover-spin').show();
+        $.ajax({
+            "url": api + "qna/like?token=" + urlParams.get('token'),
+            "method": "delete",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": 'bearer ' + token,
+            }
+        }).done(function(response) {
+            $('#cover-spin').hide();
+            load_content();
+        });
+    }
+
+    function report() {
+        Swal.fire({
+            title: 'Masukan Keterangan',
+            input: 'text',
+            showCancelButton: true,
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Kamu tidak boleh mengkosongkan keterangan!'
+                } else {
+                    $('#cover-spin').show();
+                    $.ajax({
+                        "url": api + "forum/post/alert?token=" + urlParams.get('token'),
+                        "method": "post",
+                        "data": {
+                            'komentar': value,
+                        },
+                        "headers": {
+                            "Accept": "application/json",
+                            "Authorization": 'bearer ' + token,
+                        }
+                    }).done(function(response) {
+                        $('#cover-spin').hide();
+                        load_content();
+                    });
+                }
+            }
+        });
+    }
+
+    function unreport() {
+        $('#cover-spin').show();
+        $.ajax({
+            "url": api + "forum/post/alert?token=" + urlParams.get('token'),
+            "method": "delete",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": 'bearer ' + token,
+            }
+        }).done(function(response) {
+            $('#cover-spin').hide();
+            load_content();
+        });
+    }
+
+    function report_comment(id) {
+        Swal.fire({
+            title: 'Masukan Keterangan',
+            input: 'text',
+            showCancelButton: true,
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Kamu tidak boleh mengkosongkan keterangan!'
+                } else {
+                    $('#cover-spin').show();
+                    $.ajax({
+                        "url": api + "forum/comment/alert?token=" + id,
+                        "method": "post",
+                        "data": {
+                            'komentar': value,
+                        },
+                        "headers": {
+                            "Accept": "application/json",
+                            "Authorization": 'bearer ' + token,
+                        }
+                    }).done(function(response) {
+                        $('#cover-spin').hide();
+                        load_content();
+                    });
+                }
+            }
+        });
+    }
+
+    function unreport_comment(id) {
+        $('#cover-spin').show();
+        $.ajax({
+            "url": api + "forum/comment/alert?token=" + id,
+            "method": "delete",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": 'bearer ' + token,
+            }
+        }).done(function(response) {
+            $('#cover-spin').hide();
+            load_content();
+        });
+    }
+
+    function komentar_detail(token, isi) {
+        $('textarea[name="comment_isi"]').val(isi);
+        $('#btn-hapus-comment').attr('onclick', 'hapus(\'' + api + 'admin/forum/comment?token=' + token + '\')');
+        $("#edit-modal").modal('show');
+    }
+
     function comment() {
+        $('#cover-spin').show();
+        $.ajax({
+            "url": api + "admin/forum/comment?token=" + urlParams.get('token'),
+            "method": "post",
+            "data": {
+                "komentar": $('textarea[name="komentar"]').val(),
+            },
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": 'bearer ' + token
+            },
+        }).done(function(response) {
+            $('#cover-spin').hide();
+            if (response.message == 'Success') {
+                $('textarea[name="komentar"]').val('');
+                load_content();
+            }
+        });
+    }
+
+    function update_comment() {
         $('#cover-spin').show();
         $.ajax({
             "url": api + "admin/forum/comment?token=" + urlParams.get('token'),
