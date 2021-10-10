@@ -46,16 +46,36 @@
                 document.getElementById('jawaban').value = response.data['jawaban'];
                 $('#jenis_jawaban').val(response.data['jenis_jawaban']).change();
 
+
+                //hapus file gambar
+                if (response.data.url_gambar !=  null) {
+                html100 = '';
+                html100 += '<a onclick="hapus(`' + api + `admin/image-delete?position=question-exam&field=image&uuid=` + urlParams.get('id') + '`)" href="#"  class="btn btn-danger btn-sm">Hapus</a>'
+                document.querySelector('.hapus_file').innerHTML = html100;
+                }
+
+                //hapus file audio
+                if (response.data.url_file !=  null) {
+                html1000 = '';
+                html1000 += '<a onclick="hapus(`' + api + `admin/image-delete?position=question-exam&field=audio&uuid=` + urlParams.get('id') + '`)" href="#"  class="btn btn-danger btn-sm">Hapus</a>'
+                document.querySelector('.hapus_audio').innerHTML = html1000;
+                }
+
+
+
                  //show file
+                if (response.data.url_gambar !=  null) {
                  $('img[name="gambar_pertanyaan_preview"]').attr('src', response.data.url_gambar).removeClass('d-none');
                 $('img[name="gambar_pertanyaan_preview"]').attr('src', response.data.url_gambar);
-                
-              //  $('audio[id="' + $(input).attr('id') + '_preview"]').removeClass('d-none');
+                }
+
+                if (response.data.url_file !=  null) {
                 $('audio[id="url_pertanyaan_preview"]').attr('src', response.data.url_file).removeClass('d-none');
                 $('audio[id="url_pertanyaan_preview"]').attr('src', response.data.url_file);
-                
+                    }
 
                 //show jawaban
+                
                 $.each(response.data.pilihan, function(index, row) {
                     $('#jawaban_teks_' + row.jawaban_id).val(row.jawaban_teks).removeClass('d-none');
                     $('#jawaban_teks_' + row.jawaban_id).val(row.jawaban_teks);

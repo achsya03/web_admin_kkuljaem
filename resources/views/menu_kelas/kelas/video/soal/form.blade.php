@@ -19,15 +19,23 @@
             </div>
         </div>
     </div>
-
     <div class="form-group">
     <label>File Gambar</label>
     <div class="custom-file">
         <input type="file" name="gambar_pertanyaan" id="gambar_pertanyaan" accept="image/*" class="custom-file-input" onchange="update_preview(this)" >
         <label class="custom-file-label">Pilih File</label>
         <div class="small">Format jpg ukuran 12 x 12</div>
-    </div>
-    <img id="gambar_pertanyaan_preview" class="d-none"  src="#" name="gambar_pertanyaan_preview" style="min-width: 300px; max-height: 150px; object-fit:cover;">
+            <div class="form-row">
+                    <div class="col-md-3">
+                    <img id="gambar_pertanyaan_preview" class="d-none"  src="#" name="gambar_pertanyaan_preview" style="min-width: 300px; max-height: 150px; object-fit:cover;">
+                    </div>
+                    <br>
+                    <div class="col-md-9 hapus_file">
+                    
+                    </div>
+
+            </div>
+            <br>
     </div>
 
 
@@ -36,9 +44,17 @@
     <div class="custom-file">
         <input type="file" name="url_pertanyaan" id="url_pertanyaan" accept=".mp3,audio/*" class="custom-file-input" onchange="update_preview(this)" >
         <label class="custom-file-label">Pilih File</label>
+        <div>
         <div class="small">Format jpg ukuran 12 x 12</div>
-    </div>
-    <audio id="url_pertanyaan_preview" class="d-none" controls><source  class="audio"  src="#" type="audio/mpeg"></audio>
+                <div class="form-row">
+                        <div class="col-md-3">
+                            <audio id="url_pertanyaan_preview" class="d-none" controls><source  class="audio"  src="#" type="audio/mpeg"></audio>
+                        </div>
+                        <br>
+                        <div class="col-md-9 hapus_audio">
+                            
+                        </div>
+                </div>
     </div>
 
     <div class="row mt-3">

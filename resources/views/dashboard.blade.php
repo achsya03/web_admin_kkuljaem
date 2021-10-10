@@ -200,8 +200,6 @@
             data,
         } = datas;
 
-        // var today = new Date();
-        // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+'-'+today.get();
 
     $('.page-title-text').html("Dashboard" + '<div class="page-title-subheading">' + moment().format('MMMM Do YYYY') + '</div>');
 
