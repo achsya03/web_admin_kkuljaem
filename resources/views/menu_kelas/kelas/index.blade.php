@@ -61,7 +61,7 @@
             html += '<tr>';
             html += '<td>' + (index + 1) + '</td>';
             html += '<td>' + row.judul_class + '</td>';
-            html += '<td>' + row.deskripsi_class + '</td>';
+            html += '<td>' + row.deskripsi_class.substring(0, 100) + '...' + '</td>';
             html += '<td>';
             $.each(row.mentor, function(index1, row1) {
                 html += row1.nama_mentor + '<br>';

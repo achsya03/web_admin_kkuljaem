@@ -276,7 +276,7 @@
         const {
             data,
         } = datas;
-        $('.page-title-text').html(data.judul_class + '<div class="page-title-subheading">' + data.deskripsi_class + '</div>');
+        $('.page-title-text').html(data.judul_class + '<div class="page-title-subheading">' + data.deskripsi_class.substring(0, 50) + '...' + '</div>');
 
     }
     getview();

@@ -18,7 +18,7 @@
             <p id="keterangan"><i class="fa fa-spin fa-spinner"></i> Mohon Tunggu</p>
         </div>
         <div>
-            <a data-toggle="modal" data-target=".bd-example-modal-sm1" class="btn-icon btn-icon-only btn btn-primary mobile-toggle-header-nav" href="">Sunting Quiz</a>
+            <a data-toggle="modal" data-target=".bd-example-modal-sm-edit1"  onclick="editQuiz()" class="btn-icon btn-icon-only btn btn-primary mobile-toggle-header-nav" href="">Sunting Quiz</a>
         </div>
     </div>
     <div class="col-md-6">
@@ -53,11 +53,12 @@
 </div>
 @endsection
 @section('modal')
-<div class="modal fade bd-example-modal-sm1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<!-- edit Quiz -->
+<div class="modal fade bd-example-modal-sm-edit1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle"> Sunting Quiz</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Forum Edit Quiz</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -65,19 +66,25 @@
             <div class="modal-body">
                 <div class="position-relative form-group"><label for="exampleEmail" class="">Letak</label>
                     <div class="form-row">
-                        <div class="col-md-3"><input name="email" id="exampleEmail" placeholder="" type="email" class="form-control" disabled>
+                        <div class="col-md-3">
+                            <input name="id_q" id="id_q" hidden class="form-control">
+
+                            <input name="nomor_q_edit" id="nomor_q_edit" placeholder="" type="number" class="form-control" disabled>
                         </div>
                     </div>
                 </div>
-                <div class="position-relative form-group"><label for="exampleEmail" class="">Judul Quiz</label><input name="email" id="exampleEmail" placeholder="" type="email" class="form-control"></div>
-                <div class="position-relative form-group"><label for="exampleEmail" class="">Keterangan</label><textarea name="email" id="exampleEmail" placeholder="" type="email" class="form-control"></textarea>
-                    <small class="form-text text-muted">Jumlah Kata 0 (Max 500 Karakter)</small>
-
+                <div class="position-relative form-group"><label for="exampleEmail" class="">Judul Quiz</label>
+                    <input name="judul_q_edit" id="judul_q_edit" placeholder="" type="text" class="form-control">
                 </div>
+                <div class="position-relative form-group"><label for="exampleEmail" class="">Keterangan</label>
+                    <textarea name="keterangan_q_edit" id="keterangan_q_edit" placeholder="" type="text" class="form-control"></textarea>
+                    <small class="form-text text-muted">Jumlah Kata 0 (Max 500 Karakter)</small>
+                </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Tambah</button>
+                <button type="button" onclick="updatequiz($('#id_q').val())" class="btn btn-primary">Simpan</button>
             </div>
         </div>
     </div>
@@ -99,6 +106,59 @@
     }
     getview();
 
+    //SHOW EDIT quiz
+    function editQuiz() {
+    $.ajax({
+        method: 'get',
+        url: 'https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content/quiz/detail?token=' + urlParams.get('token'),
+        dataType: 'json',
+        success: function(response) {
+            console.log(response)
+
+            if (response.message !== 'Success') {
+                // $.growl.warning({
+                //     message: response.message
+                // });
+            } else if (response.message == 'Success') {
+                document.getElementById('id_q').value = response.data['uuid'];
+                document.getElementById('nomor_q_edit').value = response.data['nomor'];
+                document.getElementById('judul_q_edit').value = response.data['judul'];
+                document.getElementById('keterangan_q_edit').value = response.data['keterangan'];
+              
+
+            }
+        }
+    });
+    }
+
+
+       // update quiz
+        function updatequiz() {
+        $.ajax({
+            type: "post",
+            url: 'https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content/quiz/update?token=' + urlParams.get('token'),
+            data: {
+                'nomor': $("#nomor").val(),
+                'judul': $("#judul_q_edit").val(),
+                'tipe': 'quiz',
+                'keterangan': $("#keterangan_q_edit").val(),
+            },
+            success: function(response) {
+                if (response.message !== 'Success') {
+         
+                } else if (response.message == 'Success') {
+                    $(".btn-close").click();
+                    window.location = "{{route('quizsiswa')}}?token=" + urlParams.get('token');
+                }
+
+            }
+        });
+    }
+
+
+
+
+//show data
     $('.dataTable').dataTable({
         "ajax": {
             "url": api + "admin/classroom/content/quiz/all?token=" + urlParams.get('token'),
