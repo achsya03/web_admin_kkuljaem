@@ -19,23 +19,15 @@
     <div class="position-relative form-group">
         <label class="font-weight-bold mb-0">Isi Forum</label>
         <div id="deskripsi"></div>
-        <!-- <div class="row mb-2">
+        <div class="row mb-2">
             <div class="col-5">
-                <div class="row">
-                    <div class="col-4">
-                        <img src="{{ url('css/assets/images/avatars/1.jpg') }}" width="100%">
-                    </div>
-                    <div class="col-4">
-                        <img src="{{ url('css/assets/images/avatars/2.jpg') }}" width="100%">
-                    </div>
-                    <div class="col-4">
-                        <img src="{{ url('css/assets/images/avatars/3.jpg') }}" width="100%">
-                    </div>
-                </div>
+                <div class="row gambar"> </div>
             </div>
-        </div> -->
+        </div>
         <button class="btn btn-focus">Sukai</button>
-        <button class="btn btn-focus">Laporkan</button>
+        <button class="btn btn-focus user_posting_false d-none">Laporkan</button>
+        <button class="btn btn-focus user_posting_true d-none">Sunting</button>
+        <button class="btn btn-focus user_posting_true d-none">Hapus</button>
     </div>
     <div class="position-relative form-group">
         <label class="font-weight-bold mb-0">Beri Komentar</label>
@@ -94,6 +86,7 @@
                 $('#nama_pengirim').html(response.data.posting[0].nama_pengirim);
                 $('#deskripsi').html(response.data.posting[0].deskripsi);
                 $('#react').html(response.data.posting[0].jml_like + ' Suka ' + response.data.posting[0].jml_komen + ' Komentar');
+                // $('#user_posting')
 
                 html = '';
                 $.each(response.data.comment, function(index, row) {
@@ -108,6 +101,13 @@
                     html += '</div>';
                 });
                 $('#komentar').html(html);
+                html = '';
+                $.each(response.data.posting[0].gambar, function(index, row) {
+                    html += '<div class="col-4">';
+                    html += `<img src="{{ url('css/assets/images/avatars/1.jpg') }}" width="100%">`;
+                    html += '</div>';
+                });
+                $('.gambar').html(html);
             }
         });
     }

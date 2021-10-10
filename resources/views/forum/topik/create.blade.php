@@ -37,7 +37,7 @@
         <div class="row">
             <div class="col-5">
                 <div class="position-relative form-group">
-                    <label>Gambar {{ $row }}</label>
+                    <label>Gambar {{ $row +1}}</label>
                     <div class="position-relative form-group">
                         <div class="input-group">
                             <div class="custom-file">
@@ -107,7 +107,7 @@
                 } else if (response.message == 'Success') {
                     notif('success', 'Berhasil menambah banner, Mohon tunggu');
                     setTimeout(() => {
-                         window.location = "{{route('forum-topik')}}?token=" + urlParams.get('token');
+                        window.location = "{{route('forum-topik')}}?token=" + urlParams.get('token');
                     }, 1000);
                 }
             }

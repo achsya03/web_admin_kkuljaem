@@ -21,7 +21,6 @@ mix.styles([
     'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
 ], 'public/css/app.css')
 .scripts([
-    'resources/architectui/assets/scripts/main.js',
     'node_modules/ckeditor/ckeditor.js',
     'node_modules/jquery/dist/jquery.js',
     'node_modules/bootstrap/dist/js/bootstrap.min.js',
@@ -34,6 +33,7 @@ mix.styles([
     'node_modules/fullcalendar/main.js',
     'node_modules/green-audio-player/dist/js/green-audio-player.js',
     'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
+    'resources/architectui/assets/scripts/main.js',
 ], 'public/js/app.js')
 .copy([
     'resources/architectui/assets/fonts',
