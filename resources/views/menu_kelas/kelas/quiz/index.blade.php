@@ -190,7 +190,7 @@
             "data": "exam_uuid",
             "render": function(data) {
                 return `<a href="{{ route('editsoalquiz') }}?token=` + data + `" class="btn btn-sm btn-focus mb-2">Detail</a>` +
-                    `<button onclick="hapus(` + api + `)" href="{{ route('qna-detail') }}?token=` + data + `" class="btn btn-sm btn-danger mb-2">Hapus</button>`
+                    `<button onclick="hapus('` + api + `admin/classroom/content/quiz/exam?token=` + data + `')"  class="btn btn-sm btn-danger mb-2">Hapus</button>`
             }
         }, ]
     });

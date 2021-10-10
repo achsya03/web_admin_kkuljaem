@@ -295,7 +295,7 @@
             html += '<tr>';
             html += '<td>' + row.nomor + '</td>';
             html += '<td>' + row.hangeul + '</td>';
-            html += '<td>' + row.pelafalan + '</td>';
+            html += '<td>' + row.penjelasan + '</td>';
             html += '<td>' + `<audio controls><source src="` + row.url_pengucapan + `" type="audio/mpeg"></audio>` + '</td>';
             html += '<td>' + '<a data-toggle="modal" data-target=".bd-example-modal-sm-edit1" onclick="getEditQuiz(\'' + row.shadowing_uuid + '\')" class="btn-icon btn-icon-only btn btn-info btn-sm mobile-toggle-header-nav" href="" style="margin:2px;">Edit</a><br>' + '<button onclick="hapus(`' + api + `admin/classroom/content/video/shadowing?token=` + row.shadowing_uuid + '`)" style="margin:2px;" class="btn btn-danger btn-sm">Hapus</button>'+ '</td>';
             html += '</tr>';
