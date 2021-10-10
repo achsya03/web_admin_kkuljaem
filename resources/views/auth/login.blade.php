@@ -107,7 +107,7 @@
         $("#login-form").submit(function(event) {
             $('#login-form').addClass('disablediv');
             $('input').removeClass('is-invalid');
-            $.post(api + 'auth/login', $(this).serialize(), function(response) {
+            $.post(api + 'auth/login?role=mentor', $(this).serialize(), function(response) {
                 $('#login-form').removeClass('disablediv');
                 if (response.message == 'Failed') {
                     notif('error', 'Terdapat Kesalahan');
