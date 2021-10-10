@@ -210,9 +210,9 @@
                                 </div>
                             </div>
                             <div class="page-title-actions">
-                                <a href="#" onClick="javascript:history.go(-1)" class="btn btn-focus btn-kembali mm-active">
+                                <button onClick="back_url()" class="btn btn-focus btn-kembali mm-active">
                                     <i class="fa fa-angle-left"></i> Kembali
-                                </a>
+                                </button>
                                 @yield('top-button')
                             </div>
                         </div>
@@ -259,6 +259,14 @@
         if (window.location.pathname.split('/').length == 2) {
             $('.btn-kembali').addClass('d-none');
         };
+
+        if (window.localStorage.getItem("backurl_{{ $_SERVER['REQUEST_URI'] }}") == null) {
+            window.localStorage.setItem("backurl_{{ $_SERVER['REQUEST_URI'] }}", '{{ url()->previous() }}');
+        }
+
+        function back_url() {
+            window.location.href = window.localStorage.getItem("backurl_{{ $_SERVER['REQUEST_URI'] }}");
+        }
 
         function logout() {
             $.ajax({
