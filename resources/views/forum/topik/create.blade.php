@@ -130,7 +130,7 @@
                     $('select[name="topik"]').append('<option value="' + row.uuid + '">' + row.judul + '</option>');
                 });
                 $.ajax({
-                    "url": api + "admin/forum/detail?token=" + urlParams.get('token'),
+                    "url": api + "admin/forum?token=" + urlParams.get('token'),
                     "method": "get",
                     "headers": {
                         "Accept": "application/json",
@@ -138,9 +138,8 @@
                     },
                 }).done(function(response) {
                     if (response.message == 'Success') {
-                        $('.title').html(response.data.posting[0].judul);
-                        $('.page-title-subheading').html('Forum / ' + response.data.posting[0].tema + ' / ' + response.data.posting[0].judul);
-
+                        $('.title').html(response.data.theme.judul);
+                        $('.page-title-subheading').html('Forum / ' + response.data.theme.judul + ' / Buat Forum');
                     }
                     $('select[name="topik"]').val(urlParams.get('token'));
                     $('input[name="token"]').val(urlParams.get('token'));
