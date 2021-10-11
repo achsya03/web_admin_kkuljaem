@@ -18,7 +18,7 @@
         <label class="custom-file-label">Pilih File</label>
         <div class="small">Format .jpg ukuran gambar 580 x 323px dengan maksimal ukuran file 2MB</div>
     </div>
-    <img  class="img"src="#" name="url_web_preview" style="min-width: 300px; max-height: 150px; object-fit:cover;">
+    <img  class="img d-none"src="#" name="url_web_preview"  style="min-width: 300px; max-height: 150px; object-fit:cover;">
 </div>
 
 <div class="form-group">
@@ -28,7 +28,7 @@
         <label class="custom-file-label">Pilih File</label>
         <div class="small">Format .jpg ukuran gambar 580 x 323px dengan maksimal ukuran file 2MB</div>
     </div>
-    <img src="#" name="url_mobile_preview" style="min-width: 300px; max-height: 150px; object-fit:cover;">
+    <img src="#" name="url_mobile_preview" class="d-none" style="min-width: 300px; max-height: 150px; object-fit:cover;">
 </div>
 
 
@@ -46,6 +46,7 @@
             var reader = new FileReader();
             reader.onload = function(e) {
                 $('img[name="' + $(input).attr('name') + '_preview"]').attr('src', e.target.result);
+                $('img[name="' + $(input).attr('name') + '_preview"]').removeClass('d-none');
             }
             reader.readAsDataURL(input.files[0]);
         }

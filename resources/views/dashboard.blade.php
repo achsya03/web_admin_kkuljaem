@@ -206,9 +206,6 @@ function load_dashboard() {
             },
         }).done(function(response) {
         $('#cover-spin').hide();
-
-console.log(response)
-
                     $('.page-title-text').html("Dashboard" + '<div class="page-title-subheading">' + moment().format('MMMM Do YYYY') + '</div>');
 
                         $('.fa-spinner').removeClass('fa-spinner').removeClass('fa-spin');

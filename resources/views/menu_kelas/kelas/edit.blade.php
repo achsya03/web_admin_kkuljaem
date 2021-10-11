@@ -28,6 +28,10 @@
         method: 'get',
         url: api + 'admin/classroom/edit?token=' + urlParams.get('id'),
         dataType: 'json',
+        headers: {
+            "Accept": "application/json",
+            "Authorization": 'bearer ' + token,
+        },
         success: function(response) {
             if (response.message !== 'Success') {
 
@@ -50,7 +54,10 @@
                 });
 
                 //show file
+                $('img[name="url_web_preview"]').attr('src', response.data.url_web).removeClass('d-none');
                 $('img[name="url_web_preview"]').attr('src', response.data.url_web);
+
+                $('img[name="url_mobile_preview"]').attr('src', response.data.url_mobile).removeClass('d-none')
                 $('img[name="url_mobile_preview"]').attr('src', response.data.url_mobile);
 
               
@@ -70,6 +77,10 @@
             contentType: false,
             mimeType: "multipart/form-data",
             processData: false,
+            headers: {
+            "Accept": "application/json",
+            "Authorization": 'bearer ' + token,
+        },
             success: function(response) {
                 if (response.message !== 'Success') {
                     $('#cover-spin').hide();

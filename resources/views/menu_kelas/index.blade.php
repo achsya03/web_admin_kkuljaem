@@ -91,9 +91,13 @@ function load_menukelas() {
             e.preventDefault();
             $.ajax({
                 method: 'post',
-                url: 'https://floating-harbor-93486.herokuapp.com/api/admin/classroom-group',
+                url: api + 'admin/classroom-group',
                 data: $('form').serialize(),
                 dataType: 'json',
+                headers: {
+                "Accept": "application/json",
+                "Authorization": 'bearer ' + token,
+            },
                 success: function(response) {
                     if (response.message !== 'Success') {
                         notif('error', 'Mohon semua form diisi !');
@@ -118,8 +122,12 @@ function load_menukelas() {
     function getEdit(id) {
         $.ajax({
             method: 'get',
-            url: 'https://floating-harbor-93486.herokuapp.com/api/admin/classroom-group/detail?token=' + id,
+            url: api +'admin/classroom-group/detail?token=' + id,
             dataType: 'json',
+            headers: {
+                "Accept": "application/json",
+                "Authorization": 'bearer ' + token,
+            },
             success: function(response) {
                 if (response.message !== 'Success') {
                     // $.growl.warning({
@@ -139,10 +147,14 @@ function load_menukelas() {
     function update(id) {
         $.ajax({
             type: "post",
-            url: 'https://floating-harbor-93486.herokuapp.com/api/admin/classroom-group/update?token=' + id,
+            url: api + 'admin/classroom-group/update?token=' + id,
             data: {
                 'nama': $("#nama").val(),
                 'deskripsi': $("#deskripsi").val(),
+            },
+            headers: {
+                "Accept": "application/json",
+                "Authorization": 'bearer ' + token,
             },
             success: function(response) {
                 if (response.message !== 'Success') {

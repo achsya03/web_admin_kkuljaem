@@ -269,17 +269,27 @@
 @section('js')
 <script>
 
-    //show view atas
-        async function getview() {
-        const response = await fetch('https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content?token=' + urlParams.get('id'));
-        const datas = await response.json();
-        const {
-            data,
-        } = datas;
-        $('.page-title-text').html(data.judul_class + '<div class="page-title-subheading">' + data.deskripsi_class.substring(0, 50) + '...' + '</div>');
 
+
+    //show view atas
+    function load_view() {
+        $('#cover-spin').show();
+        $.ajax({
+            "url": api + "admin/classroom/content?token="  + urlParams.get('id'),
+            "method": "GET",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": 'bearer ' + token,
+            },
+        }).done(function(response) {
+
+        $('.page-title-text').html(response.data.judul_class + '<div class="page-title-subheading">' + response.data.deskripsi_class.substring(0, 50) + '...' + '</div>');
+
+        $('#cover-spin').hide();
+    });
     }
-    getview();
+    load_view();
+
 
 
     //show data 

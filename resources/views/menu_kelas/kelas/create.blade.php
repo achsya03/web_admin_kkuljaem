@@ -54,6 +54,10 @@
             contentType: false,
             mimeType: "multipart/form-data",
             processData: false,
+            headers: {
+            "Accept": "application/json",
+            "Authorization": 'bearer ' + token,
+        },
             success: function(response) {
                  $('#cover-spin').hide();
                 if (response.message !== 'Success') {
