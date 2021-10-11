@@ -277,6 +277,7 @@
                     "Authorization": 'bearer ' + window.localStorage.getItem('token'),
                 },
                 success: function(response) {
+                    window.localStorage.clear();
                     window.location.href = "{{ env('APP_URL', './') }}";
                 }
             });
