@@ -282,40 +282,43 @@
     getview();
 
 
-
-    //SHOW DATA
-    async function getISS() {
-        const response = await fetch('https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content?token=' + urlParams.get('id'));
-        const datas = await response.json();
-        const {
-            data,
-        } = datas;
-        console.log(data)
+    //show data 
+    function load_detailkelas() {
+        $('#cover-spin').show();
+        $.ajax({
+            "url": api + "admin/classroom/content?token="  + urlParams.get('id'),
+            "method": "GET",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": 'bearer ' + token,
+            },
+        }).done(function(response) {
+        $('#cover-spin').hide();
 
         $('.fa-spinner').removeClass('fa-spinner').removeClass('fa-spin');
 
 
         html000 = '';
-        html000 += `<img src="` + data.url_web + `" width="500" height="220" style="object-fit: cover;">`
+        html000 += `<img src="` + response.data.url_web + `" width="500" height="220" style="object-fit: cover;">`
         document.querySelector('.thumb1').innerHTML = html000;
 
 
         html00 = '';
-        html00 += `<a href="{{route('kelas')}}?id=` + data.group_uuid + `" type="button" class=" mb-2 mr-2 btn btn-primary">> Kembali </a>`
+        html00 += `<a href="{{route('kelas')}}?id=` + response.data.group_uuid + `" type="button" class=" mb-2 mr-2 btn btn-primary">> Kembali </a>`
 
         html0 = '';
-        html0 += `<a href="{{route('editkelas')}}?id=` + data.class_uuid + '&token=' + data.group_uuid + `" type="button" class=" mb-2 mr-2 btn btn-primary"> Sunting Kelas </a>`
+        html0 += `<a href="{{route('editkelas')}}?id=` + response.data.class_uuid + '&token=' + response.data.group_uuid + `" type="button" class=" mb-2 mr-2 btn btn-primary"> Sunting Kelas </a>`
         document.querySelector('.route').innerHTML = html0;
 
         
-        html0 += `<a href="{{route('progressiswa')}}?id=` + data.class_uuid + `" type="button" class=" mb-2 mr-2 btn btn-primary"> Progress Siswa </a>`
+        html0 += `<a href="{{route('progressiswa')}}?id=` + response.data.class_uuid + `" type="button" class=" mb-2 mr-2 btn btn-primary"> Progress Siswa </a>`
         document.querySelector('.route').innerHTML = html0;
 
-        document.getElementById('judul').textContent = data.judul_class;
-        document.getElementById('deskripsi').textContent = data.deskripsi_class;
+        document.getElementById('judul').textContent = response.data.judul_class;
+        document.getElementById('deskripsi').textContent = response.data.deskripsi_class;
         
         html99 = '';
-        $.each(data.mentor, function(index3, row3) {
+        $.each(response.data.mentor, function(index3, row3) {
              const A = [row3.nama_mentor];
              html99 += '<td>' + A  + '</td>' + ' ';
 
@@ -323,7 +326,7 @@
         document.querySelector('.mentor').innerHTML = html99;
 
         html = '';
-        $.each(data.materi, function(index, row) {
+        $.each(response.data.materi, function(index, row) {
             html += '<tr>';
             html += '<td>' + row.number + '</td>';
             html += '<td>' + row.jenis + '</td>';
@@ -337,7 +340,7 @@
 
 
         html1 = '';
-        $.each(data.video, function(index1, row1) {
+        $.each(response.data.video, function(index1, row1) {
             html1 += '<tr>';
             html1 += '<td>' + (row1.number) + '</td>';
             html1 += '<td>' + row1.jenis + '</td>';
@@ -353,7 +356,7 @@
 
 
         html2 = '';
-        $.each(data.quiz, function(index1, row2) {
+        $.each(response.data.quiz, function(index1, row2) {
             console.log(row2)
             html2 += '<tr>';
             html2 += '<td>' + row2.number + '</td>';
@@ -366,8 +369,95 @@
         document.querySelector('.tbody2').innerHTML = html2;
         $('#example2').DataTable();
 
+    });
     }
-    getISS();
+    load_detailkelas();
+
+    //SHOW DATA
+    // async function getISS() {
+    //     const response = await fetch('https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content?token=' + urlParams.get('id'));
+    //     const datas = await response.json();
+    //     const {
+    //         data,
+    //     } = datas;
+    //     console.log(data)
+
+    //     $('.fa-spinner').removeClass('fa-spinner').removeClass('fa-spin');
+
+
+    //     html000 = '';
+    //     html000 += `<img src="` + data.url_web + `" width="500" height="220" style="object-fit: cover;">`
+    //     document.querySelector('.thumb1').innerHTML = html000;
+
+
+    //     html00 = '';
+    //     html00 += `<a href="{{route('kelas')}}?id=` + data.group_uuid + `" type="button" class=" mb-2 mr-2 btn btn-primary">> Kembali </a>`
+
+    //     html0 = '';
+    //     html0 += `<a href="{{route('editkelas')}}?id=` + data.class_uuid + '&token=' + data.group_uuid + `" type="button" class=" mb-2 mr-2 btn btn-primary"> Sunting Kelas </a>`
+    //     document.querySelector('.route').innerHTML = html0;
+
+        
+    //     html0 += `<a href="{{route('progressiswa')}}?id=` + data.class_uuid + `" type="button" class=" mb-2 mr-2 btn btn-primary"> Progress Siswa </a>`
+    //     document.querySelector('.route').innerHTML = html0;
+
+    //     document.getElementById('judul').textContent = data.judul_class;
+    //     document.getElementById('deskripsi').textContent = data.deskripsi_class;
+        
+    //     html99 = '';
+    //     $.each(data.mentor, function(index3, row3) {
+    //          const A = [row3.nama_mentor];
+    //          html99 += '<td>' + A  + '</td>' + ' ';
+
+    //     });
+    //     document.querySelector('.mentor').innerHTML = html99;
+
+    //     html = '';
+    //     $.each(data.materi, function(index, row) {
+    //         html += '<tr>';
+    //         html += '<td>' + row.number + '</td>';
+    //         html += '<td>' + row.jenis + '</td>';
+    //         html += '<td>' + row.judul + '</td>';
+    //         html += '<td>' + row.keterangan + '</td>';
+    //         html += '<td>' + row.keterangan + '</td>';
+    //         html += '</tr>';
+    //     });
+    //     document.querySelector('.tbody').innerHTML = html;
+    //       $('#example').DataTable();
+
+
+    //     html1 = '';
+    //     $.each(data.video, function(index1, row1) {
+    //         html1 += '<tr>';
+    //         html1 += '<td>' + (row1.number) + '</td>';
+    //         html1 += '<td>' + row1.jenis + '</td>';
+    //         html1 += '<td>' + row1.judul + '</td>';
+    //         html1 += '<td>' + row1.keterangan + '</td>';
+    //         html1 += '<td>' + row1.keterangan + '</td>';
+    //         html1 += '<td>' + `<a href="{{ route('videosiswa') }}?token=` + row1.uuid + `" style="margin:2px;" class="btn btn-secondary btn-sm">Details</a><br>` + '<a data-toggle="modal" data-target=".bd-example-modal-sm-edit" onclick="getEditVideo(\'' + row1.uuid + '\')" class="btn-icon btn-icon-only btn btn-info btn-sm mobile-toggle-header-nav" href="" style="margin:2px;">Edit</a><br>' + '<button onclick="hapus(`' + api + `admin/classroom/content/video?token=` + row1.uuid + '`)" style="margin:2px;" class="btn btn-danger btn-sm">Hapus</button>' +
+    //             '</td>';
+    //         html += '</tr>';
+    //     });
+    //     document.querySelector('.tbody1').innerHTML = html1;
+    //     $('#example1').DataTable();
+
+
+    //     html2 = '';
+    //     $.each(data.quiz, function(index1, row2) {
+    //         console.log(row2)
+    //         html2 += '<tr>';
+    //         html2 += '<td>' + row2.number + '</td>';
+    //         html2 += '<td>' + row2.judul + '</td>';
+    //         html2 += '<td>' + row2.keterangan + '</td>';
+    //         html2 += '<td>' + row2.jml_pertanyaan + ' Soal</td>';
+    //         html2 += '<td>' + ` <a href="{{ route('quizsiswa') }}?token=` + row2.uuid + `"style="margin:2px;" class="btn btn-secondary btn-sm"> Details </a><br>` + `<button data-toggle="modal" data-target=".bd-example-modal-sm-edit1" onclick="editQuiz('` + row2.uuid + `')" class="btn-icon btn-icon-only btn btn-info btn-sm mobile-toggle-header-nav" style="margin:2px;" >Edit</button> <br> ` + ` <button onclick="hapus('` + api + `admin/classroom/content/quiz?token=` + row2.uuid + `')" style="margin:2px;" class="btn btn-danger btn-sm"> Hapus </button>` + '</td>';
+    //         html2 += '</tr>';
+    //     });
+    //     document.querySelector('.tbody2').innerHTML = html2;
+    //     $('#example2').DataTable();
+
+    // }
+    // getISS();
 
     //CREATE VIDEO
     function create() {
