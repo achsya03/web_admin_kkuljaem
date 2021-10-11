@@ -46,6 +46,7 @@ function load_student() {
                 "Authorization": 'bearer ' + token,
             },
         }).done(function(response) {
+            console.log(response)
             $('#cover-spin').hide();
             if (response.message == 'Success') {
                 console.log(response)
@@ -60,7 +61,7 @@ function load_student() {
                     html += '<td>' + row.jenis_kel + '</td>';
                     html += '<td>' + row.tempat_lahir + '</td>';
                     html += '<td>' + row.tgl_lahir + '</td>';
-                    html += '<td>' + `<a href="{{route('detailsiswa')}}?id=` + row.user_uuid + `" style="margin:2px;"  type="button" class="btn btn-primary btn-sm">Rincian</a><br>` + `<a href="{{route('detailkelas')}}?id=` + row.class_uuid + `" style="margin:2px;"  type="button" class="btn btn-info btn-sm">Rincian</a><br>` + `<a href="#" onclick="hapus('` + api + `admin/classroom?token=` + row.user_uuid + `')" style="margin:2px;"  type="button" class="btn btn-danger btn-sm">Hapus</a>` + '</td>';
+                    html += '<td>' + `<a href="{{route('detailsiswa')}}?id=` + row.user_uuid + `" style="margin:2px;"  type="button" class="btn btn-primary btn-sm">Rincian</a><br>` + `<a href="{{route('editsiswa')}}?id=` + row.class_uuid + `" style="margin:2px;"  type="button" class="btn btn-info btn-sm">Rincian</a><br>` + `<a href="#" onclick="hapus('` + api + `admin/user/student?token=` + row.user_uuid + `')" style="margin:2px;"  type="button" class="btn btn-danger btn-sm">Hapus</a>` + '</td>';
                     html += '</tr>';
                 });
                 document.querySelector('.tbody').innerHTML = html;

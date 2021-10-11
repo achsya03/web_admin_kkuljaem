@@ -36,6 +36,10 @@
             contentType: false,
             mimeType: "multipart/form-data",
             processData: false,
+            headers: {
+                "Accept": "application/json",
+                "Authorization": 'bearer ' + token,
+            },
             success: function(response) {
                 if (response.message !== 'Your Email Registration Success. Please Activate From Your Email') {
                     notif('error', 'Silahkan cek form dan tipe file yang di upload');
