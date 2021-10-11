@@ -89,7 +89,7 @@
     $('#create-refence-id').submit(function(e) {
         e.preventDefault();
         $('#cover-spin').show();
-        $.ajax({
+        $.ajax({ 
             "url": api + "admin/reference",
             "method": "post",
             "data": $(this).serialize(),
