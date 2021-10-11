@@ -45,7 +45,6 @@
     <div class="custom-file">
         <input type="file" name="url_pertanyaan" id="url_pertanyaan" accept=".mp3,audio/*" class="custom-file-input" onchange="update_preview(this)" >
         <label class="custom-file-label">Pilih File</label>
-        <div>
         <div class="small">Format jpg ukuran 12 x 12</div>
                 <div class="form-row">
                         <div class="col-md-3">
