@@ -33,7 +33,7 @@
         $('#cover-spin').hide();
         if (response.message == 'Success') {
             $('input[name="jadwal"]').val(response.data.jadwal);
-            $('input[name="url_video_preview"]').val('https://drive.google.com/file/d/' + response.data.url_video.split("=")[2] + '/view').change();
+            $('input[name="url_video"]').val(response.data.url_video).keyup();
             $('.btn-danger').click(function() {
                 hapus(api + 'admin/videos?token=' + response.data.uuid, '{{ route("homepage-setting-video-today") }}');
             });

@@ -84,6 +84,10 @@
     </div>
     <script type="text/javascript" src="/js/app.js"></script>
     <script>
+        if (window.localStorage.getItem('token')) {
+            window.location.href = '{{ route("dashboard") }}';
+        }
+
         var api = "{{ env('APP_API_URL', 'api/') }}";
         navigator.geolocation.getCurrentPosition(function(position) {
             $('input[name="device_id"]').val(navigator.userAgent);
