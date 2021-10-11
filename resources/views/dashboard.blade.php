@@ -125,7 +125,7 @@
                             <th width="50px">#</th>
                             <th width="75px">Penanya</th>
                             <th width="150px">Pertanyaan</th>
-                            <th width="100px">Actions</th>
+                            <th width="150px">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="tbody">
@@ -148,9 +148,9 @@
                     <thead>
                         <tr>
                             <th width="50px">#</th>
-                            <th width="75px">Pengarang</th>
+                            <th width="80px">Pengarang</th>
                             <th width="150px">Judul Forum</th>
-                            <th width="100px">Action</th>
+                            <th width="110px">Action</th>
                         </tr>
                     </thead>
                     <tbody class="tbody2">
@@ -193,66 +193,140 @@
 @endsection
 @section('js')
 <script>
-    async function getISS() {
-        const response = await fetch('https://floating-harbor-93486.herokuapp.com/api/admin?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9mbG9hdGluZy1oYXJib3ItOTM0ODYuaGVyb2t1YXBwLmNvbVwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYzMTM2NzgwMCwiZXhwIjoxNjkxMzY3NzQwLCJuYmYiOjE2MzEzNjc4MDAsImp0aSI6IjI4RlhES0gydDBwVDFXMDciLCJzdWIiOjgsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.yJk1mYacAC5MjySzISUAjNQt8O0UUBjnNf-q-MNKoCw');
-        const datas = await response.json();
-        const {
-            data,
-        } = datas;
+
+//dashboard
+function load_dashboard() {
+        $('#cover-spin').show();
+        $.ajax({
+            "url": api + "admin?token=" + token,
+            "method": "GET",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": 'bearer ' + token,
+            },
+        }).done(function(response) {
+        $('#cover-spin').hide();
+
+console.log(response)
+
+                    $('.page-title-text').html("Dashboard" + '<div class="page-title-subheading">' + moment().format('MMMM Do YYYY') + '</div>');
+
+                        $('.fa-spinner').removeClass('fa-spinner').removeClass('fa-spin');
+                        document.getElementById('sub').textContent = response.data['jml-subs'];
+                        document.getElementById('siswa').textContent = response.data['jml-siswa'];
+                        document.getElementById('forum').textContent = response.data['jml-forum'];
+                        document.getElementById('mentor').textContent = response.data['jml-mentor'];
+                        document.getElementById('kelas').textContent = response.data['jml-class'];
+                        document.getElementById('qna').textContent = response.data['jml-qna'];
+
+                        html = '';
+                        $.each(response.data.qna, function(index, row) {
+                            html += '<tr>';
+                            html += '<td>' + (index + 1) + '</td>';
+                            html += '<td>' + row.nama + '</td>';
+                            html += '<td>' + row.deskripsi.substring(0, 100) + "..." + '</td>';
+                            html += '<td>' + '<div class="btn-group-sm btn-group"><a href="" type="button" class="btn btn-success">Jawab</a>'+ `<a href="{{ route('qna-detail') }}?token=` + row['qna-uuid'] + `" class="btn btn-info">Rincian</a>` + '</div>' + '</td>';
+                            html += '</tr>';
+                        });
+
+                        document.querySelector('.tbody').innerHTML = html;
+
+                        html1 = '';
+                        $.each(response.data.forum, function(index, row) {
+                            html1 += '<tr>';
+                            html1 += '<td>' + (index + 1) + '</td>';
+                            html1 += '<td>' + row.nama + '</td>';
+                            html1 += '<td>' + row.judul.substring(0, 100) + "..." + '</td>';
+                            html1 += '<td>' + '<div class="btn-group-sm btn-group"><a href="" type="button" class="btn btn-success">Jawab</a>' + `<a href="{{ route('forum-topik-detail') }}?token=` + row['forum-uuid'] + `" class="btn btn-info">Rincian</a>` + '</div>' + '</td>';
+                            html1 += '</tr>';
+                        });
+
+                        document.querySelector('.tbody2').innerHTML = html1;
+
+                        html2 = '';
+                        $.each(response.data.subs, function(index, row) {
+                            $a = 'paket-jenis';
+                            html2 += '<tr>';
+                            html2 += '<td>' + (index + 1) + '</td>';
+                            html2 += '<td>' + row.nama + '</td>';
+                            html2 += '<td>' + row['paket-jenis'] + ' Bulan</td>';
+                            html2 += '<td>' + row['paket-status'] + '</td>';
+                            html2 += '<td>' + '<div role="group" class="btn-group-sm btn-group btn-group-toggle" data-toggle="buttons"><a href="" type="button" class="btn btn-info">Details</a></div>' + '</td>';
+                            html2 += '</tr>';
+                        });
+
+                        document.querySelector('.tbody3').innerHTML = html2;
 
 
-    $('.page-title-text').html("Dashboard" + '<div class="page-title-subheading">' + moment().format('MMMM Do YYYY') + '</div>');
 
-        console.log(data)
-        $('.fa-spinner').removeClass('fa-spinner').removeClass('fa-spin');
-        document.getElementById('sub').textContent = data['jml-subs'];
-        document.getElementById('siswa').textContent = data['jml-siswa'];
-        document.getElementById('forum').textContent = data['jml-forum'];
-        document.getElementById('mentor').textContent = data['jml-mentor'];
-        document.getElementById('kelas').textContent = data['jml-class'];
-        document.getElementById('qna').textContent = data['jml-qna'];
 
-        html = '';
-        $.each(data.qna, function(index, row) {
-            html += '<tr>';
-            html += '<td>' + (index + 1) + '</td>';
-            html += '<td>' + row.nama + '</td>';
-            html += '<td>' + row.deskripsi.substring(0, 100) + "..." + '</td>';
-            html += '<td>' + '<div role="group" class="btn-group-sm btn-group btn-group-toggle" data-toggle="buttons"><a href="" type="button" class="btn btn-success">Answer</a><a href="" type="button" class="btn btn-info">Details</a></div>' + '</td>';
-            html += '</tr>';
+
+
         });
-
-        document.querySelector('.tbody').innerHTML = html;
-
-        html1 = '';
-        $.each(data.forum, function(index, row) {
-            html1 += '<tr>';
-            html1 += '<td>' + (index + 1) + '</td>';
-            html1 += '<td>' + row.nama + '</td>';
-            html1 += '<td>' + row.judul.substring(0, 100) + "..." + '</td>';
-            html1 += '<td>' + '<div role="group" class="btn-group-sm btn-group btn-group-toggle" data-toggle="buttons"><a href="" type="button" class="btn btn-success">Answer</a><a href="" type="button" class="btn btn-info">Details</a></div>' + '</td>';
-            html1 += '</tr>';
-        });
-
-        document.querySelector('.tbody2').innerHTML = html1;
-
-        html2 = '';
-        $.each(data.subs, function(index, row) {
-            $a = 'paket-jenis';
-            html2 += '<tr>';
-            html2 += '<td>' + (index + 1) + '</td>';
-            html2 += '<td>' + row.nama + '</td>';
-            html2 += '<td>' + row['paket-jenis'] + ' Bulan</td>';
-            html2 += '<td>' + row['paket-status'] + '</td>';
-            html2 += '<td>' + '<div role="group" class="btn-group-sm btn-group btn-group-toggle" data-toggle="buttons"><a href="" type="button" class="btn btn-info">Details</a></div>' + '</td>';
-            html2 += '</tr>';
-        });
-
-        document.querySelector('.tbody3').innerHTML = html2;
-
-
     }
-    getISS();
+    load_dashboard();
+
+
+    // async function getISS() {
+    //     const response = await fetch('https://floating-harbor-93486.herokuapp.com/api/admin?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9mbG9hdGluZy1oYXJib3ItOTM0ODYuaGVyb2t1YXBwLmNvbVwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYzMTM2NzgwMCwiZXhwIjoxNjkxMzY3NzQwLCJuYmYiOjE2MzEzNjc4MDAsImp0aSI6IjI4RlhES0gydDBwVDFXMDciLCJzdWIiOjgsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.yJk1mYacAC5MjySzISUAjNQt8O0UUBjnNf-q-MNKoCw');
+    //     const datas = await response.json();
+    //     const {
+    //         data,
+    //     } = datas;
+
+
+    // $('.page-title-text').html("Dashboard" + '<div class="page-title-subheading">' + moment().format('MMMM Do YYYY') + '</div>');
+
+    //     console.log(data)
+    //     $('.fa-spinner').removeClass('fa-spinner').removeClass('fa-spin');
+    //     document.getElementById('sub').textContent = data['jml-subs'];
+    //     document.getElementById('siswa').textContent = data['jml-siswa'];
+    //     document.getElementById('forum').textContent = data['jml-forum'];
+    //     document.getElementById('mentor').textContent = data['jml-mentor'];
+    //     document.getElementById('kelas').textContent = data['jml-class'];
+    //     document.getElementById('qna').textContent = data['jml-qna'];
+
+    //     html = '';
+    //     $.each(data.qna, function(index, row) {
+    //         html += '<tr>';
+    //         html += '<td>' + (index + 1) + '</td>';
+    //         html += '<td>' + row.nama + '</td>';
+    //         html += '<td>' + row.deskripsi.substring(0, 100) + "..." + '</td>';
+    //         html += '<td>' + '<div role="group" class="btn-group-sm btn-group btn-group-toggle" data-toggle="buttons"><a href="" type="button" class="btn btn-success">Answer</a><a href="" type="button" class="btn btn-info">Details</a></div>' + '</td>';
+    //         html += '</tr>';
+    //     });
+
+    //     document.querySelector('.tbody').innerHTML = html;
+
+    //     html1 = '';
+    //     $.each(data.forum, function(index, row) {
+    //         html1 += '<tr>';
+    //         html1 += '<td>' + (index + 1) + '</td>';
+    //         html1 += '<td>' + row.nama + '</td>';
+    //         html1 += '<td>' + row.judul.substring(0, 100) + "..." + '</td>';
+    //         html1 += '<td>' + '<div role="group" class="btn-group-sm btn-group btn-group-toggle" data-toggle="buttons"><a href="" type="button" class="btn btn-success">Answer</a><a href="" type="button" class="btn btn-info">Details</a></div>' + '</td>';
+    //         html1 += '</tr>';
+    //     });
+
+    //     document.querySelector('.tbody2').innerHTML = html1;
+
+    //     html2 = '';
+    //     $.each(data.subs, function(index, row) {
+    //         $a = 'paket-jenis';
+    //         html2 += '<tr>';
+    //         html2 += '<td>' + (index + 1) + '</td>';
+    //         html2 += '<td>' + row.nama + '</td>';
+    //         html2 += '<td>' + row['paket-jenis'] + ' Bulan</td>';
+    //         html2 += '<td>' + row['paket-status'] + '</td>';
+    //         html2 += '<td>' + '<div role="group" class="btn-group-sm btn-group btn-group-toggle" data-toggle="buttons"><a href="" type="button" class="btn btn-info">Details</a></div>' + '</td>';
+    //         html2 += '</tr>';
+    //     });
+
+    //     document.querySelector('.tbody3').innerHTML = html2;
+
+
+    // }
+    // getISS();
 </script>
 @endsection
 
