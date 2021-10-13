@@ -8,7 +8,7 @@
         <div class="col-md-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <h5 class="card-title">Tambah Akun Siswa</h5>
+                    <h5 class="card-title">Tambah Akun Mentor</h5>
                     <form id="change-pass-form">
                         @include('akun_pengguna.mentor.form')
                         <br>
@@ -22,12 +22,16 @@
 </div>
 @endsection
 @section('js')
+@yield('form_js')
 <script>
+    $('#password1').removeClass('d-none');
+    $('#password_confirmation1').removeClass('d-none');
+
     //CREATE
     $('#change-pass-form').submit(function(e) {
-    $('#cover-spin').show();
+        $('#cover-spin').show();
 
-    e.preventDefault();
+        e.preventDefault();
         $.ajax({
             method: 'post',
             url: api + 'admin/user/mentor',
@@ -41,11 +45,13 @@
                 "Authorization": 'bearer ' + token,
             },
             success: function(response) {
-                if (response.message !== 'Your Email Registration Success. Please Activate From Your Email') {
+                if (response.message !== 'Success') {
+                    $('#cover-spin').hide();
+
                     notif('error', 'Silahkan cek form dan tipe file yang di upload');
-                         $('#cover-spin').hide();
-        
-                } else if (response.message == 'Your Email Registration Success. Please Activate From Your Email') {
+
+                } else if (response.message == "Success") {
+                    $('#cover-spin').hide();
                     notif('success', 'Berhasil membuat kelas, Mohon tunggu');
                     setTimeout(() => {
                         window.location = "{{route('mentor')}}";
@@ -55,7 +61,6 @@
         });
     });
     $('#cover-spin').hide();
-
 </script>
 @endsection
 @extends('layouts.layout')

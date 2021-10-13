@@ -1,15 +1,15 @@
 <div class="col-12">
     <div class="form-group">
         <label>Tanggal edar</label>
-        <input type="date" name="jadwal" class="form-control" placeholder="dd-mm-yyyy">
+        <input type="date" name="jadwal" class="form-control" placeholder="dd-mm-yyyy" required>
     </div>
     <div class="form-group">
         <label>Kata dalam Hanguel</label>
-        <input type="text" name="hangeul" class="form-control" placeholder="Kata dalam Hanguel">
+        <input type="text" name="hangeul" class="form-control" placeholder="Kata dalam Hanguel" required>
     </div>
     <div class="form-group">
         <label>Pelafalan dalam latin</label>
-        <input type="text" name="pelafalan" class="form-control" placeholder="Pelafalan dalam latin">
+        <input type="text" name="pelafalan" class="form-control" placeholder="Pelafalan dalam latin" required>
     </div>
     <div class="form-group">
         <label>Penjelasan Kata</label>

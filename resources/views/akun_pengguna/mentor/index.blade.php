@@ -30,11 +30,10 @@
 @section('js')
 
 <script>
-
- function load_student() {
+    function load_student() {
         $('#cover-spin').show();
         $.ajax({
-            "url": api + "admin/user/mentor",
+            "url": api + "admin/user/mentor/list",
             "method": "GET",
             "headers": {
                 "Accept": "application/json",
@@ -43,7 +42,6 @@
         }).done(function(response) {
             $('#cover-spin').hide();
             if (response.message == 'Success') {
-                console.log(response)
                 html = '';
                 $.each(response.data, function(index, row) {
                     html += '<tr>';
@@ -52,7 +50,7 @@
                     html += '<td>' + row.nama + '</td>';
                     html += '<td>' + row.status + '</td>';
                     html += '<td>' + row.bio + '</td>';
-                    html += '<td>' + `<a href="{{route('detailmentor')}}?id=` + row.user_uuid + `" style="margin:2px;"  type="button" class="btn btn-primary btn-sm">Rincian</a><br>` + `<a href="{{route('detailkelas')}}?id=` + row.class_uuid + `" style="margin:2px;"  type="button" class="btn btn-info btn-sm">Rincian</a><br>` + `<a href="#" onclick="hapus('` + api + `admin/classroom?token=` + row.user_uuid + `')" style="margin:2px;"  type="button" class="btn btn-danger btn-sm">Hapus</a>` + '</td>';
+                    html += '<td>' + `<a href="{{route('detailmentor')}}?id=` + row.user_uuid + `" style="margin:2px;"  type="button" class="btn btn-primary btn-sm">Rincian</a><br>` + `<a href="{{route('editmentor')}}?id=` + row.user_uuid + `" style="margin:2px;"  type="button" class="btn btn-info btn-sm">Edit</a><br>` + `<a href="#" onclick = "hapus('` + api + `admin/user/mentor?token=` + row.user_uuid + `')" style="margin:2px;"  type="button" class="btn btn-danger btn-sm">Hapus</a><br>` + '</td>';
                     html += '</tr>';
                 });
                 document.querySelector('.tbody').innerHTML = html;
@@ -62,7 +60,6 @@
         });
     }
     load_student();
-
 </script>
 @endsection
 @extends('layouts.layout')

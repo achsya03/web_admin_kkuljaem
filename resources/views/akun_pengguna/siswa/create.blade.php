@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <h5 class="card-title">Tambah Akun Siswa</h5>
+                    <h5 class="card-title">Tambah Akun </h5>
                     <form id="change-pass-form">
                         @include('akun_pengguna.siswa.form')
                         <br>
@@ -23,9 +23,13 @@
 
 @section('js')
 <script>
-//CREATE
+    $('#password1').removeClass('d-none');
+    $('#password_confirmation1').removeClass('d-none');
+
+
+    //CREATE
     $('#change-pass-form').submit(function(e) {
-    $('#cover-spin').show();
+        $('#cover-spin').show();
 
         e.preventDefault();
         $.ajax({
@@ -41,12 +45,12 @@
                 "Authorization": 'bearer ' + token,
             },
             success: function(response) {
-                if (response.message !== 'Your Email Registration Success. Please Activate From Your Email') {
+                if (response.message !== 'Success') {
                     notif('error', 'Silahkan cek form dan tipe file yang di upload');
-                         $('#cover-spin').hide();
-        
-                } else if (response.message == 'Your Email Registration Success. Please Activate From Your Email') {
-                    notif('success', 'Berhasil membuat kelas, Mohon tunggu');
+                    $('#cover-spin').hide();
+
+                } else if (response.message == 'Success') {
+                    notif('success', 'Berhasil membuat siswa, Mohon tunggu');
                     setTimeout(() => {
                         window.location = "{{route('siswa')}}";
                     }, 1000);

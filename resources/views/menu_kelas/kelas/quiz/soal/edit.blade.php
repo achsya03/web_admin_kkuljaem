@@ -8,19 +8,19 @@
 <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
     <div class="row">
         <div class="col-md-12">
-        <div class="main-card mb-3 card">
-        <div class="col-md-12">
-            <br>
-        <h5><strong>Forum Sunting Soal</strong></h5>
-        </div>
-            <form id="change-pass-form">
-                @include('menu_kelas.kelas.quiz.soal.form')
-                <br>
-                <div class="form-row col-md-5">
-                <button type="submit" class="mt-1 btn btn-info">Sunting</button>
+            <div class="main-card mb-3 card">
+                <div class="col-md-12">
+                    <br>
+                    <h5><strong>Forum Sunting Soal</strong></h5>
                 </div>
-            </form>
-        </div>
+                <form id="change-pass-form">
+                    @include('menu_kelas.kelas.quiz.soal.form')
+                    <br>
+                    <div class="form-row col-md-5">
+                        <button type="submit" class="mt-1 btn btn-info">Sunting</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -48,34 +48,34 @@
 
 
                 //hapus file gambar
-                if (response.data.url_gambar !=  null) {
-                html100 = '';
-                html100 += '<a onclick="hapus(`' + api + `admin/image-delete?position=question-exam&field=image&uuid=` + urlParams.get('id') + '`)" href="#"  class="btn btn-danger btn-sm">Hapus</a>'
-                document.querySelector('.hapus_file').innerHTML = html100;
+                if (response.data.url_gambar != null) {
+                    html100 = '';
+                    html100 += '<a onclick="hapus(`' + api + `admin/image-delete?position=question-exam&field=image&uuid=` + urlParams.get('id') + '`)" href="#"  class="btn btn-danger btn-sm">Hapus</a>'
+                    document.querySelector('.hapus_file').innerHTML = html100;
                 }
 
                 //hapus file audio
-                if (response.data.url_file !=  null) {
-                html1000 = '';
-                html1000 += '<a onclick="hapus(`' + api + `admin/image-delete?position=question-exam&field=audio&uuid=` + urlParams.get('id') + '`)" href="#"  class="btn btn-danger btn-sm">Hapus</a>'
-                document.querySelector('.hapus_audio').innerHTML = html1000;
+                if (response.data.url_file != null) {
+                    html1000 = '';
+                    html1000 += '<a onclick="hapus(`' + api + `admin/image-delete?position=question-exam&field=audio&uuid=` + urlParams.get('id') + '`)" href="#"  class="btn btn-danger btn-sm">Hapus</a>'
+                    document.querySelector('.hapus_audio').innerHTML = html1000;
                 }
 
 
 
-                 //show file
-                if (response.data.url_gambar !=  null) {
-                 $('img[name="gambar_pertanyaan_preview"]').attr('src', response.data.url_gambar).removeClass('d-none');
-                $('img[name="gambar_pertanyaan_preview"]').attr('src', response.data.url_gambar);
+                //show file
+                if (response.data.url_gambar != null) {
+                    $('img[name="gambar_pertanyaan_preview"]').attr('src', response.data.url_gambar).removeClass('d-none');
+                    $('img[name="gambar_pertanyaan_preview"]').attr('src', response.data.url_gambar);
                 }
 
-                if (response.data.url_file !=  null) {
-                $('audio[id="url_pertanyaan_preview"]').attr('src', response.data.url_file).removeClass('d-none');
-                $('audio[id="url_pertanyaan_preview"]').attr('src', response.data.url_file);
-                    }
+                if (response.data.url_file != null) {
+                    $('audio[id="url_pertanyaan_preview"]').attr('src', response.data.url_file).removeClass('d-none');
+                    $('audio[id="url_pertanyaan_preview"]').attr('src', response.data.url_file);
+                }
 
                 //show jawaban
-                
+
                 $.each(response.data.pilihan, function(index, row) {
                     $('#jawaban_teks_' + row.jawaban_id).val(row.jawaban_teks).removeClass('d-none');
                     $('#jawaban_teks_' + row.jawaban_id).val(row.jawaban_teks);
@@ -92,15 +92,15 @@
                 });
 
 
-                
+
 
             }
         }
     });
 
-//UPDATE
-$('#change-pass-form').submit(function(e) {
-    $('#cover-spin').show();
+    //UPDATE
+    $('#change-pass-form').submit(function(e) {
+        $('#cover-spin').show();
 
         e.preventDefault();
         $.ajax({
@@ -113,11 +113,11 @@ $('#change-pass-form').submit(function(e) {
             processData: false,
             success: function(response) {
                 if (response.message !== 'Success') {
-    $('#cover-spin').hide();
+                    $('#cover-spin').hide();
 
                     notif('error', 'Silahkan cek form dan tipe file yang di upload');
                 } else if (response.message == 'Success') {
-    $('#cover-spin').hide();
+                    $('#cover-spin').hide();
 
 
                     notif('success', 'Berhasil membuat kelas, Mohon tunggu');
@@ -128,8 +128,6 @@ $('#change-pass-form').submit(function(e) {
             }
         });
     });
-
-
 </script>
 @endsection
 @extends('layouts.layout')

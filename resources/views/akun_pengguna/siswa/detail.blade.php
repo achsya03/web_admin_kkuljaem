@@ -3,34 +3,34 @@
 @section('title-icon', 'pe-7s-bookmarks')
 @section('content')
 
-<h4 style="color:black" id="nama"><strong>Nanda Mohammad</strong></h4>
-<a id="email">nandamohammad@gmail.com</a> <br>
-
-<span style="color:black" ><strong>Status</strong></span><br><a id="status">Member</a>
-<br>
-<span style="color:black"><strong>Jenis Kelamin</strong></span><br><a id="jenis_kel">Laki-Laki</a>
-<br>
-
-<span style="color:black"><strong>Tanggal Lahir</strong></span><br><a id="email"> @gmail.com5</a>
-<br>
-
-<span style="color:black"><strong>Alamat</strong></span><br><a id="alamat">nandamohammad@gmail.com</a>
-
-
-<br>
-<br>
-<a>Pin telang dipasang </a><a href="">Lihat Peta</a>
-
-<br>
-<div>
-    <a href="{{route('siswa')}}" class="mb-2 mr-2 btn btn-primary">
-        Nonaktifkan Akun</a>
+<div class="nama">
 </div>
+<div class="email">
+</div>
+<span style="color:black"><strong>Status</strong></span><br>
+<div class="status">
+</div>
+<span style="color:black"><strong>Jenis Kelamin</strong></span><br>
+<div class="jenis_kelamin">
+</div>
+<span style="color:black"><strong>Tanggal Lahir</strong></span><br>
+<div class="tgl_lahir">
+</div>
+<span style="color:black"><strong>Alamat</strong></span><br>
+<div class="alamat">
+</div>
+
+<br>
+<!-- <a>Pin telang dipasang </a><a href="">Lihat Peta</a> -->
+<br>
+<div class="route">
+</div>
+<br>
 <div class="col-lg-13">
     <div class="main-card mb-3 card">
         <div class="card-body">
             <h5 class="card-title">Progress Pembelajaran</h5>
-            <table class="mb-0 table table-striped">
+            <table class="mb-0 table table-striped table">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -38,25 +38,8 @@
                         <th>Progress</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>
-                            <div class="mb-3 progress ">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">25%</div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>
-                            <div class="mb-3 progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">25%</div>
-                            </div>
-                        </td>
-                    </tr>
+                <tbody class="tbody">
+
                 </tbody>
             </table>
         </div>
@@ -65,8 +48,19 @@
 <div class="main-card mb-3 card">
     <div class="card-body">
         <h5 class="card-title">History Langganan</h5>
-        <strong>- </strong>
-        <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</td>
+
+        <table class="mb-0 table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="tbody1">
+
+            </tbody>
+        </table>
+
     </div>
 </div>
 @endsection
@@ -75,7 +69,7 @@
 <script>
     function load_detail() {
         $.ajax({
-            "url": api + "user/detail?=token" + urlParams.get('id'),
+            "url": api + "admin/user/student/detail?token=" + urlParams.get('id'),
             "method": "GET",
             "headers": {
                 "Accept": "application/json",
@@ -85,13 +79,66 @@
             $('#cover-spin').hide();
             if (response.message == 'Success') {
                 console.log(response)
+
+                //show nama
+                html000 = '';
+                html000 += `<h4 style="color:black" id="nama">` + `<strong>` + response.data.user['nama'] + `</strong>` + `</h4>`
+                document.querySelector('.nama').innerHTML = html000;
+
+                //show email
+                html001 = '';
+                html001 += `<a id="email">` + response.data.user['email'] + `</a>` + `<br>`
+                document.querySelector('.email').innerHTML = html001;
+
+                //show email
+                html011 = '';
+                html011 += `<a id="email">` + response.data.user['status'] + `</a>` + `<br>`
+                document.querySelector('.status').innerHTML = html011;
+
+                //show email
+                html111 = '';
+                html111 += `<a id="email">` + response.data.user['jenis_kel'] + `</a>` + `<br>`
+                document.querySelector('.jenis_kelamin').innerHTML = html111;
+
+                //show email
+                html001 = '';
+                html001 += `<a id="email">` + response.data.user['tgl_lahir'] + `</a>` + `<br>`
+                document.querySelector('.tgl_lahir').innerHTML = html001;
+
+                //show email
+                html001 = '';
+                html001 += `<a id="email">` + response.data.user['alamat'] + `</a>` + `<br>`
+                document.querySelector('.alamat').innerHTML = html001;
+
+
+                //show nonaktifkan
+                html0011 = '';
+                html0011 += `<a href = "` + api + "admin/user/student/status?token=" + urlParams.get('id') + `" class = "mb-2 mr-2 btn btn-primary">Nonaktifkan Akun</a>` + `<br>`
+                document.querySelector('.route').innerHTML = html0011;
+
+                //show progress
                 html = '';
-                document.getElementById('nama').textContent = response.data.user.nama;
-                document.getElementById('email').textContent = response.data.user.email;
-                document.getElementById('status').textContent = response.data.user.status;
-                document.getElementById('jenis_kel').textContent = response.data.user.jenis_kel;
-                document.getElementById('tgl_lahir').textContent = response.data.user.tgl_lahir;
-                document.getElementById('alamat').textContent = response.data.user.alamat;
+                $.each(response.data.classes, function(index, row) {
+                    html += '<tr>';
+                    html += '<td>' + (index + 1) + '</td>';
+                    html += '<td>' + row.class + '</td>';
+                    html += '<td>' + row.progress + '</td>';
+                    html += '</tr>';
+                });
+                document.querySelector('.tbody').innerHTML = html;
+                $('.table').DataTable();
+
+                //show sub
+                html1 = '';
+                $.each(response.subscription, function(index, row) {
+                    html1 += '<tr>';
+                    html1 += '<td>' + (index + 1) + '</td>';
+                    html1 += '<td>' + row.subs + '</td>';
+                    html1 += '</tr>';
+                });
+                document.querySelector('.tbody1').innerHTML = html1;
+
+
 
 
 
