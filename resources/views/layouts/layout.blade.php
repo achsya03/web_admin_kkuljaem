@@ -256,7 +256,13 @@
                 active_sidebar.parent().parent().parent().addClass("mm-active");
             }
         });
-        if (window.location.pathname.split('/').length == 2) {
+        if (window.location.pathname.split('/').length == 2 || [
+                'akun_pengguna',
+                'laporan_pengguna',
+                'keuangan',
+                'homepage-setting',
+                'application-setting'
+            ].includes(window.location.pathname.split('/')[1])) {
             $('.btn-kembali').addClass('d-none');
         };
 
