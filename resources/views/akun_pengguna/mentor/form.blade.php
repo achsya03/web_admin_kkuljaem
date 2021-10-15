@@ -23,7 +23,7 @@
         <input name="url_foto[]" id="url_foto" type="file" class="form-control-file" onchange="update_preview(this)">
         <small class=" form-text text-muted">Format jpg ukuran 12 x 12</small>
     </div>
-    <img src="#" name="url_foto_preview" style="min-width: 300px; max-height: 150px; object-fit:cover;">
+    <img src="#" id="url_foto_preview" style="min-width: 300px; max-height: 150px; object-fit:cover;">
 
 </div>
 <br>
@@ -38,6 +38,7 @@
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
+                console.log($(input).attr('id'));
                 $('img[id="' + $(input).attr('id') + '_preview"]').attr('src', e.target.result);
                 $('img[id="' + $(input).attr('id') + '_preview"]').removeClass('d-none');
             }

@@ -2,19 +2,6 @@
 @section('title-description', 'Manajemen Laporan daro pengguna aplikasi dan mentor')
 @section('title-icon', 'pe-7s-bookmarks')
 @section('content')
-<div class="row">
-    <div class="col-md-6">
-        <div class="mb-3 card">
-            <div class="card-header card-header-tab-animation">
-                <ul class="nav nav-justified">
-                    <li class="nav-item"><a data-toggle="tab" href="#tab-eg115-0" class="nav-link show active">LAPORAN (22)</a></li>
-                    <li class="nav-item"><a data-toggle="tab" href="#tab-eg115-1" class="nav-link show">DAFTAR PENGABAIAN (2)</a></li>
-                </ul>
-            </div>
-
-        </div>
-    </div>
-</div>
 <div class="card card-body">
     <div class="row">
         <div class="col-7 col-md-4 col-xl-4">
@@ -28,71 +15,23 @@
         <div class="col-4 col-md-1 col-xl-1">
             <label class="text-light">.</label>
             <button class="btn btn-focus btn-lg">Terapkan</button>
+            <!-- <a data-toggle="modal" data-target=".bd-example-modal-sm1" class="btn-icon btn-icon-only btn btn-primary mobile-toggle-header-nav active" class="btn btn-sm btn-focus">Detail</a> -->
         </div>
     </div>
-    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-        <div class="row">
-            <div class="col-sm-12 col-md-6">
-                <div class="dataTables_length" id="DataTables_Table_0_length"><label>Show <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="custom-select custom-select-sm form-control form-control-sm">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select> entries</label></div>
-            </div>
-            <div class="col-sm-12 col-md-6">
-                <div id="DataTables_Table_0_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="DataTables_Table_0"></label></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <table class="dataTable table no-footer" width="100%" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" style="width: 100%;">
-                    <thead>
-                        <tr role="row">
-                            <td class="sorting sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="#: activate to sort column descending" style="width: 24.2px;">#</td>
-                            <td class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Judul QnA: activate to sort column ascending" style="width: 148.2px;">Judul QnA</td>
-                            <td class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Detail QnA: activate to sort column ascending" style="width: 279.2px;">Detail QnA</td>
-                            <td class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Penanya: activate to sort column ascending" style="width: 133.2px;">Penanya</td>
-                            <td class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Dibuat: activate to sort column ascending" style="width: 157.2px;">Dibuat</td>
-                            <td data-orderable="false" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Tanggapan" style="width: 96.4px;">Tanggapan</td>
-                            <td data-orderable="false" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Action" style="width: 73.4px;">Action</td>
-                        </tr>
-                    </thead>
-                    <tbody>
 
-                        <tr class="odd">
-                            <td class="sorting_1">1</td>
-                            <td>Kenapa bumi bulat?</td>
-                            <td>Keterangan Dibuat 15 kata terus (...)</td>
-                            <td>Nanda Abdi Tanya</td>
-                            <td>12/12/2021 10.00PM</td>
-                            <td>
-                                12 <i class="pe-7s-like"></i> <br>
-                                12 <i class="pe-7s-chat"></i>
-                            </td>
-                            <td>
-                                <a data-toggle="modal" data-target=".bd-example-modal-sm1" class="btn-icon btn-icon-only btn btn-primary mobile-toggle-header-nav active" class="btn btn-sm btn-focus">Detail</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-5">
-                <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing 1 to 1 of 1 entries</div>
-            </div>
-            <div class="col-sm-12 col-md-7">
-                <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-                    <ul class="pagination">
-                        <li class="paginate_button page-item previous disabled" id="DataTables_Table_0_previous"><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
-                        <li class="paginate_button page-item active"><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                        <li class="paginate_button page-item next disabled" id="DataTables_Table_0_next"><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" class="page-link">Next</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+    <table id="example" class="table table-fix table-hover table-striped table-bordered">
+        <thead>
+            <th width="10px">#</th>
+            <th>Pelapor</th>
+            <th>Konten yang dilaporkan</th>
+            <th>Tanggal Lapor</th>
+            <th>Status</th>
+            <th width="45px">Action</th>
+            </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
 </div>
 
 
@@ -108,30 +47,112 @@
                 </button>
             </div>
             <div class="modal-body">
-                <span style="color:black"><strong>Jenis</strong></span><br>Jenis
-                <br>
-                <span style="color:black"><strong>Judul</strong></span><br>Judul
-                <br>
-                <span style="color:black"><strong>Detail</strong></span><br>Detail
-                <br>
-                <span style="color:black"><strong>Isi</strong></span><br>Isi
-                <br> <br> <br> <br> <br> <br>
+                <span style="color:black"><strong>Jenis</strong></span><br>
+                <input name="post_report_uuid" id="post_report_uuid" hidden class="form-control">
 
-                <span style="color:black"><strong>Gambar</strong></span>
+                <a id="user_lapor"></a>
                 <br>
-                <td>Gambar 1</td>
-
-
+                <span style="color:black"><strong>Konten yang dilaporkan</strong></span><br>
+                <a id="komentar"> </a>
+                <br>
+                <span style="color:black"><strong>Tanggal Lapor</strong></span><br>
+                <a id="tgl_lapor"></a>
+                <br>
+                <span style="color:black"><strong>Status</strong></span><br>
+                <a id="status"></a>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Abaikan</button>
-                <button type="button" class="btn btn-primary">Blokir</button>
+                <button type="button" onclick="update($('#post_report_uuid').val())" class="btn btn-primary">Blokir</button>
             </div>
         </div>
     </div>
 </div>
 @endsection
 @section('js')
+<script>
+    function load_view() {
+        $('#cover-spin').show();
+        $.ajax({
+            "url": api + "admin/report?status=ignored",
+            "method": "GET",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": 'bearer ' + token,
+            },
+        }).done(function(response) {
+            $('#cover-spin').hide();
+            html = '';
+            $.each(response.data, function(index, row) {
+                html += '<tr>';
+                html += '<td>' + (index + 1) + '</td>';
+                html += '<td>' + row.user_lapor + '</td>';
+                html += '<td>' + row.komentar + '</td>';
+                html += '<td>' + row.tgl_lapor + '</td>';
+                html += '<td>' + row.status + '</td>';
+                html += '<td>' + `<a data-toggle="modal" data-target=".bd-example-modal-sm1" href="#" onclick="getEdit('` + row.post_report_uuid + `')" class="btn btn-sm btn-focus">Detail</a>` + '</td>';
+                html += '<td>';
+                html += '</tr>';
+            });
+            document.querySelector('.tbody').innerHTML = html;
+            $('table').DataTable();
 
+        });
+    }
+    load_view();
+
+
+    //SHOW EDIT
+    function getEdit(id) {
+        $.ajax({
+            method: 'get',
+            url: api + 'admin/report/detail?type=comment&token=' + id,
+            dataType: 'json',
+            headers: {
+                "Accept": "application/json",
+                "Authorization": 'bearer ' + token,
+            },
+            success: function(response) {
+                if (response.message !== 'Success') {
+                    // $.growl.warning({
+                    //     message: response.message
+                    // });
+                } else if (response.message == 'Success') {
+                    document.getElementById('user_lapor').textContent = response.data['user_lapor'];
+                    document.getElementById('deskripsi').textContent = response.data['deskripsi'];
+                    document.getElementById('tgl_lapor').textContent = response.data['tgl_lapor'];
+                    document.getElementById('status').textContent = response.data['status'];
+                    document.getElementById('post_report_uuid').value = response.data['post_report_uuid'];
+                }
+            }
+        });
+    }
+
+
+    function update(id) {
+        $.ajax({
+            type: "post",
+            url: api + 'admin/report/update?type=comment&token=' + id,
+            data: {
+                'jenis': $("#jenis").val(),
+                'judul': $("#judul").val(),
+                'deskripsi': $("#deskripsi").val(),
+                'user_lapor': $("#user_lapor").val(),
+                'tgl_lapor': $("#tgl_lapor").val(),
+                'post_report_uuid': $("#post_report_uuid").val(),
+            },
+            success: function(response) {
+                if (response.message !== 'Success') {
+                    // $.growl.warning({
+                    //     message: response.message
+                    // });
+                } else if (response.message == 'Success') {
+                    $(".btn-close").click();
+                    window.location = "{{route('laporankonten')}}";
+                }
+            }
+        });
+    }
+</script>
 @endsection
 @extends('layouts.layout')
