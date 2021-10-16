@@ -8,7 +8,7 @@
         <div class="col-5">
             <div class="position-relative form-group">
                 <label class="font-weight-bold mb-0">Email Mentor</label>
-                <input type="text" class="form-control" value="nanda.mochammad@gmail.com">
+                <input type="email" name="email" class="form-control" value="nanda.mochammad@gmail.com">
             </div>
         </div>
     </div>
@@ -33,7 +33,7 @@
         <div class="col-5">
             <div class="position-relative form-group">
                 <label class="font-weight-bold mb-0">Nama Mentor</label>
-                <input type="text" class="form-control" value="Nanda Mochammad">
+                <input type="text" name="nama" class="form-control" value="Nanda Mochammad">
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
         <div class="col-5">
             <div class="position-relative form-group">
                 <label class="font-weight-bold mb-0">Bio</label>
-                <textarea name="tes" rows="5" class="form-control"></textarea>
+                <textarea name="bio" rows="5" class="form-control"></textarea>
                 <small>Jumlah Kata 0 (Max 500 Karakter)</small>
             </div>
         </div>
@@ -70,6 +70,27 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+<script>
+    $('#cover-spin').show();
+    $.ajax({
+        "url": api + "admin/profile",
+        "method": "get",
+        "headers": {
+            "Accept": "application/json",
+            "Authorization": 'bearer ' + token,
+        }
+    }).done(function(response) {
+        $('#cover-spin').hide();
+        if (response.message == "Success") {
+            $('input[name="email"]').val(response.data.user.email);
+            $('input[name="nama"]').val(response.data.user.nama);
+            $('textarea[name="bio"]').val(response.data.user.bio);
+        }
+    });
+</script>
 @endsection
 
 @extends('layouts.layout')
