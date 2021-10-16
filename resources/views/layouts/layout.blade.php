@@ -138,12 +138,8 @@
                                     </div>
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
-                                    <div class="widget-heading">
-                                        Nanda Mochammad
-                                    </div>
-                                    <div class="widget-subheading">
-                                        Mentor/Admin
-                                    </div>
+                                    <div class="widget-heading"> </div>
+                                    <div class="widget-subheading"> </div>
                                 </div>
                                 <div class="widget-content-right header-user-info ml-3">
                                 </div>
@@ -269,6 +265,20 @@
         if (window.localStorage.getItem("backurl_{{ $_SERVER['REQUEST_URI'] }}") == null) {
             window.localStorage.setItem("backurl_{{ $_SERVER['REQUEST_URI'] }}", '{{ url()->previous() }}');
         }
+
+        $.ajax({
+            "url": api + "admin/profile",
+            "method": "get",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": 'bearer ' + token,
+            }
+        }).done(function(response) {
+            if (response.message == "Success") {
+                $('.widget-heading').html(response.data.user.nama);
+                $('.widget-subheading').html(response.data.user.jenis_pengguna);
+            }
+        });
 
         function back_url() {
             window.location.href = window.localStorage.getItem("backurl_{{ $_SERVER['REQUEST_URI'] }}");
