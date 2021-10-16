@@ -23,7 +23,7 @@
                         <td>Nama Peserta</td>
                         <td>Identitas Peserta</td>
                         <td>Testimoni</td>
-                        <td>Actions</td>
+                        <td width="1px" data-orderable="false">Actions</td>
                     </tr>
                 </thead>
                 <thead>
@@ -86,10 +86,9 @@
         }
     });
 
-    $('.dataTable').dataTable({
+    $('.dataTable').DataTable({
         "ajax": {
-            "url": api + "testimoni",
-            "dataSrc": "data.word",
+            "url": api + "admin/testimoni",
             "dataType": 'json',
             "type": "GET",
             "beforeSend": function(xhr) {
