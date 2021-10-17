@@ -127,7 +127,7 @@
                                 <div class="widget-content-left">
                                     <div class="btn-group">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                            <img width="42" class="rounded-circle" src="{{ url('css/assets/images/avatars/1.jpg') }}" alt="">
+                                            <img width="42" class="rounded-circle foto-profile" src="{{ url('css/assets/images/avatars/1.jpg') }}" alt="">
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
@@ -277,6 +277,7 @@
             if (response.message == "Success") {
                 $('.widget-heading').html(response.data.user.nama);
                 $('.widget-subheading').html(response.data.user.jenis_pengguna);
+                $('.foto-profile').attr('src', response.data.user.foto);
             }
         });
 

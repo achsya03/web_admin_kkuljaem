@@ -41,7 +41,7 @@
             $('#nama').html(response.data.user.nama);
             $('.page-title-subheading').html(response.data.user.email);
             $('#email').html(response.data.user.email);
-            $('#status').html(response.data.user.status);
+            $('#status').html(response.data.user.jenis_pengguna);
             $('#bio').html(response.data.user.bio);
             $('.card').removeClass('d-none');
         }
