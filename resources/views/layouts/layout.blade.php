@@ -138,8 +138,8 @@
                                     </div>
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
-                                    <div class="widget-heading"> </div>
-                                    <div class="widget-subheading"> </div>
+                                    <div class="widget-heading" id="widget-heading"> </div>
+                                    <div class="widget-subheading" id="widget-subheading"> </div>
                                 </div>
                                 <div class="widget-content-right header-user-info ml-3">
                                 </div>
@@ -275,8 +275,8 @@
             }
         }).done(function(response) {
             if (response.message == "Success") {
-                $('.widget-heading').html(response.data.user.nama);
-                $('.widget-subheading').html(response.data.user.jenis_pengguna);
+                $('#widget-heading').html(response.data.user.nama);
+                $('#widget-subheading').html(response.data.user.jenis_pengguna);
                 $('.foto-profile').attr('src', response.data.user.foto);
             }
         });
