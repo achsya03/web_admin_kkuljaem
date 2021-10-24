@@ -14,6 +14,7 @@
         </div>
         <div class="col-4 col-md-1 col-xl-1">
             <label class="text-light">.</label>
+             <br>
             <button class="btn btn-focus btn-lg">Terapkan</button>
         </div>
     </div>
