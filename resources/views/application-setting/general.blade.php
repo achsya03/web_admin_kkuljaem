@@ -86,12 +86,21 @@
 
     function store(form_name, value) {
         $('#cover-spin').show();
+        if (form_name == 'and_ver' || form_name == 'ios_ver') {
+            var data = {
+                'ios_ver': $('input[name="ios_ver"]').val(),
+                'and_ver': $('input[name="and_ver"]').val(),
+            }
+            form_name = 'version';
+        } else {
+            var data = {
+                'value': value
+            }
+        }
         $.ajax({
             "url": api + "admin/setting/update?key=" + form_name,
             "method": "post",
-            "data": {
-                'value': value
-            },
+            "data": data,
             "headers": {
                 "Accept": "application/json",
                 "Authorization": 'bearer ' + token,
