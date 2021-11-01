@@ -321,15 +321,23 @@
                             "Authorization": 'bearer ' + window.localStorage.getItem('token'),
                         },
                         success: function(response) {
-                            Swal.fire(
-                                'Sukses!',
-                                'Data berhasil dihapus!',
-                                'success'
-                            )
-                            if (back_url) {
-                                window.location.href = back_url;
+                            if (response.message == 'Failed') {
+                                Swal.fire(
+                                    'Gagal!',
+                                    response.error,
+                                    'error'
+                                )
                             } else {
-                                location.reload();
+                                Swal.fire(
+                                    'Sukses!',
+                                    'Data berhasil dihapus!',
+                                    'success'
+                                )
+                                if (back_url) {
+                                    window.location.href = back_url;
+                                } else {
+                                    location.reload();
+                                }
                             }
                         },
                         error: function() {
