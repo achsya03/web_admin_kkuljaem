@@ -3,8 +3,8 @@
 @section('title-icon', 'pe-7s-bookmarks')
 @section('content')
 
-<div class="row">
-    <div class="col-md-4">
+<div class="row cardss">
+    <!-- <div class="col-md-4">
         <div class="main-card mb-3 card">
             <div class="card-body">
                 <h5>Tambah Kata Kasar</h5>
@@ -14,10 +14,25 @@
                 <a href="#" class="btn btn-success">Tambahkan</a>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 
-<div class="card card-body">
+<div class="main-card mb-3 card">
+    <div class="card-body">
+
+        <table id="example" class="table table-fix table-hover table-striped table-bordered">
+            <thead>
+                <th width="75px">#</th>
+                <th>Kata Kasar</th>
+                <th width="75px">Action</th>
+                </tr>
+            </thead>
+            <tbody class="tbody">
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- <div class="card card-body">
     <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
         <div class="row">
             <div class="col-sm-12 col-md-6">
@@ -81,13 +96,13 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <br>
 
 
 @endsection
 @section('modal')
-<div class="modal fade bd-example-modal-sm1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<!-- <div class="modal fade bd-example-modal-sm1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
@@ -118,9 +133,76 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 @endsection
 @section('js')
 
+<script>
+    function load_menukelas() {
+        $('#cover-spin').show();
+        $.ajax({
+            "url": api + "admin/bad-word",
+            "method": "GET",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": 'bearer ' + token,
+            },
+        }).done(function(response) {
+            $('#cover-spin').hide();
+            if (response.message == 'Success') {
+                console.log(response)
+                html1 = '';
+                html1 += `<div class="col-md-4"><div class="main-card mb-3 card"><div class="card-body"><h5><strong>Tambah Kata Kasar</strong></h5><form id="change-pass-form"><div class="position-relative form-group"><label class="">Kata Kasar</label><input name="kata" placeholder="" class="form-control"></div><div class="position-relative form-group"><button type="submit" class="btn-icon btn-focus btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">Tambahkan</button></div></form></div></div></div>`;
+                document.querySelector('.cardss').innerHTML = html1;
+
+                html = '';
+                $.each(response.data, function(index, row) {
+                    console.log(row)
+                    html += '<tr>';
+                    html += '<td>' + (index + 1) + '</td>';
+                    html += '<td>' + row.kata + '</td>';
+                    html += '<td>' + `<a href="#" onclick="hapus('` + api + `admin/bad-word?token=` + row.uuid + `')" style="margin:2px;"  type="button" class="btn btn-danger btn-sm">Hapus</a>` + '</td>';
+                    html += '</tr>';
+                });
+
+                document.querySelector('.tbody').innerHTML = html;
+                $('table').DataTable();
+
+                //CREATE
+                $('#change-pass-form').submit(function(e) {
+                    e.preventDefault();
+                    $('#cover-spin').show();
+
+                    $.ajax({
+                        method: 'post',
+                        url: api + 'admin/bad-word',
+                        data: $('form').serialize(),
+                        dataType: 'json',
+                        headers: {
+                            "Accept": "application/json",
+                            "Authorization": 'bearer ' + token,
+                        },
+                        success: function(response) {
+                            $('#cover-spin').hide();
+
+                            if (response.message !== 'Success') {
+                                notif('error', 'Mohon semua form diisi !');
+
+                            } else if (response.message == 'Success') {
+                                notif('success', 'Berhasil membuat grup kelas, Mohon tunggu');
+                                window.location = "{{ route('katakasar')}}";
+
+                            }
+                        }
+                    });
+                });
+
+
+
+            }
+        });
+    }
+    load_menukelas();
+</script>
 @endsection
 @extends('layouts.layout')
