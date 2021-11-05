@@ -18,7 +18,7 @@
             <p id="keterangan"><i class="fa fa-spin fa-spinner"></i> Mohon Tunggu</p>
         </div>
         <div>
-            <a data-toggle="modal" data-target=".bd-example-modal-sm-edit1"  onclick="editQuiz()" class="btn-icon btn-icon-only btn btn-primary mobile-toggle-header-nav" href="">Sunting Quiz</a>
+            <a data-toggle="modal" data-target=".bd-example-modal-sm-edit1" onclick="editQuiz()" class="btn-icon btn-icon-only btn btn-primary mobile-toggle-header-nav" href="">Sunting Quiz</a>
         </div>
     </div>
     <div class="col-md-6">
@@ -27,7 +27,7 @@
 <br>
 <div class="col-lg-13">
     <div class="mb-3 card">
-        <div class="card-body"> 
+        <div class="card-body">
             <div class="tab-content">
                 <div class="card-body">
                     <div>
@@ -92,10 +92,9 @@
 @endsection
 @section('js')
 <script>
-
-//show view atas
+    //show view atas
     async function getview() {
-        const response = await fetch('https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content/quiz/all?token=' + urlParams.get('token'));
+        const response = await fetch(' https://kkuljaem-api-new-3-ft4mz.ondigitalocean.app/api/admin/classroom/content/quiz/all?token=' + urlParams.get('token'));
         const datas = await response.json();
         const {
             data,
@@ -108,35 +107,35 @@
 
     //SHOW EDIT quiz
     function editQuiz() {
-    $.ajax({
-        method: 'get',
-        url: 'https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content/quiz/detail?token=' + urlParams.get('token'),
-        dataType: 'json',
-        success: function(response) {
-            console.log(response)
+        $.ajax({
+            method: 'get',
+            url: ' https://kkuljaem-api-new-3-ft4mz.ondigitalocean.app/api/admin/classroom/content/quiz/detail?token=' + urlParams.get('token'),
+            dataType: 'json',
+            success: function(response) {
+                console.log(response)
 
-            if (response.message !== 'Success') {
-                // $.growl.warning({
-                //     message: response.message
-                // });
-            } else if (response.message == 'Success') {
-                document.getElementById('id_q').value = response.data['uuid'];
-                document.getElementById('nomor_q_edit').value = response.data['nomor'];
-                document.getElementById('judul_q_edit').value = response.data['judul'];
-                document.getElementById('keterangan_q_edit').value = response.data['keterangan'];
-              
+                if (response.message !== 'Success') {
+                    // $.growl.warning({
+                    //     message: response.message
+                    // });
+                } else if (response.message == 'Success') {
+                    document.getElementById('id_q').value = response.data['uuid'];
+                    document.getElementById('nomor_q_edit').value = response.data['nomor'];
+                    document.getElementById('judul_q_edit').value = response.data['judul'];
+                    document.getElementById('keterangan_q_edit').value = response.data['keterangan'];
 
+
+                }
             }
-        }
-    });
+        });
     }
 
 
-       // update quiz
-        function updatequiz() {
+    // update quiz
+    function updatequiz() {
         $.ajax({
             type: "post",
-            url: 'https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content/quiz/update?token=' + urlParams.get('token'),
+            url: 'https://kkuljaem-api-new-3-ft4mz.ondigitalocean.app/api/admin/classroom/content/quiz/update?token=' + urlParams.get('token'),
             data: {
                 'nomor': $("#nomor").val(),
                 'judul': $("#judul_q_edit").val(),
@@ -145,7 +144,7 @@
             },
             success: function(response) {
                 if (response.message !== 'Success') {
-         
+
                 } else if (response.message == 'Success') {
                     $(".btn-close").click();
                     window.location = "{{route('quizsiswa')}}?token=" + urlParams.get('token');
@@ -158,7 +157,7 @@
 
 
 
-//show data
+    //show data
     $('.dataTable').dataTable({
         "ajax": {
             "url": api + "admin/classroom/content/quiz/all?token=" + urlParams.get('token'),
@@ -166,10 +165,10 @@
             "type": "GET",
             "dataSrc": function(response) {
 
-         //tambahsoal
-        html0000 ='';
-        html0000 += `<a class="btn-icon btn-icon-only btn btn-primary mobile-toggle-header-nav"  href="{{ route('tambahsoalquiz') }}?token=` + urlParams.get('token') +`" > Tambah Soal</a>`
-        document.querySelector('.route1').innerHTML = html0000;
+                //tambahsoal
+                html0000 = '';
+                html0000 += `<a class="btn-icon btn-icon-only btn btn-primary mobile-toggle-header-nav"  href="{{ route('tambahsoalquiz') }}?token=` + urlParams.get('token') + `" > Tambah Soal</a>`
+                document.querySelector('.route1').innerHTML = html0000;
 
 
                 $('#keterangan').html(response.data.keterangan);
@@ -182,7 +181,7 @@
         },
         "columns": [{
             "data": "nomor"
-        },{
+        }, {
             "data": "pertanyaan"
         }, {
             "data": "jawaban"

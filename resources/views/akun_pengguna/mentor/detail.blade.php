@@ -72,7 +72,7 @@
 
                 //show sunting
                 html111 = "";
-                html111 += `<a href="{{ route('editmentor') }}?token=` + urlParams.get('id') + `"  class = "mb-2 mr-2 btn btn-primary">Sunting Akun Mentor </a>`
+                html111 += `<a href="{{ route('editmentor') }}?id=` + urlParams.get('id') + `"  class = "mb-2 mr-2 btn btn-primary">Sunting Akun Mentor </a>`
                 document.querySelector('.sunting').innerHTML = html111;
 
                 //show hapus

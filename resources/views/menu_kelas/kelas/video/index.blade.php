@@ -10,7 +10,7 @@
         <a id="judul"></a>
         <br><br>
 
-        <span style="color:black"><strong>Deskripsi Video</strong></span><br>
+        <span style="color:black"><strong>Keterangan</strong></span><br>
         <i class="fa fa-spin fa-spinner"></i>
         <a id="deskripsi"></a>
         <br><br>
@@ -25,7 +25,7 @@
     </div>
     <div class="col-md-6">
         <div class="thumb1">
-        <i class="fa fa-spin fa-spinner"></i>
+            <i class="fa fa-spin fa-spinner"></i>
         </div>
     </div>
 
@@ -43,12 +43,12 @@
         </div>
         <div class="card-body">
             <div class="tab-content">
-        <!-- //tabpanel_1 -->
+                <!-- //tabpanel_1 -->
                 <div class="tab-pane active" id="tab-eg8-1" role="tabpanel">
                     <div class="card-body">
                         <div>
-                        <div class="position-relative form-group route1">
-                        </div>
+                            <div class="position-relative form-group route1">
+                            </div>
                         </div>
                         <table id="example2" class="table table-hover table-striped table-bordered">
                             <thead>
@@ -58,16 +58,16 @@
                                 <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody  class="tbody2">
+                            <tbody class="tbody2">
                             </tbody>
                         </table>
                     </div>
                 </div>
-        <!-- //tabpanel_2 -->
+                <!-- //tabpanel_2 -->
                 <div class="tab-pane" id="tab-eg8-2" role="tabpanel">
                     <div class="card-body">
                         <div>
-                            <div class="position-relative form-group"><a data-toggle="modal" data-target=".bd-example-modal-sm1" onclick="getTambahShadowing()"class="btn-icon btn-icon-only btn btn-primary mobile-toggle-header-nav" href=""> Tambah Ungkapan</a></div>
+                            <div class="position-relative form-group"><a data-toggle="modal" data-target=".bd-example-modal-sm1" onclick="getTambahShadowing()" class="btn-icon btn-icon-only btn btn-primary mobile-toggle-header-nav" href=""> Tambah Ungkapan</a></div>
                         </div>
                         <table id="example1" class="table table-hover table-striped table-bordered">
                             <thead>
@@ -103,30 +103,31 @@
                 </button>
             </div>
             <div class="modal-body">
-            <form id="form-create" >
-                <div class="position-relative form-group"><label for="exampleEmail" class="">Letak</label>
-                    <div class="form-row">
-                        <div class="col-md-3">
-                            <input name="nomor" id="nomor1" placeholder="" type="text" class="form-control" disabled>
+                <form id="form-create">
+                    <div class="position-relative form-group"><label for="exampleEmail" class="">Letak</label>
+                        <div class="form-row">
+                            <div class="col-md-3">
+                                <input name="nomor" id="nomor1" placeholder="" type="text" class="form-control" disabled>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="position-relative form-group">
-                    <label  class="">Kata dalam Hanquel</label>
-                    <input name="nomor" id="nomor" placeholder="" type="text" class="form-control" hidden>
-                    <input name="pelafalan" id="pelafalan"  placeholder="" type="text" class="form-control" hidden>
+                    <div class="position-relative form-group">
+                        <label class="">Kata dalam Hanquel</label>
+                        <input name="nomor" id="nomor" placeholder="" type="text" class="form-control" hidden>
+                        <input name="pelafalan" id="pelafalan" placeholder="" type="text" class="form-control" hidden>
 
-                    <input name="hangeul" id="hangeul"  placeholder="" type="text" class="form-control">
-                </div>
-                <div class="position-relative form-group">
-                    <label  class="">Arti atau Keterangan singkat</label>
-                    <input name="penjelasan" id="penjelasan" placeholder="" type="text" class="form-control"></div>
-                <div class="position-relative form-group">
-                    <label  class="">File Audio</label>
-                    <input name="url_pengucapan" id="url_pengucapan"  type="file" class="form-control-file">
-                    <small class="form-text text-muted">Format Mp3 Maksimal ukuran file 2MB</small>
-                </div>
-            </form>
+                        <input name="hangeul" id="hangeul" placeholder="" type="text" class="form-control">
+                    </div>
+                    <div class="position-relative form-group">
+                        <label class="">Arti atau Keterangan singkat</label>
+                        <input name="penjelasan" id="penjelasan" placeholder="" type="text" class="form-control">
+                    </div>
+                    <div class="position-relative form-group">
+                        <label class="">File Audio</label>
+                        <input name="url_pengucapan" id="url_pengucapan" type="file" class="form-control-file">
+                        <small class="form-text text-muted">Format Mp3 Maksimal ukuran file 2MB</small>
+                    </div>
+                </form>
 
             </div>
             <div class="modal-footer">
@@ -148,31 +149,32 @@
                 </button>
             </div>
             <div class="modal-body">
-            <form id="form-edit" >
-                <div class="position-relative form-group"><label for="exampleEmail" class="">Letak</label>
-                    <div class="form-row">
-                        <div class="col-md-3">
-                            <input name="id" id="id_quiz" hidden class="form-control" hidden>
+                <form id="form-edit">
+                    <div class="position-relative form-group"><label for="exampleEmail" class="">Letak</label>
+                        <div class="form-row">
+                            <div class="col-md-3">
+                                <input name="id" id="id_quiz" hidden class="form-control" hidden>
 
-                            <input name="nomor" id="nomor_quiz" placeholder="" type="text" class="form-control" disabled>
+                                <input name="nomor" id="nomor_quiz" placeholder="" type="text" class="form-control" disabled>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="position-relative form-group">
-                    <label  class="">Kata dalam Hanquel</label>
-                    <input name="nomor" id="nomor_quiz1" placeholder="" type="text" class="form-control" hidden>
-                    <input name="pelafalan" id="pelafalan_quiz"  placeholder="" type="text" class="form-control" hidden>
-                    <input name="hangeul" id="hangeul_quiz"  placeholder="" type="text" class="form-control">
-                </div>
-                <div class="position-relative form-group">
-                    <label  class="">Arti atau Keterangan singkat</label>
-                    <input name="penjelasan" id="penjelasan_quiz" placeholder="" type="text" class="form-control"></div>
-                <div class="position-relative form-group">
-                    <label  class="">File Audio</label>
-                    <input name="url_pengucapan" id="url_pengucapan_quiz"  type="file" class="form-control-file">
-                    <small class="form-text text-muted">Format Mp3 Maksimal ukuran file 2MB</small>
-                </div>
-            </form>
+                    <div class="position-relative form-group">
+                        <label class="">Kata dalam Hanquel</label>
+                        <input name="nomor" id="nomor_quiz1" placeholder="" type="text" class="form-control" hidden>
+                        <input name="pelafalan" id="pelafalan_quiz" placeholder="" type="text" class="form-control" hidden>
+                        <input name="hangeul" id="hangeul_quiz" placeholder="" type="text" class="form-control">
+                    </div>
+                    <div class="position-relative form-group">
+                        <label class="">Arti atau Keterangan singkat</label>
+                        <input name="penjelasan" id="penjelasan_quiz" placeholder="" type="text" class="form-control">
+                    </div>
+                    <div class="position-relative form-group">
+                        <label class="">File Audio</label>
+                        <input name="url_pengucapan" id="url_pengucapan_quiz" type="file" class="form-control-file">
+                        <small class="form-text text-muted">Format Mp3 Maksimal ukuran file 2MB</small>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -232,11 +234,9 @@
 
 
 <script>
-
-
     //show view atas
     async function getview() {
-        const response = await fetch('https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content/video/all?token=' + urlParams.get('token'));
+        const response = await fetch(' https://kkuljaem-api-new-3-ft4mz.ondigitalocean.app/api/admin/classroom/content/video/all?token=' + urlParams.get('token'));
         const datas = await response.json();
         const {
             data,
@@ -246,11 +246,11 @@
     }
     getview();
 
- 
+
 
     //SHOW DATA
     async function getISS() {
-        const response = await fetch('https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content/video/all?token=' + urlParams.get('token'));
+        const response = await fetch(' https://kkuljaem-api-new-3-ft4mz.ondigitalocean.app/api/admin/classroom/content/video/all?token=' + urlParams.get('token'));
         const datas = await response.json();
         const {
             data,
@@ -259,8 +259,8 @@
         $('.fa-spinner').removeClass('fa-spinner').removeClass('fa-spin');
 
         //tambahsoal
-        html0000 ='';
-        html0000 += `<a class="btn-icon btn-icon-only btn btn-primary mobile-toggle-header-nav"  href="{{ route('tambahsoalvideo') }}?token=` + urlParams.get('token') +`" > Tambah Soal</a>`
+        html0000 = '';
+        html0000 += `<a class="btn-icon btn-icon-only btn btn-primary mobile-toggle-header-nav"  href="{{ route('tambahsoalvideo') }}?token=` + urlParams.get('token') + `" > Tambah Soal</a>`
         document.querySelector('.route1').innerHTML = html0000;
 
         //show jumlah shadowing dan video
@@ -275,11 +275,14 @@
 
         //show video
         html000 = '';
-        
-        html000 += '<iframe width="500" height="220" src="https://www.youtube.com/embed/'+ data.url_video.split("=")[1] + '"></iframe> '
-      //  html000 += `<video id='my-video' controls controlsList="nodownload" preload='auto'width="500" height="220"><source src="` + data.url_video + `" type='video/mp4'></video>`
-        document.querySelector('.thumb1').innerHTML = html000;
+        if (data.url_video.split("=").length == 1) {
+            html000 += '<iframe width="500" height="220" src="https://www.youtube.com/embed/' + data.url_video.split("/")[3] + '"></iframe>'
+            document.querySelector('.thumb1').innerHTML = html000;
+        } else {
+            html000 += '<iframe width="500" height="220" src="https://www.youtube.com/embed/' + data.url_video.split("=")[1] + '"></iframe>'
+            document.querySelector('.thumb1').innerHTML = html000;
 
+        }
         //sunting video
         html0 = '';
         html0 += '<a data-toggle="modal" data-target=".bd-example-modal-sm-edit" onclick="getEditVideo(\'' + data.uuid + '\')" class="btn-icon btn-icon-only btn btn-primary mobile-toggle-header-nav" href="" style="margin:2px;">Sunting Video</a><br>'
@@ -297,7 +300,7 @@
             html += '<td>' + row.hangeul + '</td>';
             html += '<td>' + row.penjelasan + '</td>';
             html += '<td>' + `<audio controls><source src="` + row.url_pengucapan + `" type="audio/mpeg"></audio>` + '</td>';
-            html += '<td>' + '<a data-toggle="modal" data-target=".bd-example-modal-sm-edit1" onclick="getEditQuiz(\'' + row.shadowing_uuid + '\')" class="btn-icon btn-icon-only btn btn-info btn-sm mobile-toggle-header-nav" href="" style="margin:2px;">Edit</a><br>' + '<button onclick="hapus(`' + api + `admin/classroom/content/video/shadowing?token=` + row.shadowing_uuid + '`)" style="margin:2px;" class="btn btn-danger btn-sm">Hapus</button>'+ '</td>';
+            html += '<td>' + '<a data-toggle="modal" data-target=".bd-example-modal-sm-edit1" onclick="getEditQuiz(\'' + row.shadowing_uuid + '\')" class="btn-icon btn-icon-only btn btn-info btn-sm mobile-toggle-header-nav" href="" style="margin:2px;">Edit</a><br>' + '<button onclick="hapus(`' + api + `admin/classroom/content/video/shadowing?token=` + row.shadowing_uuid + '`)" style="margin:2px;" class="btn btn-danger btn-sm">Hapus</button>' + '</td>';
             html += '</tr>';
         });
         document.querySelector('.tbody1').innerHTML = html;
@@ -311,7 +314,7 @@
             html1 += '<td>' + row1.nomor + '</td>';
             html1 += '<td>' + row1.pertanyaan + '</td>';
             html1 += '<td>' + row1.jawaban + '</td>';
-            html1 += '<td>' + `<a  href="{{ route('editsoalvideo') }}?id=` + row1.task_uuid + '&token=' + urlParams.get('token')+`" class="btn-icon btn-icon-only btn btn-info btn-sm mobile-toggle-header-nav"  style="margin:2px;">Edit</a><br>` + '<button onclick="hapus(`' + api + `admin/classroom/content/video/task?token=` + row1.task_uuid + '`)" style="margin:2px;" class="btn btn-danger btn-sm">Hapus</button>'+ '</td>';
+            html1 += '<td>' + `<a  href="{{ route('editsoalvideo') }}?id=` + row1.task_uuid + '&token=' + urlParams.get('token') + `" class="btn-icon btn-icon-only btn btn-info btn-sm mobile-toggle-header-nav"  style="margin:2px;">Edit</a><br>` + '<button onclick="hapus(`' + api + `admin/classroom/content/video/task?token=` + row1.task_uuid + '`)" style="margin:2px;" class="btn btn-danger btn-sm">Hapus</button>' + '</td>';
             html1 += '</tr>';
         });
         document.querySelector('.tbody2').innerHTML = html1;
@@ -319,7 +322,7 @@
 
 
 
-        
+
 
 
 
@@ -331,7 +334,7 @@
     function getEditVideo() {
         $.ajax({
             method: 'get',
-            url: 'https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content/video/detail?token=' + urlParams.get('token'),
+            url: 'https://kkuljaem-api-new-3-ft4mz.ondigitalocean.app/api/admin/classroom/content/video/detail?token=' + urlParams.get('token'),
             dataType: 'json',
             success: function(response) {
                 if (response.message !== 'Success') {
@@ -355,7 +358,7 @@
     function update(id) {
         $.ajax({
             type: "post",
-            url: 'https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content/video/update?token=' + id,
+            url: ' https://kkuljaem-api-new-3-ft4mz.ondigitalocean.app/api/admin/classroom/content/video/update?token=' + id,
             data: {
                 'nomor': $("#nomor_q").val(),
                 'judul': $("#judul_video_edit").val(),
@@ -384,7 +387,7 @@
         });
         $.ajax({
             method: 'get',
-            url: 'https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content/video/shadowing?token=' + urlParams.get('token'),
+            url: ' https://kkuljaem-api-new-3-ft4mz.ondigitalocean.app/api/admin/classroom/content/video/shadowing?token=' + urlParams.get('token'),
             dataType: 'json',
             success: function(response) {
                 console.log(response)
@@ -418,7 +421,7 @@
                     notif('error', 'Silahkan cek form dan tipe file yang di upload');
                 } else if (response.message == 'Success') {
                     notif('success', 'Berhasil membuat kelas, Mohon tunggu');
-                     $('#cover-spin').hide();
+                    $('#cover-spin').hide();
                     setTimeout(() => {
                         window.location = "{{route('videosiswa')}}?token=" + urlParams.get('token');
                     }, 1000);
@@ -435,12 +438,11 @@
         });
         $.ajax({
             method: 'get',
-            url : api + 'admin/classroom/content/video/shadowing/detail?token=' + id,
+            url: api + 'admin/classroom/content/video/shadowing/detail?token=' + id,
             dataType: 'json',
             success: function(response) {
                 console.log(response)
-                if (response.message !== 'Success') {
-                } else if (response.message == 'Success') {
+                if (response.message !== 'Success') {} else if (response.message == 'Success') {
                     document.getElementById('id_quiz').value = response.data['shadowing_uuid'];
                     document.getElementById('nomor_quiz1').value = response.data['nomor'];
                     document.getElementById('nomor_quiz').value = response.data['nomor'];
@@ -469,7 +471,7 @@
                     notif('error', 'Silahkan cek form dan tipe file yang di upload');
                 } else if (response.message == 'Success') {
                     notif('success', 'Berhasil membuat kelas, Mohon tunggu');
-                     $('#cover-spin').hide();
+                    $('#cover-spin').hide();
                     setTimeout(() => {
                         window.location = "{{route('videosiswa')}}?token=" + urlParams.get('token');
                     }, 1000);
@@ -478,8 +480,6 @@
         });
 
     }
-
-
 </script>
 @endsection
 @extends('layouts.layout')

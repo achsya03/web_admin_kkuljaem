@@ -18,7 +18,7 @@
         <div class="col-4 col-md-1 col-xl-1">
             <label class="text-light">.</label>
             <br>
-            <button  onclick="get_view_posting()" class="btn btn-focus btn-lg">Terapkan</button>
+            <button onclick="get_view_posting()" class="btn btn-focus btn-lg">Terapkan</button>
         </div>
     </div>
 
@@ -52,7 +52,7 @@
             <div class="modal-body">
                 <span style="color:black"><strong>Jenis</strong></span><br>
                 <input name="post_report_uuid" id="post_report_uuid" hidden class="form-control">
-                
+
                 <a id="jenis"></a>
                 <br>
                 <span style="color:black"><strong>Konten yang dilaporkan</strong></span><br>
@@ -65,7 +65,7 @@
                 <a id="status"></a>
             </div>
             <div class="modal-footer">
-                <button type="button" onclick="blokir_posting($('#post_report_uuid').val())" class="btn btn-secondary" >Abaikan</button>
+                <button type="button" onclick="blokir_posting($('#post_report_uuid').val())" class="btn btn-secondary">Abaikan</button>
                 <button type="button" onclick="update_posting($('#post_report_uuid').val())" class="btn btn-primary">Blokir</button>
             </div>
         </div>
@@ -83,7 +83,7 @@
             <div class="modal-body">
                 <span style="color:black"><strong>Jenis</strong></span><br>
                 <input name="post_report_uuid" id="post_report_uuid1" hidden class="form-control">
-                
+
                 <a id="jenis1"></a>
                 <br>
                 <span style="color:black"><strong>Konten yang dilaporkan</strong></span><br>
@@ -105,6 +105,40 @@
 @endsection
 @section('js')
 <script>
+    function get_all() {
+        $('#cover-spin').show();
+        $.ajax({
+            "url": api + "admin/report?status=all",
+            "method": "GET",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": 'bearer ' + token,
+            },
+        }).done(function(response) {
+            $('#cover-spin').hide();
+            html = '';
+            $.each(response.data, function(index, row) {
+                html += '<tr>';
+                html += '<td>' + (index + 1) + '</td>';
+                html += '<td>' + row.user_lapor + '</td>';
+                html += '<td>' + row.komentar + '</td>';
+                html += '<td>' + row.tgl_lapor + '</td>';
+                html += '<td>' + row.status + '</td>';
+                if (row.status == "Menunggu Konfirmasi") {
+                    if (row.komentar.match(/Posting.*/)) {
+                        html += '<td>' + `<a data-toggle="modal" data-target=".bd-example-modal-sm1" href="#" onclick="getEdit('` + row.post_report_uuid + `')" class="btn btn-sm btn-focus">Detail</a>` + '</td>';
+                    } else {
+                        html += '<td>' + `<a data-toggle="modal" data-target=".bd-example-modal-sm11" href="#" onclick="getEdit1('` + row.comment_report_uuid + `')" class="btn btn-sm btn-focus">Detail</a>` + '</td>';
+                    }
+                }
+                html += '</tr>';
+            });
+            document.querySelector('.tbody').innerHTML = html;
+            $('table').DataTable();
+        });
+    }
+    get_all();
+
     function get_view_posting() {
         $('#cover-spin').show();
         $.ajax({
@@ -115,7 +149,7 @@
                 "Authorization": 'bearer ' + token,
             },
         }).done(function(response) {
-        $('#cover-spin').hide();
+            $('#cover-spin').hide();
             html = '';
             $.each(response.data, function(index, row) {
                 html += '<tr>';
@@ -125,11 +159,11 @@
                 html += '<td>' + row.tgl_lapor + '</td>';
                 html += '<td>' + row.status + '</td>';
                 if (row.status == "Menunggu Konfirmasi") {
-                        if (row.komentar.match(/Posting.*/)) {
+                    if (row.komentar.match(/Posting.*/)) {
                         html += '<td>' + `<a data-toggle="modal" data-target=".bd-example-modal-sm1" href="#" onclick="getEdit('` + row.post_report_uuid + `')" class="btn btn-sm btn-focus">Detail</a>` + '</td>';
-                        } else {
-                            html += '<td>' + `<a data-toggle="modal" data-target=".bd-example-modal-sm11" href="#" onclick="getEdit1('` + row.comment_report_uuid + `')" class="btn btn-sm btn-focus">Detail</a>` + '</td>';
-                        }
+                    } else {
+                        html += '<td>' + `<a data-toggle="modal" data-target=".bd-example-modal-sm11" href="#" onclick="getEdit1('` + row.comment_report_uuid + `')" class="btn btn-sm btn-focus">Detail</a>` + '</td>';
+                    }
                 }
                 html += '</tr>';
             });
@@ -139,10 +173,11 @@
     }
 
 
+
     //SHOW EDIT
     function getEdit(id) {
         $.ajax({
-            method: 'get',  
+            method: 'get',
             url: api + 'admin/report/detail?type=posting&token=' + id,
             dataType: 'json',
             headers: {
@@ -157,11 +192,11 @@
                     // });
                 } else if (response.message == 'Success') {
                     $.each(response.data, function(index, row) {
-                    document.getElementById('jenis').textContent = row['jenis'];
-                    document.getElementById('deskripsi').textContent = row['deskripsi'];
-                    document.getElementById('tgl_lapor').textContent = row['tgl_lapor'];
-                    document.getElementById('status').textContent = row['status'];
-                    document.getElementById('post_report_uuid').value = row['post_report_uuid'];
+                        document.getElementById('jenis').textContent = row['jenis'];
+                        document.getElementById('deskripsi').textContent = row['deskripsi'];
+                        document.getElementById('tgl_lapor').textContent = row['tgl_lapor'];
+                        document.getElementById('status').textContent = row['status'];
+                        document.getElementById('post_report_uuid').value = row['post_report_uuid'];
                     });
                 }
             }
@@ -170,7 +205,7 @@
 
     function getEdit1(id) {
         $.ajax({
-            method: 'get',  
+            method: 'get',
             url: api + 'admin/report/detail?type=comment&token=' + id,
             dataType: 'json',
             headers: {
@@ -183,11 +218,11 @@
 
                 } else if (response.message == 'Success') {
                     $.each(response.data, function(index, row) {
-                    document.getElementById('jenis1').textContent = row['jenis'];
-                    document.getElementById('deskripsi1').textContent = row['deskripsi'];
-                    document.getElementById('tgl_lapor1').textContent = row['tgl_lapor'];
-                    document.getElementById('status1').textContent = row['status'];
-                    document.getElementById('post_report_uuid1').value = row['comment_report_uuid'];
+                        document.getElementById('jenis1').textContent = row['jenis'];
+                        document.getElementById('deskripsi1').textContent = row['deskripsi'];
+                        document.getElementById('tgl_lapor1').textContent = row['tgl_lapor'];
+                        document.getElementById('status1').textContent = row['status'];
+                        document.getElementById('post_report_uuid1').value = row['comment_report_uuid'];
                     });
                 }
             }

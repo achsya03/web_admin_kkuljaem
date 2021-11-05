@@ -74,7 +74,11 @@
                         if (response.message == 'Success') {
                             $('#cover-spin').hide();
                             $("#detail-modal").modal('show');
-                            $('.video').html('<iframe width="100%" height="300px" src="https://www.youtube.com/embed/' + response.data.url_video.split("=")[1].split("&")[0] + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+                            if (response.data.url_video.split("=").length == 1) {
+                                $('.video').html('<iframe width="100%" height="300px" src="https://www.youtube.com/embed/' + response.data.url_video.split("/")[3] + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+                            } else {
+                                $('.video').html('<iframe width="100%" height="300px" src="https://www.youtube.com/embed/' + response.data.url_video.split("=")[1].split("&")[0] + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+                            }
                             $('.btn-edit').attr('href', "{{ route('homepage-setting-video-today-edit') }}?id=" + response.data.uuid);
                             $('.modal-body h5').html(moment(response.data.jadwal).format('DD/M/y'));
                             $('#detail-modal').on('hidden.bs.modal', function() {
