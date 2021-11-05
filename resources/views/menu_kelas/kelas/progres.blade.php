@@ -43,7 +43,7 @@
                 html += '<tr>';
                 html += '<td>' + (index + 1) + '</td>';
                 html += '<td>' + row.nama + '</td>';
-                html += '<td><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: ' + row.progress + '%;">' + row.progress + '%</div></div></td>';
+                html += '<td><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: ' + row.progress.toFixed(2) + '%;">' + row.progress.toFixed(2) + '%</div></div></td>';
                 html += '</tr>';
             });
             document.querySelector('.tbody').innerHTML = html;
