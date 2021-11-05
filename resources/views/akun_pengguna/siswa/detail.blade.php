@@ -121,8 +121,8 @@
                 $.each(response.data.classes, function(index, row) {
                     html += '<tr>';
                     html += '<td>' + (index + 1) + '</td>';
-                    html += '<td>' + row.class + '</td>';
-                    html += '<td>' + row.progress + '</td>';
+                    html += '<td>' + row.class_name + '</td>';
+                    html += '<td><div class="progress-bar-sm progress-bar-animated-alt progress"><div class="progress-bar bg-primary" role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: ' + row.class_prosentase.toFixed(2) + '%;">' + row.class_prosentase.toFixed(2) + '%</div></div></td>';
                     html += '</tr>';
                 });
                 document.querySelector('.tbody').innerHTML = html;
