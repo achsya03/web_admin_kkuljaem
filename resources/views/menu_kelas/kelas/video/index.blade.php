@@ -275,11 +275,14 @@
 
         //show video
         html000 = '';
+        if (data.url_video.split("=").length == 1) {
+            html000 += '<iframe width="500" height="220" src="https://www.youtube.com/embed/' + data.url_video.split("/")[3] + '"></iframe>'
+            document.querySelector('.thumb1').innerHTML = html000;
+        } else {
+            html000 += '<iframe width="500" height="220" src="https://www.youtube.com/embed/' + data.url_video.split("=")[1] + '"></iframe>'
+            document.querySelector('.thumb1').innerHTML = html000;
 
-        html000 += '<iframe width="500" height="220" src="https://www.youtube.com/embed/' + data.url_video.split("=")[1] + '"></iframe> '
-        //  html000 += `<video id='my-video' controls controlsList="nodownload" preload='auto'width="500" height="220"><source src="` + data.url_video + `" type='video/mp4'></video>`
-        document.querySelector('.thumb1').innerHTML = html000;
-
+        }
         //sunting video
         html0 = '';
         html0 += '<a data-toggle="modal" data-target=".bd-example-modal-sm-edit" onclick="getEditVideo(\'' + data.uuid + '\')" class="btn-icon btn-icon-only btn btn-primary mobile-toggle-header-nav" href="" style="margin:2px;">Sunting Video</a><br>'

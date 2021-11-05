@@ -340,7 +340,12 @@
                 html += '<td>' + row.jenis + '</td>';
                 html += '<td>' + row.judul + '</td>';
                 html += '<td>' + row.keterangan + '</td>';
-                html += '<td>' + row.jml_latihan + ' <i class="pe-7s-note"></i><br>' + row.jml_shadowing + ' <i class="pe-7s-micro"></i>' + '</td>';
+                if (row.jenis == 'video') {
+                    html += '<td>' + row.jml_latihan + ' <i class="pe-7s-note"></i><br>' + row.jml_shadowing + ' <i class="pe-7s-micro"></i>' + '</td>';
+                } else {
+                    html += '<td>' + row.number + ' <i class="pe-7s-ticket"></i>' + '</td>';
+
+                }
                 html += '</tr>';
             });
             document.querySelector('.tbody').innerHTML = html;
@@ -365,7 +370,6 @@
 
             html2 = '';
             $.each(response.data.quiz, function(index1, row2) {
-                console.log(row2)
                 html2 += '<tr>';
                 html2 += '<td>' + row2.number + '</td>';
                 html2 += '<td>' + row2.judul + '</td>';
