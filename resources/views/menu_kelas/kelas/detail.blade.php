@@ -75,8 +75,8 @@
                             <thead>
                                 <th width="10px">Episode</th>
                                 <th>Video Materi</th>
+                                <th>Judul Materi</th>
                                 <th>Keterangan</th>
-                                <th>URL Video</th>
                                 <th>Lainnya</th>
                                 <th width="10px" data-orderable="false">Action</th>
                                 </tr>
@@ -334,12 +334,13 @@
 
             html = '';
             $.each(response.data.materi, function(index, row) {
+                console.log(response.data.materi)
                 html += '<tr>';
                 html += '<td>' + row.number + '</td>';
                 html += '<td>' + row.jenis + '</td>';
                 html += '<td>' + row.judul + '</td>';
                 html += '<td>' + row.keterangan + '</td>';
-                html += '<td>' + row.keterangan + '</td>';
+                html += '<td>' + row.jml_latihan + ' <i class="pe-7s-note"></i><br>' + row.jml_shadowing + ' <i class="pe-7s-micro"></i>' + '</td>';
                 html += '</tr>';
             });
             document.querySelector('.tbody').innerHTML = html;
@@ -353,7 +354,7 @@
                 html1 += '<td>' + row1.jenis + '</td>';
                 html1 += '<td>' + row1.judul + '</td>';
                 html1 += '<td>' + row1.keterangan + '</td>';
-                html1 += '<td>' + row1.keterangan + '</td>';
+                html1 += '<td>' + row1.jml_latihan + ' <i class="pe-7s-note"></i><br>' + row1.jml_shadowing + ' <i class="pe-7s-micro"></i>' + '</td>';
                 html1 += '<td>' + `<a href="{{ route('videosiswa') }}?token=` + row1.uuid + `" style="margin:2px;" class="btn btn-secondary btn-sm">Details</a><br>` + '<a data-toggle="modal" data-target=".bd-example-modal-sm-edit" onclick="getEditVideo(\'' + row1.uuid + '\')" class="btn-icon btn-icon-only btn btn-info btn-sm mobile-toggle-header-nav" href="" style="margin:2px;">Edit</a><br>' + '<button onclick="hapus(`' + api + `admin/classroom/content/video?token=` + row1.uuid + '`)" style="margin:2px;" class="btn btn-danger btn-sm">Hapus</button>' +
                     '</td>';
                 html += '</tr>';

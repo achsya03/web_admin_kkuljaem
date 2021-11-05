@@ -10,7 +10,7 @@
         <a id="judul"></a>
         <br><br>
 
-        <span style="color:black"><strong>Deskripsi Video</strong></span><br>
+        <span style="color:black"><strong>Keterangan</strong></span><br>
         <i class="fa fa-spin fa-spinner"></i>
         <a id="deskripsi"></a>
         <br><br>
