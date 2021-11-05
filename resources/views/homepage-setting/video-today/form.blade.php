@@ -13,7 +13,11 @@
 @section('form_js')
 <script>
     $('input[name="url_video"]').keyup(function() {
-        $('iframe').attr('src', 'https://www.youtube.com/embed/' + $(this).val().split("=")[1].split("&")[0]);
+        if ($(this).val().split("=").length == 1) {
+            $('iframe').attr('src', 'https://www.youtube.com/embed/' + $(this).val().split("/")[3]);
+        } else {
+            $('iframe').attr('src', 'https://www.youtube.com/embed/' + $(this).val().split("=")[1].split("&")[0]);
+        }
     });
 </script>
 @endsection
