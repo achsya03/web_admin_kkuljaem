@@ -37,8 +37,8 @@
     </div>
 </div>
 
-
-<a href="{{ route('penarikansaldo')}}" class="btn btn-success">Tarik Saldo</a>
+<!-- 
+<a href="{{ route('penarikansaldo')}}" class="btn btn-success">Tarik Saldo</a> -->
 <br>
 <br>
 <div class="card card-body">
