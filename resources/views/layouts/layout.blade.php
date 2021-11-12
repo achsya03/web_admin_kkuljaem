@@ -286,6 +286,10 @@
             }
         });
 
+        if (window.localStorage.jenis_pengguna != 'Admin') {
+            $('.for-admin').hide();
+        }
+
         function back_url() {
             window.location.href = window.localStorage.getItem("backurl_{{ $_SERVER['REQUEST_URI'] }}");
         }
