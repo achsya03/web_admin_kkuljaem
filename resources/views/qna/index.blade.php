@@ -48,7 +48,7 @@
             },
         },
         "columns": [{
-            "data": "class_uuid"
+            "data": "class_uuid",
         }, {
             "data": "judul"
         }, {
@@ -73,6 +73,11 @@
             "render": function(data) {
                 return `<a href="{{ route('qna-detail') }}?token=` + data + `" class="btn btn-sm btn-focus">Detail</a>`;
             }
+        }],
+        "columnDefs": [{
+            "targets": [0],
+            "visible": false,
+            "searchable": false
         }]
     });
 
