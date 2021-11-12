@@ -240,7 +240,6 @@
         var api = "{{ env('APP_API_URL', 'api/') }}";
         var token = window.localStorage.getItem('token');
         var urlParams = new URLSearchParams(window.location.search);
-
         var formatter = new Intl.NumberFormat('id-ID', {
             style: 'currency',
             currency: 'IDR',
@@ -301,7 +300,7 @@
                 },
                 success: function(response) {
                     window.localStorage.clear();
-                    window.location.href = "{{ env('APP_URL', './') }}";
+                    window.location.href = "{{ url('') }}";
                 }
             });
         }

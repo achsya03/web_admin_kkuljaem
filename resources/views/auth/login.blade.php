@@ -126,6 +126,7 @@
                 } else {
                     notif('success', 'Sukses Masuk, Mohon tunggu');
                     window.localStorage.setItem('token', response.data['bearer_token']);
+                    window.localStorage.setItem('jenis_pengguna', response.data['jenis_pengguna']);
                     window.location.href = '{{ route("dashboard") }}';
                 }
             });

@@ -7,20 +7,21 @@
         <div class="col-7 col-md-4 col-xl-4">
             <div class="position-relative form-group">
                 <label>Tampilkan Berdasarkan</label>
-                <select name="#" class="custom-select">
-                    <option value="#">Semua Kelas</option>
+                <select name="filter_datatable" class="custom-select list-class">
+                    <option>Semua Kelas</option>
                 </select>
             </div>
         </div>
         <div class="col-4 col-md-1 col-xl-1">
             <label class="text-light">.</label>
-             <br>
+            <br>
             <button class="btn btn-focus btn-lg">Terapkan</button>
         </div>
     </div>
     <table class="dataTable table">
         <thead>
             <tr>
+                <td>UUID</td>
                 <td>Judul QnA</td>
                 <td>Detail QnA</td>
                 <td>Penanya</td>
@@ -37,7 +38,7 @@
 
 @section('js')
 <script>
-    table = $('.dataTable').DataTable({
+    var table = $('.dataTable').DataTable({
         "ajax": {
             "url": api + "admin/qna",
             "dataType": 'json',
@@ -47,6 +48,8 @@
             },
         },
         "columns": [{
+            "data": "class_uuid"
+        }, {
             "data": "judul"
         }, {
             "data": "deskripsi",
@@ -82,13 +85,17 @@
         }
     }).done(function(response) {
         if (response.message == "Success") {
-            html = '<option value="#">Semua Kelas</option>';
+            html = '<option value="">Semua Kelas</option>';
             $.each(response.data, function(index, row) {
                 html += '<option value="' + row.uuid + '">' + row.nama + '</option>';
             });
-            $('.custom-select').html(html);
+            $('.list-class').html(html);
         }
     });
+
+    $('.list-class').change(function() {
+        table.columns(0).search($('.list-class').val()).draw();
+    })
 </script>
 @endsection
 @extends('layouts.layout')
