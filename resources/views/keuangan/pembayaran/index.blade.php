@@ -13,7 +13,7 @@
                 </a>
                 <a>
                     <div>
-                        <h5><strong id="saldo">RP. 12.000.000</strong></h5>
+                        <h5><strong id="saldo"></strong></h5>
                     </div>
                 </a>
             </div>
@@ -29,7 +29,7 @@
                 </a>
                 <a>
                     <div>
-                        <h5><strong id="jumlah_t">20</strong></h5>
+                        <h5><strong id="jumlah_t"></strong></h5>
                     </div>
                 </a>
             </div>
@@ -85,7 +85,7 @@
             $('#cover-spin').hide();
             if (response.message == 'Success') {
 
-                document.getElementById('saldo').textContent = response.data['total_saldo'];
+                document.getElementById('saldo').textContent = formatter.format(response.data['total_saldo']);
                 document.getElementById('jumlah_t').textContent = response.data['jml_transaksi'];
 
                 console.log(response)

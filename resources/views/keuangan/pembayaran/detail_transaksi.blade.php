@@ -69,7 +69,7 @@
                 document.getElementById('invoice').textContent = response.data.subs['id_permintaan'];
                 document.getElementById('jenis').textContent = response.data.subs['jenis'];
                 document.getElementById('tipe').textContent = response.data.subs['status'];
-                document.getElementById('jumlah').textContent = response.data.subs['jumlah'];
+                document.getElementById('jumlah').textContent = formatter.format(response.data.subs['jumlah']);
                 document.getElementById('tanggal').textContent = response.data.subs['tgl_akhir_bayar'];
 
                 document.getElementById('packet_name').textContent = response.data.detail_sub['packet_name'];

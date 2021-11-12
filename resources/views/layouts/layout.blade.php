@@ -222,7 +222,7 @@
                                 <ul class="nav">
                                     <li class="nav-item">
                                         <p class="nav-link">
-                                            2021 Kkuljaem Korea - Built with <i class="fa fa-fw">  </i> by Namatech
+                                            Copyright 2021 by Kkuljaem Korean
                                         </p>
                                     </li>
                                 </ul>
@@ -240,6 +240,12 @@
         var api = "{{ env('APP_API_URL', 'api/') }}";
         var token = window.localStorage.getItem('token');
         var urlParams = new URLSearchParams(window.location.search);
+
+        var formatter = new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+        });
+
         $('table').attr('width', '100%');
         $(".custom-file-input").on("change", function() {
             var fileName = $(this).val().split("\\").pop();

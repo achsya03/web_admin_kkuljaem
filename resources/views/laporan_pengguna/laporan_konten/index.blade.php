@@ -104,6 +104,7 @@
 </div>
 @endsection
 @section('js')
+
 <script>
     function get_all() {
         $('#cover-spin').show();
@@ -122,7 +123,7 @@
                 html += '<td>' + (index + 1) + '</td>';
                 html += '<td>' + row.user_lapor + '</td>';
                 html += '<td>' + row.komentar + '</td>';
-                html += '<td>' + row.tgl_lapor + '</td>';
+                html += '<td>' + moment(row.tgl_lapor).add(7, 'hours').format('l, h:mm:ss A') + '</td>';
                 html += '<td>' + row.status + '</td>';
                 if (row.status == "Menunggu Konfirmasi") {
                     if (row.komentar.match(/Posting.*/)) {
@@ -156,6 +157,7 @@
                 html += '<td>' + (index + 1) + '</td>';
                 html += '<td>' + row.user_lapor + '</td>';
                 html += '<td>' + row.komentar + '</td>';
+                html += '<td>' + moment(row.tgl_lapor).add(7, 'hours').format('l, h:mm:ss A') + '</td>';
                 html += '<td>' + row.tgl_lapor + '</td>';
                 html += '<td>' + row.status + '</td>';
                 if (row.status == "Menunggu Konfirmasi") {
