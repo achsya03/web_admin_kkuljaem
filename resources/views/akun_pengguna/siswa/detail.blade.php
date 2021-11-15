@@ -112,8 +112,12 @@
 
 
                 //show nonaktifkan
+
+
                 html0011 = '';
-                html0011 += `<a href = "` + api + "admin/user/student/status?token=" + urlParams.get('id') + `" class = "mb-2 mr-2 btn btn-primary">Nonaktifkan Akun</a>` + `<br>`
+                html0011 += `<a href="#" onclick="nonaktifkan('` + api + `admin/user/student/status?token=` + urlParams.get('id') + `')" class = "mb-2 mr-2 btn btn-primary">Nonaktifkan Akun</a>` + `<br>`
+
+                //`<a href = "` + api + "admin/user/student/status?token=" + urlParams.get('id') + `" class = "mb-2 mr-2 btn btn-primary">Nonaktifkan Akun</a>` + `<br>`
                 document.querySelector('.route').innerHTML = html0011;
 
                 //show progress
@@ -146,8 +150,62 @@
         });
     }
     load_detail();
+
+
+    function nonaktifkan(url, back_url = "") {
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Batalkan'
+        }).then((result) => {
+            $('#cover-spin').show();
+            if (result.isConfirmed) {
+                $.ajax({
+                    "url": url,
+                    "method": "post",
+                    "headers": {
+                        "Accept": "application/json",
+                        "Authorization": 'bearer ' + window.localStorage.getItem('token'),
+                    },
+                    success: function(response) {
+                        if (response.message == 'Failed') {
+                            Swal.fire(
+                                'Gagal!',
+                                response.error,
+                                'error'
+                            )
+                        } else {
+                            Swal.fire(
+                                'Sukses!',
+                                'Data berhasil dirubah!',
+                                'success'
+                            )
+                            if (back_url) {
+                                window.location.href = back_url;
+                            } else {
+                                location.reload();
+                            }
+                        }
+                    },
+                    error: function() {
+                        Swal.fire(
+                            'Gagal!',
+                            'Data tidak berhasil dirubah!',
+                            'error'
+                        )
+                    }
+                });
+            }
+            $('#cover-spin').hide();
+        });
+    }
 </script>
 
 @endsection
+
 
 @extends('layouts.layout')
