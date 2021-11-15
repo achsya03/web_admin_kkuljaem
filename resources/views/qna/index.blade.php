@@ -4,12 +4,21 @@
 @section('content')
 <div class="card card-body">
     <div class="row">
-        <div class="col-7 col-md-4 col-xl-4">
+        <div class="col-4 col-md-4 col-xl-4">
             <div class="position-relative form-group">
                 <label>Tampilkan Berdasarkan</label>
-                <select name="filter_datatable" class="custom-select list-class">
-                    <option>Semua Kelas</option>
-                </select>
+                <div class="row">
+                    <div class="col-8">
+                        <select name="filter_datatable" class="custom-select list-class">
+                            <option>Semua Kelas</option>
+                        </select>
+                    </div>
+                    <div class="col-4">
+                        <select name="episode" class="custom-select list-episode">
+                            <option>Episode</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-4 col-md-1 col-xl-1">
@@ -22,6 +31,7 @@
         <thead>
             <tr>
                 <td>UUID</td>
+                <td>Video UUID</td>
                 <td>Judul QnA</td>
                 <td>Detail QnA</td>
                 <td>Penanya</td>
@@ -38,6 +48,7 @@
 
 @section('js')
 <script>
+    $('#cover-spin').show();
     var table = $('.dataTable').DataTable({
         "ajax": {
             "url": api + "admin/qna",
@@ -49,6 +60,8 @@
         },
         "columns": [{
             "data": "class_uuid",
+        }, {
+            "data": "video_uuid",
         }, {
             "data": "judul"
         }, {
@@ -75,24 +88,26 @@
             }
         }],
         "columnDefs": [{
-            "targets": [0],
+            "targets": [0, 1],
             "visible": false,
-            "searchable": false
-        }]
+        }],
     });
 
     $.ajax({
-        "url": api + "admin/classroom-group",
+        "url": api + "qna/theme",
         "method": "get",
         "headers": {
             "Accept": "application/json",
             "Authorization": 'bearer ' + token,
         }
     }).done(function(response) {
+        $('#cover-spin').hide();
         if (response.message == "Success") {
             html = '<option value="">Semua Kelas</option>';
-            $.each(response.data, function(index, row) {
-                html += '<option value="' + row.uuid + '">' + row.nama + '</option>';
+            $.each(response.data, function(index, classes) {
+                $.each(classes.classes, function(index2, row) {
+                    html += '<option value="' + row.class_uuid + '">' + row.class_nama + '</option>';
+                })
             });
             $('.list-class').html(html);
         }
@@ -100,7 +115,31 @@
 
     $('.list-class').change(function() {
         table.columns(0).search($('.list-class').val()).draw();
-    })
+        $('#cover-spin').show();
+        $.ajax({
+            "url": api + "admin/qna/class-list",
+            "method": "get",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": 'bearer ' + token,
+            }
+        }).done(function(response) {
+            $('#cover-spin').hide();
+            if (response.message == "Success") {
+                html = '<option value="">Semua Episode</option>';
+                $.each(response.data, function(index, row) {
+                    if (row.class_uuid == $('.list-class').val()) {
+                        html += '<option value="' + row.video_uuid + '">' + row.video_episode + '</option>';
+                    }
+                });
+                $('.list-episode').html(html);
+            }
+        });
+    });
+
+    $('.list-episode').change(function() {
+        table.columns(1).search($('.list-episode').val()).draw();
+    });
 </script>
 @endsection
 @extends('layouts.layout')
