@@ -72,7 +72,7 @@
         }, {
             "data": "user_post"
         }, {
-            "data": "tgl_post",
+            "data": "created_at",
             "render": function(data) {
                 return moment(data).format('DD/MM/YYYY hh:mm a');
             }
@@ -132,7 +132,7 @@
                         html += '<option value="' + row.video_uuid + '">' + row.video_episode + '</option>';
                     }
                 });
-                $('.list-episode').html(html);
+                $('.list-episode').html(html).change();
             }
         });
     });
