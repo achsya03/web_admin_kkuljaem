@@ -90,7 +90,7 @@
                 html = "";
                 $.each(response.data.comment, function(index, row) {
                     html += '<div class="mb-2 p-2 border">';
-                    html += '<div><span class="font-weight-bold">' + (row.user_comment == 'True' ? 'Anda' : row.comment_nama) + '</span> . ' + moment(row.comment_tgl).format('DD.MM.Y hh:mm A') + '</div>';
+                    html += '<div><span class="font-weight-bold">' + (row.user_comment == 'True' ? 'Anda' : row.comment_nama) + '</span> . ' + moment(row.comment_tgl).add(7, 'hours').format('DD.MM.Y hh:mm A') + '</div>';
                     html += '<div>' + row.comment_isi + '</div>';
                     if (row.user_comment == 'True') {
                         html += '<button class="btn btn-secondary btn-sm" onclick="komentar_detail(\'' + row.comment_uuid + '\', \'' + row.comment_isi + '\')">Pengaturan</button>';

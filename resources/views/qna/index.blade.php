@@ -74,7 +74,7 @@
         }, {
             "data": "created_at",
             "render": function(data) {
-                return moment(data).format('DD/MM/YYYY hh:mm a');
+                return moment(data).add(7, 'hours').format('DD/MM/YYYY hh:mm a');
             }
         }, {
             "data": null,
