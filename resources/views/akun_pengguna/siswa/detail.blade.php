@@ -52,8 +52,10 @@
         <table class="mb-0 table-striped">
             <thead>
                 <tr>
-                    <th></th>
-                    <th></th>
+                    <th width=10px></th>
+                    <th width=500px></th>
+                    <th width=160px></th>
+                    <th width=10px></th>
                 </tr>
             </thead>
             <tbody class="tbody1">
@@ -134,10 +136,11 @@
 
                 //show sub
                 html1 = '';
-                $.each(response.subscription, function(index, row) {
+                $.each(response.data.subscription, function(index, row) {
+                    console.log(row)
                     html1 += '<tr>';
-                    html1 += '<td>' + (index + 1) + '</td>';
-                    html1 += '<td>' + row.subs + '</td>';
+                    html1 += '<td>' + '-' + '</td>';
+                    html1 += '<td>' + moment(row.tgl_subs).add(7, 'hours').format('l, h:mm:ss A') + '&nbsp' + '-' + '&nbsp' + 'Menjadi Member' + '&nbsp' + '(Paket : ' + row.packet['lama_paket'] + '&nbsp' + 'Bulan)' + '&nbsp' + '(' + 'Ref.ID : ' + row.reference['kode'] + '&nbsp' + ')' + '</td>';
                     html1 += '</tr>';
                 });
                 document.querySelector('.tbody1').innerHTML = html1;
