@@ -95,7 +95,7 @@
                     html += '<td>' + (index + 1) + '</td>';
                     html += '<td>' + row.tipe_transaksi + '</td>';
                     html += '<td>' + row.jenis + '</td>';
-                    html += '<td>' + moment(row.tgl_akhir_bayar).add(7, 'hours').format('l, h:mm:ss A') + '</td>';
+                    html += '<td>' + moment(row.tgl_subs).add(7, 'hours').format('l, h:mm:ss A') + '</td>';
                     html += '<td>' + row.id_permintaan + '</td>';
                     html += '<td>' + row.email + '</td>';
                     html += '<td>' + row.status + '</td>';
