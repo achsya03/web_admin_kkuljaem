@@ -236,6 +236,7 @@
     @yield('modal')
     <script type="text/javascript" src="/js/app.js"></script>
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script>
         var api = "{{ env('APP_API_URL', 'api/') }}";
         var token = window.localStorage.getItem('token');
