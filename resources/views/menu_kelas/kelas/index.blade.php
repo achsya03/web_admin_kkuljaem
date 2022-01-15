@@ -94,14 +94,23 @@
                 "Authorization": 'bearer ' + token,
             },
         }).done(function(response) {
-            console.log(response)
+            var id = response.data.classes.slice(0);
+            id.sort(function(a, b) {
+                var x = a.judul_class.toLowerCase();
+                var y = b.judul_class.toLowerCase();
+                return x < y ? -1 : x > y ? 1 : 0;
+            });
+            id.sort(function(a, b) {
+                return a.urutan_class - b.urutan_class;
+            });
+            console.log(id)
             $('#cover-spin').hide();
             html0 = '';
             html0 += `<a href="{{route('tambahkelas')}}?id=` + urlParams.get('id') + `" class="mb-2 mr-2 btn btn-primary">Tambah Kelas</a>`
             document.querySelector('.tambah').innerHTML = html0;
 
             html = '';
-            $.each(response.data.classes, function(index, row) {
+            $.each(id, function(index, row) {
                 html += '<tr>';
                 html += '<td>' + (index + 1) + '</td>';
                 html += '<td>' + row.judul_class + '</td>';
