@@ -26,7 +26,6 @@
         </div>
         <button class="btn btn-focus btn-like">Sukai</button>
         <button class="btn btn-focus btn-report user_posting_false d-none">Laporkan</button>
-        <a href="#" class="btn btn-focus btn-sunting user_posting_true d-none">Sunting</a>
         <button class="btn btn-focus btn-hapus user_posting_true d-none">Hapus</button>
     </div>
     <div class="position-relative form-group">
@@ -57,7 +56,6 @@
                 <div>Jawaban anda</div>
                 <textarea name="comment_isi" rows="5" class="form-control"></textarea>
                 <div><small>Jumlah Kata 0(Max 500 karakter)</small></div>
-                <button class="btn btn-success mb-2">Ubah</button> <br>
                 <button class="btn btn-danger" id="btn-hapus-comment">Hapus Komentar</button>
             </div>
         </div>
