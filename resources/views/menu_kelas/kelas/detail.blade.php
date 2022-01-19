@@ -265,6 +265,30 @@
         </div>
     </div>
 </div>
+<!-- Modal Sorting -->
+<div class="modal fade bd-example-modal-sm-sort " tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Sorting</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="simple-list" class="row">
+                    <div id="items" class="list-group col simple" style="cursor: -webkit-grab; cursor: grab">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="savesort()" class=" btn btn-primary">Simpan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 @section('js')
 <script>
@@ -317,8 +341,10 @@
             html0 += `<a href="{{route('editkelas')}}?id=` + response.data.class_uuid + '&token=' + response.data.group_uuid + `" type="button" class=" mb-2 mr-2 btn btn-primary"> Sunting Kelas </a>`
             document.querySelector('.route').innerHTML = html0;
 
-
             html0 += `<a href="{{route('progressiswa')}}?id=` + response.data.class_uuid + `" type="button" class=" mb-2 mr-2 btn btn-primary"> Progress Siswa </a>`
+            document.querySelector('.route').innerHTML = html0;
+
+            html0 += `<a data-toggle="modal" data-target=".bd-example-modal-sm-sort" onclick="sorting()" class="btn-icon btn-icon-only btn btn-primary mobile-toggle-header-nav mb-2 mr-2 btn btn-primary" href="""> Urutkan </a>`
             document.querySelector('.route').innerHTML = html0;
 
             document.getElementById('judul').textContent = response.data.judul_class;
@@ -385,97 +411,13 @@
     }
     load_detailkelas();
 
-    //SHOW DATA
-    // async function getISS() {
-    //     const response = await fetch('https://floating-harbor-93486.herokuapp.com/api/admin/classroom/content?token=' + urlParams.get('id'));
-    //     const datas = await response.json();
-    //     const {
-    //         data,
-    //     } = datas;
-    //     console.log(data)
 
-    //     $('.fa-spinner').removeClass('fa-spinner').removeClass('fa-spin');
-
-
-    //     html000 = '';
-    //     html000 += `<img src="` + data.url_web + `" width="500" height="220" style="object-fit: cover;">`
-    //     document.querySelector('.thumb1').innerHTML = html000;
-
-
-    //     html00 = '';
-    //     html00 += `<a href="{{route('kelas')}}?id=` + data.group_uuid + `" type="button" class=" mb-2 mr-2 btn btn-primary">> Kembali </a>`
-
-    //     html0 = '';
-    //     html0 += `<a href="{{route('editkelas')}}?id=` + data.class_uuid + '&token=' + data.group_uuid + `" type="button" class=" mb-2 mr-2 btn btn-primary"> Sunting Kelas </a>`
-    //     document.querySelector('.route').innerHTML = html0;
-
-
-    //     html0 += `<a href="{{route('progressiswa')}}?id=` + data.class_uuid + `" type="button" class=" mb-2 mr-2 btn btn-primary"> Progress Siswa </a>`
-    //     document.querySelector('.route').innerHTML = html0;
-
-    //     document.getElementById('judul').textContent = data.judul_class;
-    //     document.getElementById('deskripsi').textContent = data.deskripsi_class;
-
-    //     html99 = '';
-    //     $.each(data.mentor, function(index3, row3) {
-    //          const A = [row3.nama_mentor];
-    //          html99 += '<td>' + A  + '</td>' + ' ';
-
-    //     });
-    //     document.querySelector('.mentor').innerHTML = html99;
-
-    //     html = '';
-    //     $.each(data.materi, function(index, row) {
-    //         html += '<tr>';
-    //         html += '<td>' + row.number + '</td>';
-    //         html += '<td>' + row.jenis + '</td>';
-    //         html += '<td>' + row.judul + '</td>';
-    //         html += '<td>' + row.keterangan + '</td>';
-    //         html += '<td>' + row.keterangan + '</td>';
-    //         html += '</tr>';
-    //     });
-    //     document.querySelector('.tbody').innerHTML = html;
-    //       $('#example').DataTable();
-
-
-    //     html1 = '';
-    //     $.each(data.video, function(index1, row1) {
-    //         html1 += '<tr>';
-    //         html1 += '<td>' + (row1.number) + '</td>';
-    //         html1 += '<td>' + row1.jenis + '</td>';
-    //         html1 += '<td>' + row1.judul + '</td>';
-    //         html1 += '<td>' + row1.keterangan + '</td>';
-    //         html1 += '<td>' + row1.keterangan + '</td>';
-    //         html1 += '<td>' + `<a href="{{ route('videosiswa') }}?token=` + row1.uuid + `" style="margin:2px;" class="btn btn-secondary btn-sm">Details</a><br>` + '<a data-toggle="modal" data-target=".bd-example-modal-sm-edit" onclick="getEditVideo(\'' + row1.uuid + '\')" class="btn-icon btn-icon-only btn btn-info btn-sm mobile-toggle-header-nav" href="" style="margin:2px;">Edit</a><br>' + '<button onclick="hapus(`' + api + `admin/classroom/content/video?token=` + row1.uuid + '`)" style="margin:2px;" class="btn btn-danger btn-sm">Hapus</button>' +
-    //             '</td>';
-    //         html += '</tr>';
-    //     });
-    //     document.querySelector('.tbody1').innerHTML = html1;
-    //     $('#example1').DataTable();
-
-
-    //     html2 = '';
-    //     $.each(data.quiz, function(index1, row2) {
-    //         console.log(row2)
-    //         html2 += '<tr>';
-    //         html2 += '<td>' + row2.number + '</td>';
-    //         html2 += '<td>' + row2.judul + '</td>';
-    //         html2 += '<td>' + row2.keterangan + '</td>';
-    //         html2 += '<td>' + row2.jml_pertanyaan + ' Soal</td>';
-    //         html2 += '<td>' + ` <a href="{{ route('quizsiswa') }}?token=` + row2.uuid + `"style="margin:2px;" class="btn btn-secondary btn-sm"> Details </a><br>` + `<button data-toggle="modal" data-target=".bd-example-modal-sm-edit1" onclick="editQuiz('` + row2.uuid + `')" class="btn-icon btn-icon-only btn btn-info btn-sm mobile-toggle-header-nav" style="margin:2px;" >Edit</button> <br> ` + ` <button onclick="hapus('` + api + `admin/classroom/content/quiz?token=` + row2.uuid + `')" style="margin:2px;" class="btn btn-danger btn-sm"> Hapus </button>` + '</td>';
-    //         html2 += '</tr>';
-    //     });
-    //     document.querySelector('.tbody2').innerHTML = html2;
-    //     $('#example2').DataTable();
-
-    // }
-    // getISS();
 
     //CREATE VIDEO
     function create() {
         $.ajax({
             type: "post",
-            url: ' https://kkuljaem-api-new-3-ft4mz.ondigitalocean.app/api/admin/classroom/content/video?token=' + urlParams.get('id'),
+            url: api + 'admin/classroom/content/video?token=' + urlParams.get('id'),
             data: {
                 'nomor': $("#nomor").val(),
                 'judul': $("#judul_video").val(),
@@ -504,7 +446,7 @@
     function update(id) {
         $.ajax({
             type: "post",
-            url: ' https://kkuljaem-api-new-3-ft4mz.ondigitalocean.app/api/admin/classroom/content/video/update?token=' + id,
+            url: api + 'admin/classroom/content/video/update?token=' + id,
             data: {
                 'nomor': $("#nomor").val(),
                 'judul': $("#judul_video_edit").val(),
@@ -529,7 +471,7 @@
     //DELETE VIDEO
     function deleteVideo(id) {
         $.ajax({
-            url: ' https://kkuljaem-api-new-3-ft4mz.ondigitalocean.app/api/admin/classroom/content/video/update?token=' + id,
+            url: api + 'admin/classroom/content/video/update?token=' + id,
             type: "delete",
 
             success: function(response) {
@@ -549,7 +491,7 @@
     function getAddVideo() {
         $.ajax({
             method: 'get',
-            url: ' https://kkuljaem-api-new-3-ft4mz.ondigitalocean.app/api/admin/classroom/content/video?token=' + urlParams.get('id'),
+            url: api + 'admin/classroom/content/video?token=' + urlParams.get('id'),
             dataType: 'json',
             success: function(response) {
                 console.log(response)
@@ -571,7 +513,7 @@
     function getEditVideo(id) {
         $.ajax({
             method: 'get',
-            url: ' https://kkuljaem-api-new-3-ft4mz.ondigitalocean.app/api/admin/classroom/content/video/detail?token=' + id,
+            url: api + 'admin/classroom/content/video/detail?token=' + id,
             dataType: 'json',
             success: function(response) {
                 console.log(response)
@@ -611,7 +553,7 @@
     function quiz(id) {
         $.ajax({
             type: "post",
-            url: ' https://kkuljaem-api-new-3-ft4mz.ondigitalocean.app/api/admin/classroom/content/quiz?token=' + urlParams.get('id'),
+            url: api + 'admin/classroom/content/quiz?token=' + urlParams.get('id'),
             data: {
                 'nomor': $("#nomor_q").val(),
                 'judul': $("#judul_quiz").val(),
@@ -640,7 +582,7 @@
     function editQuiz(id) {
         $.ajax({
             method: 'get',
-            url: ' https://kkuljaem-api-new-3-ft4mz.ondigitalocean.app/api/admin/classroom/content/quiz/detail?token=' + id,
+            url: api + 'admin/classroom/content/quiz/detail?token=' + id,
             dataType: 'json',
             success: function(response) {
                 console.log(response)
@@ -666,7 +608,7 @@
     function updatequiz(id) {
         $.ajax({
             type: "post",
-            url: ' https://kkuljaem-api-new-3-ft4mz.ondigitalocean.app/api/admin/classroom/content/quiz/update?token=' + id,
+            url: api + 'admin/classroom/content/quiz/update?token=' + id,
             data: {
                 'nomor': $("#nomor").val(),
                 'judul': $("#judul_q_edit").val(),
@@ -679,6 +621,90 @@
                 } else if (response.message == 'Success') {
                     $(".btn-close").click();
                     window.location = "{{route('detailkelas')}}?id=" + urlParams.get('id');
+                }
+
+            }
+        });
+    }
+
+
+
+    //SHOW SORTING
+    function sorting() {
+        $.ajax({
+            "url": api + "admin/sorter?table=konten&detail_kelas=" + urlParams.get('id'),
+            "method": "GET",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": 'bearer ' + token,
+            },
+        }).done(function(response1) {
+            if (response1.message == 'Success') {
+                console.log(response1)
+                html33 = '';
+                $.each(response1.data.konten, function(index, row) {
+                    //       if (row.type == "video") {
+                    html33 += `<div id="` + row.content_uuid + `" class="list-group-item"><i class="fas fa-arrows-alt handle"></i>` + ` ` + row.judul + `</div>`;
+                    html33 += '</div>';
+                    //     } else if (row.type == "quiz") {
+                    //     html33 += `<div id="` + row.content_quiz_uuid + `" class="list-group-item"><i class="fas fa-arrows-alt handle"></i>` + ` ` + row.judul + `</div>`;
+                    //     html33 += '</div>';
+                    // }
+
+                });
+                document.querySelector('.simple').innerHTML = html33;
+            }
+        });
+    }
+
+    var originalList;
+    var listnew;
+    var el = document.getElementById('items');
+    var sortable = new Sortable(el, {
+        animation: 150,
+        ghostClass: 'bg-color-info',
+        onStart: function(evt) {
+            originalList = [...document.querySelectorAll("#items > div")].map(el => el.id);
+        },
+        onEnd: function(evt) {
+            listnew = [...document.querySelectorAll("#items > div")].map(el => el.id);
+            var data = [{
+                'arr_id': listnew
+            }];
+            datas = listnew;
+            console.log(listnew);
+
+        }
+    });
+
+    //CREATE SORTING
+    function savesort() {
+        $('#cover-spin').show();
+        $.ajax({
+            type: "post",
+            url: api + 'admin/sorter?table=konten&detail_kelas=' + urlParams.get('id'),
+            data: {
+                'arr_id[]': datas
+            },
+            dataType: 'json',
+            headers: {
+                "Accept": "application/json",
+                "Authorization": 'bearer ' + token,
+            },
+            success: function(response) {
+                console.log(response);
+                if (response.message !== 'Success') {
+                    $('#cover-spin').hide();
+
+                    notif('error', 'Gagal merubah, Silahkan Refresh Ulang !');
+
+                } else if (response.message == 'Success') {
+                    $('#cover-spin').hide();
+
+                    notif('success', 'Berhasil merubah Data , Mohon tunggu');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
                 }
 
             }
