@@ -132,6 +132,14 @@
         </a>
         <ul>
             <li>
+                <a href="{{ route('application-setting-member') }}">
+                    <i class="metismenu-icon"></i>
+                    Pengaturan Membership
+                </a>
+            </li>
+        </ul>
+        <ul>
+            <li>
                 <a href="{{ route('application-setting-reference-id') }}">
                     <i class="metismenu-icon"></i>
                     Reference ID

@@ -38,6 +38,7 @@ Route::group(['prefix' => 'application-setting'], function () {
         Route::view('/list', 'application-setting.reference-id.list')->name('application-setting-reference-id-list');
     });
     Route::view('/general', 'application-setting.general')->name('application-setting-general');
+    Route::view('/member', 'application-setting.member')->name('application-setting-member');
     Route::view('/about', 'application-setting.about')->name('application-setting-about');
 });
 Route::group(['prefix' => 'homepage-setting'], function () {
