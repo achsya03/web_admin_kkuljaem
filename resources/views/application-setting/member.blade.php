@@ -16,14 +16,14 @@
 @section('js')
 <script>
     html1 = '';
-    html1 += `<div class="col-md-4"><div class="main-card mb-3 card"><div class="card-body"><h5><strong>Update Member</strong></h5><form id="change-pass-form"><div class="position-relative form-group"><label class="">Email</label><input name="email" placeholder="" class="form-control"></div><div class="position-relative form-group"><label for="exampleEmail" class="">Tanggal Akhir Sub</label><input name="tgl_akhir" placeholder="" type="date" class="form-control"></div><div class="position-relative form-group"><button type="submit" class="btn-icon btn-focus btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">Update Member</button></div></form></div></div></div>`;
+    html1 += `<div class="col-md-4"><div class="main-card mb-3 card"><div class="card-body"><h5><strong>Update Member</strong></h5><form id="change-pass-form"><div class="position-relative form-group"><label class="">Email</label><input name="email" placeholder="" class="form-control"></div><div class="position-relative form-group"><label for="exampleEmail" class="">Tanggal Akhir Sub</label><input name="tgl_akhir" placeholder="" type="date" class="form-control"></div><div class="position-relative form-group"><div class="position-relative form-group"><label class="">Keterangan</label><input name="note" placeholder="" class="form-control"></div><button type="submit" class="btn-icon btn-focus btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">Update Member</button></div></form></div></div></div>`;
     document.querySelector('.cardss').innerHTML = html1;
 
     //CREATE
     $('#change-pass-form').submit(function(e) {
         e.preventDefault();
         $.ajax({
-            method: 'get',
+            method: 'post',
             url: api + 'force/subs?',
             data: $('form').serialize(),
             dataType: 'json',
