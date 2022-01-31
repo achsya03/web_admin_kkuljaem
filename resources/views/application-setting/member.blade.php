@@ -24,7 +24,7 @@
         e.preventDefault();
         $.ajax({
             method: 'get',
-            url: api + 'force/subs?2021__11__',
+            url: api + 'force/subs?',
             data: $('form').serialize(),
             dataType: 'json',
             headers: {
@@ -36,8 +36,10 @@
                     notif('error', 'Mohon semua form diisi !');
 
                 } else if (response.message == 'Success') {
-                    notif('success', 'Berhasil membuat grup kelas, Mohon tunggu');
-                    window.location.reload();
+                    notif('success', 'Berhasil mengganti member Mohon tunggu');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
 
                 }
             }
