@@ -14,7 +14,7 @@
             <div class="card card-body">
                 <h6 class="">Tambah Topik</h6>
                 <form id="create-forum">
-                    <input type="text" name="judul" class="form-control mb-2" placeholder="Masukan Topik baru disini">
+                    <input type="text" name="judul_1" class="form-control mb-2" placeholder="Masukan Topik baru disini">
                     <button type="submit" class="btn btn-success">Tambahkan</button>
                 </form>
             </div>
@@ -38,7 +38,17 @@
                     <div class="position-relative form-group">
                         <label for="exampleEmail11" class="">Topik</label>
                         <input name="uuid" type="hidden" class="form-control">
-                        <input name="judul_1" placeholder="Nama Topik" type="text" class="form-control">
+                        <input name="judul" placeholder="Nama Topik" type="text" class="form-control">
+                    </div>
+                    <div class="position-relative form-group">
+                        <label>Gambar Forum </label>
+                        <div class="custom-file">
+                            <input type="file" name="theme_image" id="url_image" accept="image/*" class="custom-file-input" onchange="update_preview(this)">
+                            <label class="custom-file-label">Pilih File</label>
+                        </div>
+                    </div>
+                    <div class="position-relative form-group">
+                        <img src="#" name="theme_image_preview" class="d-none" style="min-width: 300px; max-height: 150px; object-fit:cover;">
                     </div>
                     <button type="submit" class="btn btn-success">Simpan</button>
                 </form>
@@ -73,6 +83,18 @@
 @endsection
 
 @section('js')
+<script>
+    function update_preview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('img[name="' + $(input).attr('name') + '_preview"]').attr('src', e.target.result);
+                $('img[name="' + $(input).attr('name') + '_preview"]').removeClass('d-none');
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
 <script>
     function load_topik() {
         $('#cover-spin').show();
@@ -121,7 +143,9 @@
         $.ajax({
             "url": api + "admin/theme",
             "method": "post",
-            "data": $(this).serialize(),
+            "data": {
+                "judul": $('input[name="judul_1"]').val()
+            },
             "headers": {
                 "Accept": "application/json",
                 "Authorization": 'bearer ' + window.localStorage.getItem('token'),
@@ -148,34 +172,66 @@
             $('#cover-spin').hide();
             if (response.message == 'Success') {
                 $("#detail_modal").modal('show');
-                $('input[name="judul_1"]').val(response.data.judul);
+                $('input[name="judul"]').val(response.data.judul);
                 $('input[name="uuid"]').val(response.data.uuid);
+                $('img[name="theme_image_preview"]').attr('src', response.data.url_gambar).removeClass('d-none')
+                $('img[name="theme_image_preview"]').attr('src', response.data.url_gambar);
             }
         });
     }
 
+    // $('#update-forum').submit(function(e) {
+    //     e.preventDefault();
+    //     $('#cover-spin').show();
+    //     $.ajax({
+    //         "url": api + "admin/theme/update?token=" + $('input[name="uuid"]').val(),
+    //         "method": "post",
+    //         "data": $(this).serialize(),
+    //         "headers": {
+    //             "Accept": "application/json",
+    //             "Authorization": 'bearer ' + window.localStorage.getItem('token'),
+    //         },
+    //     }).done(function(response) {
+    //         $('#cover-spin').hide();
+    //         if (response.message == 'Success') {
+    //             $("#detail_modal").modal('hide');
+    //             notif('success', response.info);
+
+    //         }
+    //     });
+    // });
+
+    //update
     $('#update-forum').submit(function(e) {
-        e.preventDefault();
         $('#cover-spin').show();
+        e.preventDefault();
         $.ajax({
-            "url": api + "admin/theme/update?token=" + $('input[name="uuid"]').val(),
-            "method": "post",
-            "data": {
-                "judul": $('input[name="judul_1"]').val()
-            },
-            "headers": {
+            method: 'post',
+            url: api + "admin/theme/update?token=" + $('input[name="uuid"]').val(),
+            data: new FormData($('#update-forum')[0]),
+            dataType: 'json',
+            contentType: false,
+            mimeType: "multipart/form-data",
+            processData: false,
+            headers: {
                 "Accept": "application/json",
-                "Authorization": 'bearer ' + window.localStorage.getItem('token'),
+                "Authorization": 'bearer ' + token,
             },
-        }).done(function(response) {
-            $('#cover-spin').hide();
-            if (response.message == 'Success') {
-                $("#detail_modal").modal('hide');
-                notif('success', response.info);
-                load_topik();
+            success: function(response) {
+                if (response.message !== 'Success') {
+                    $('#cover-spin').hide();
+                    notif('error', response.info);
+                } else if (response.message == 'Success') {
+                    $('#cover-spin').hide();
+                    notif('success', response.info);
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                }
             }
         });
     });
+
 
     load_topik();
 
