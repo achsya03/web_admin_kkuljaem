@@ -18,7 +18,6 @@
     html1 = '';
     html1 += `<div class="col-md-4"><div class="main-card mb-3 card"><div class="card-body"><h5><strong>Update Member</strong></h5><form id="change-pass-form"><div class="position-relative form-group"><label class="">Email</label><input name="email" placeholder="" class="form-control"></div><div class="position-relative form-group"><label for="exampleEmail" class="">Tanggal Akhir Sub</label><input name="tgl_akhir" placeholder="" type="date" class="form-control"></div><div class="position-relative form-group"><div class="position-relative form-group"><label class="">Keterangan</label><input name="note" placeholder="" class="form-control"></div><button type="submit" class="btn-icon btn-focus btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">Update Member</button></div></form></div></div></div>`;
     document.querySelector('.cardss').innerHTML = html1;
-
     //CREATE
     $('#change-pass-form').submit(function(e) {
         e.preventDefault();
@@ -32,12 +31,15 @@
                 "Authorization": 'bearer ' + token,
             },
             success: function(response) {
+
                 if (response.message !== 'Success') {
-                    notif('error', 'Mohon semua form diisi !');
+                    notif('error', 'Mohon Cek isian Semua form !');
 
                 } else if (response.message == 'Success') {
+                    $('#cover-spin').show();
                     notif('success', 'Berhasil mengganti member Mohon tunggu');
                     setTimeout(() => {
+                        $('#cover-spin').hide();
                         window.location.reload();
                     }, 1000);
 
