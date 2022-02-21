@@ -2,11 +2,11 @@
 @section('title-description', 'Pengaturan Homepage / Marketing Banner')
 @section('title-icon', 'pe-7s-home')
 @section('top-button')
-<a href="{{ route('homepage-setting-marketing-banner-create') }}" class="btn btn-focus">Tambah Banner</a>
+<a href="{{ route('homepage-setting-non-marketing-banner-create') }}" class="btn btn-focus">Tambah Banner</a>
 @endsection
 @section('content')
 <div>
-    <a data-toggle="modal" data-target=".bd-example-modal-sm-sort" onclick="sorting()" class="btn-icon btn-icon-only btn btn-primary mobile-toggle-header-nav active" href="">Urutkan</a>
+    <!-- <a data-toggle="modal" data-target=".bd-example-modal-sm-sort" onclick="sorting()" class="btn-icon btn-icon-only btn btn-primary mobile-toggle-header-nav active" href="">Urutkan</a> -->
 </div>
 <br>
 <div class="row" id="banner-content"></div>
@@ -42,7 +42,7 @@
     //SHOW BANNER
     $('#cover-spin').show();
     $.ajax({
-        "url": api + "admin/banner",
+        "url": api + "admin/banner/non-mem",
         "method": "get",
         "headers": {
             "Accept": "application/json",
@@ -50,26 +50,27 @@
         }
     }).done(function(response) {
         $('#cover-spin').hide();
-
-        var id = response.data.slice(0);
-        id.sort(function(a, b) {
-            var x = a.judul_banner.toLowerCase();
-            var y = b.judul_banner.toLowerCase();
-            return x < y ? -1 : x > y ? 1 : 0;
-        });
-        id.sort(function(a, b) {
-            return a.urutan - b.urutan;
-        });
-        console.log(id)
+        console.log(response)
+        // var id = response.data.slice(0);
+        // id.sort(function(a, b) {
+        //     var x = a.value.toLowerCase();
+        //     var y = b.value.toLowerCase();
+        //     return x < y ? -1 : x > y ? 1 : 0;
+        // });
+        // id.sort(function(a, b) {
+        //     return a.urutan - b.urutan;
+        // });
+        // console.log(id)
         if (response.message == 'Success') {
             html = '';
-            $.each(id, function(index, row) {
+            $.each(response.data, function(index, row) {
                 html += '<div class="col-4">';
                 html += '<div class="card mb-4">';
-                html += '<img class="card-img-top" src="' + row.url_web + '" alt="Card image cap" style="height: 100px; object-fit: cover;">';
+                html += '<img class="card-img-top" src="' + row.value + '" alt="Card image cap" style="height: 100px; object-fit: cover;">';
                 html += '<div class="card-body">';
-                html += '<h5 class="card-title">' + row.judul_banner + '</h5>';
-                html += '<a href="{{ route("homepage-setting-marketing-banner-edit") }}?id=' + row.uuid + '" class="btn btn-primary">Edit</a>';
+                // html += '<h5 class="card-title">' + row.judul_banner + '</h5>';
+                html += '<a class="btn-icon  btn-icon-only btn btn-danger btn-sm" href="#" onclick="hapus(`' + api + 'admin/banner/non-mem?token=' + row.key + '`)">Hapus</a>';
+                // html += '<a href="{{ route("homepage-setting-non-marketing-banner-edit") }}?id=' + row.key + '" class="btn btn-danger">Hapus</a>';
                 html += '</div>';
                 html += '</div>';
                 html += '</div>';
@@ -146,7 +147,7 @@
 
                     notif('success', 'Berhasil merubah Data , Mohon tunggu');
                     setTimeout(() => {
-                        window.location = "{{route('homepage-setting-marketing-banner')}}";
+                        window.location = "{{route('homepage-setting-non-marketing-banner')}}";
                     }, 1000);
                 }
 

@@ -47,6 +47,11 @@ Route::group(['prefix' => 'homepage-setting'], function () {
         Route::view('/create', 'homepage-setting.marketing-banner.create')->name('homepage-setting-marketing-banner-create');
         Route::view('/edit', 'homepage-setting.marketing-banner.edit')->name('homepage-setting-marketing-banner-edit');
     });
+    Route::group(['prefix' => 'non-marketing-banner'], function () {
+        Route::view('/', 'homepage-setting.non-marketing-banner.index')->name('homepage-setting-non-marketing-banner');
+        Route::view('/create', 'homepage-setting.non-marketing-banner.create')->name('homepage-setting-non-marketing-banner-create');
+        Route::view('/edit', 'homepage-setting.non-marketing-banner.edit')->name('homepage-setting-non-marketing-banner-edit');
+    });
     Route::group(['prefix' => 'word-today'], function () {
         Route::view('/', 'homepage-setting.word-today.index')->name('homepage-setting-word-today');
         Route::view('/create', 'homepage-setting.word-today.create')->name('homepage-setting-word-today-create');

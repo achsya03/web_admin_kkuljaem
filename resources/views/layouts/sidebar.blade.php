@@ -101,6 +101,14 @@
         </a>
         <ul>
             <li>
+                <a href="{{ route('homepage-setting-non-marketing-banner') }}">
+                    <i class="metismenu-icon"></i>
+                    Marketing Banner Non
+                </a>
+            </li>
+        </ul>
+        <ul>
+            <li>
                 <a href="{{ route('homepage-setting-marketing-banner') }}">
                     <i class="metismenu-icon"></i>
                     Marketing Banner
