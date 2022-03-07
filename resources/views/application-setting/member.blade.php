@@ -33,7 +33,7 @@
             },
             success: function(response) {
                 if (response.message !== 'Success') {
-                    notif('error', 'Mohon semua form diisi !');
+                    notif('error', response.error);
 
                 } else if (response.message == 'Success') {
                     notif('success', 'Berhasil mengganti member Mohon tunggu');

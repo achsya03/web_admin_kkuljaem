@@ -240,6 +240,7 @@
     <script>
         var api = "{{ env('APP_API_URL', 'api/') }}";
         var token = window.localStorage.getItem('token');
+        console.log(token)
         var urlParams = new URLSearchParams(window.location.search);
         var formatter = new Intl.NumberFormat('id-ID', {
             style: 'currency',
