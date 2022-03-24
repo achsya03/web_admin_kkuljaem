@@ -40,6 +40,13 @@ Route::group(['prefix' => 'application-setting'], function () {
     Route::view('/general', 'application-setting.general')->name('application-setting-general');
     Route::view('/member', 'application-setting.member')->name('application-setting-member');
     Route::view('/about', 'application-setting.about')->name('application-setting-about');
+
+    //avatar
+    Route::view('/avatar', 'application-setting.avatar')->name('application-setting-avatar');
+    Route::view('/avatar_index', 'application-setting.avatar-detail.index')->name('application-setting-avatar-index');
+    Route::view('/avatar_create', 'application-setting.avatar-detail.create')->name('application-setting-avatar-create');
+    Route::view('/avatar_edit', 'application-setting.avatar-detail.edit')->name('application-setting-avatar-edit');
+    Route::view('/avatar_detail', 'application-setting.avatar-detail.detail')->name('application-setting-avatar-detail');
 });
 Route::group(['prefix' => 'homepage-setting'], function () {
     Route::group(['prefix' => 'marketing-banner'], function () {

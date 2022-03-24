@@ -145,6 +145,12 @@
                     Pengaturan Membership
                 </a>
             </li>
+            <li>
+                <a href="{{ route('application-setting-avatar') }}">
+                    <i class="metismenu-icon"></i>
+                    Pengaturan Avatar
+                </a>
+            </li>
         </ul>
         <ul>
             <li>
