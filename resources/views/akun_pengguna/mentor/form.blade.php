@@ -28,8 +28,8 @@
 </div>
 <br>
 <div class="position-relative form-check">
-    <input type="hidden" name="jenis_pengguna" value="0" />
-    <input type="checkbox" name="jenis_pengguna" class="form-check-input" id="jenis_pengguna" value="mentor">
+    <input type="hidden" name="jenis_pengguna" value="mentor" />
+    <input type="checkbox" name="jenis_pengguna" class="form-check-input" id="jenis_pengguna" value="admin">
     <label class="form-check-label" for="status_tersedia">Atur Sebagai Admin</label>
 </div>
 @section('form_js')
