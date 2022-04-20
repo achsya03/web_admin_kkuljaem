@@ -56,25 +56,25 @@
                         }
                     }, {
                         data: 'status_aktif',
-                        name: 'u.status_aktif'
+                        name: 'users.status_aktif'
                     }, {
                         data: 'email',
-                        name: 'u.email'
+                        name: 'users.email'
                     }, {
                         data: 'nama',
-                        name: 'u.nama'
+                        name: 'users.nama'
                     }, {
                         data: 'jenis_kel',
-                        name: 'detail_users.jenis_kel'
+                        name: 'd.jenis_kel'
                     }, {
                         data: 'tgl_lahir',
-                        name: 'detail_users.tgl_lahir'
+                        name: 'd.tgl_lahir'
                     }, {
                         data: 'tempat_lahir',
-                        name: 'detail_users.tempat_lahir'
+                        name: 'd.tempat_lahir'
                     }, {
                         data: 'alamat',
-                        name: 'detail_users.alamat'
+                        name: 'd.alamat'
                     },
                     {
                         data: 'action',
