@@ -65,22 +65,22 @@
                         name: 'u.nama'
                     }, {
                         data: 'jenis_kel',
-                        name: 'jenis_kel'
+                        name: 'detail_users.jenis_kel'
                     }, {
                         data: 'tgl_lahir',
-                        name: 'tgl_lahir'
+                        name: 'detail_users.tgl_lahir'
                     }, {
                         data: 'tempat_lahir',
-                        name: 'tempat_lahir'
+                        name: 'detail_users.tempat_lahir'
                     }, {
                         data: 'alamat',
-                        name: 'alamat'
+                        name: 'detail_users.alamat'
                     },
                     {
                         data: 'action',
                         name: 'action',
-                        orderable: true,
-                        searchable: true
+                        orderable: false,
+                        searchable: false
                     },
                 ]
             });
