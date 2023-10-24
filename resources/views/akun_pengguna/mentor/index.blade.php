@@ -35,6 +35,7 @@
         $.ajax({
             "url": api + "admin/user/mentor/list",
             "method": "GET",
+            "dataType": "jsonp",
             "headers": {
                 "Accept": "application/json",
                 "Authorization": 'bearer ' + token,
