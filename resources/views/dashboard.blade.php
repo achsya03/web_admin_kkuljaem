@@ -200,6 +200,7 @@ function load_dashboard() {
         $.ajax({
             "url": api + "admin?token=" + token,
             "method": "GET",
+            "dataType": "jsonp",
             "headers": {
                 "Accept": "application/json",
                 "Authorization": 'bearer ' + token,
