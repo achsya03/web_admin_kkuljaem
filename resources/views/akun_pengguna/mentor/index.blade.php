@@ -32,6 +32,7 @@
 <script>
     function load_student() {
         $('#cover-spin').show();
+        //update ajax
         $.ajax({
             "url": api + "admin/user/mentor/list",
             "method": "GET",
